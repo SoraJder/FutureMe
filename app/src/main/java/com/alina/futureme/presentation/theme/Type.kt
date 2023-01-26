@@ -1,4 +1,4 @@
-package com.alina.futureme.ui.theme
+package com.alina.futureme.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
