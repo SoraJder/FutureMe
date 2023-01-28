@@ -1,6 +1,7 @@
 package com.alina.futureme.di
 
-import com.google.firebase.auth.FirebaseAuth
+import com.alina.futureme.data.AuthenticationRepositoryImpl
+import com.alina.futureme.domain.repository.AuthenticationRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -17,7 +18,9 @@ class FirebaseModule {
 
     @Singleton
     @Provides
-    fun providesFirebaseAuthentication(): FirebaseAuth = Firebase.auth
+    fun providesFirebaseAuthentication(): AuthenticationRepository = AuthenticationRepositoryImpl(
+        auth = Firebase.auth
+    )
 
     @Singleton
     @Provides
