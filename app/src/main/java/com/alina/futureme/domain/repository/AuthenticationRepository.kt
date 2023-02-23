@@ -9,5 +9,4 @@ interface AuthenticationRepository {
     suspend fun signInWithEmail(email: String, password: String): Resource<Boolean>
     suspend fun signUpWithEmail(email: String, password: String): Resource<Boolean>
     fun signOut()
-
 }
