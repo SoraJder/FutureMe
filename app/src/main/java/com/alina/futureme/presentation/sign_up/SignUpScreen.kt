@@ -1,11 +1,12 @@
-package com.alina.futureme.presentation.sign_in
+package com.alina.futureme.presentation.sign_up
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -25,37 +26,48 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
-import com.alina.futureme.common.Utils.showMessage
 import com.alina.futureme.components.CustomTextField
 import com.alina.futureme.components.PrimaryButton
-import com.alina.futureme.components.PrimaryButtonWithContent
-import com.alina.futureme.components.TextWithLinesOnSides
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
-fun SignInScreen(
-    viewModel: SignInViewModel = hiltViewModel()
+fun SignUpScreen(
+    viewModel: SignUpViewModel = hiltViewModel()
 ) {
+
     val context = LocalContext.current
 
+    var nameText by rememberSaveable { mutableStateOf("") }
     var emailText by rememberSaveable { mutableStateOf("") }
     var passwordText by rememberSaveable { mutableStateOf("") }
-    var isPasswordsVisible by rememberSaveable { mutableStateOf(false) }
+    var confirmPasswordText by rememberSaveable { mutableStateOf("") }
 
+    var validateNameText by rememberSaveable { mutableStateOf(true) }
     var validateEmailText by rememberSaveable { mutableStateOf(true) }
     var validatePasswordText by rememberSaveable { mutableStateOf(true) }
+    var validateConfirmPasswordText by rememberSaveable { mutableStateOf(true) }
+    var validatePasswordsEqual by rememberSaveable { mutableStateOf(true) }
+    var isPasswordsVisible by rememberSaveable { mutableStateOf(false) }
+    var isConfirmPasswordsEqual by rememberSaveable { mutableStateOf(false) }
 
     fun validateData(
+        name: String,
         email: String,
         password: String,
+        confirmPassword: String
     ): Boolean {
-        val passwordRegex =Utils.isPasswordValid(password)
+        val passwordRegex = Utils.isPasswordValid(password)
+        val confirmPasswordRegex = Utils.isPasswordValid(confirmPassword)
         val emailRegex = Utils.isEmailValid(email)
 
+        validateNameText = name.isNotBlank()
         validateEmailText = emailRegex
         validatePasswordText = passwordRegex
+        validateConfirmPasswordText = confirmPasswordRegex
+        validatePasswordsEqual = password == confirmPassword
 
-        return validateEmailText && validatePasswordText
+        return validateNameText && validateEmailText && validatePasswordText
+                && validateConfirmPasswordText && validatePasswordsEqual
     }
 
     Box(
@@ -69,8 +81,7 @@ fun SignInScreen(
                 .fillMaxWidth()
                 .verticalScroll(
                     rememberScrollState()
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally
+                ), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_futureme),
@@ -81,6 +92,16 @@ fun SignInScreen(
                     .fillMaxWidth()
                     .padding(24.dp)
             )
+
+            CustomTextField(
+                text = nameText,
+                placeholder = stringResource(R.string.name),
+                onValueChange = { nameText = it },
+                showError = !validateNameText,
+                errorMessage = stringResource(id = R.string.validate_name_error)
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
             CustomTextField(
                 text = emailText,
                 placeholder = stringResource(id = R.string.email_text_field),
@@ -89,84 +110,66 @@ fun SignInScreen(
                 errorMessage = stringResource(id = R.string.validate_email_error)
             )
 
-            Spacer(modifier = Modifier.padding(4.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             CustomTextField(
                 text = passwordText,
                 placeholder = stringResource(id = R.string.enter_password),
                 isPasswordTextField = true,
                 isPasswordVisible = isPasswordsVisible,
                 onVisibilityChange = { isPasswordsVisible = it },
-                onValueChange = { passwordText = it },
                 showError = !validatePasswordText,
-                errorMessage = stringResource(id = R.string.validate_password_error)
+                errorMessage = stringResource(id = R.string.validate_password_error),
+                onValueChange = { passwordText = it }
             )
 
-            TextButton(
-                onClick = { /*TODO adaugare pagina de forgor password*/ },
-                modifier = Modifier
-                    .align(
-                        alignment = Alignment.End
-                    )
-                    .padding(horizontal = 16.dp)
-
-            ) {
-                Text(
-                    text = stringResource(R.string.forgot_password),
-                    letterSpacing = 1.sp,
-                    style = Typography.button
+            Spacer(modifier = Modifier.padding(4.dp))
+            CustomTextField(
+                text = confirmPasswordText,
+                placeholder = stringResource(id = R.string.confirm_password),
+                isPasswordTextField = true,
+                isPasswordVisible = isConfirmPasswordsEqual,
+                onVisibilityChange = { isConfirmPasswordsEqual = it },
+                onValueChange = { confirmPasswordText = it },
+                showError = !validateConfirmPasswordText || !validatePasswordsEqual,
+                errorMessage = if (!validateConfirmPasswordText) stringResource(id = R.string.validate_password_error) else stringResource(
+                    id = R.string.validate_equal_password_error
                 )
-            }
+            )
 
+            Spacer(modifier = Modifier.padding(10.dp))
             PrimaryButton(
-                text = stringResource(id = R.string.sign_in),
+                text = stringResource(R.string.create_account),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
-                    // TODO sign in propriu zis
-                    if (validateData(emailText,passwordText)) {
-                        viewModel.signInWithEmailAndPassword(emailText, passwordText)
+                    if (validateData(
+                            nameText,
+                            emailText,
+                            passwordText,
+                            confirmPasswordText
+                        )
+                    ) {
+                        //TODO se inregistreaza userul
+                    } else {
+                        Log.d(ContentValues.TAG, "Error")
                     }
                 },
             )
-            TextWithLinesOnSides(stringResource(id = R.string.or_between_lines))
-            PrimaryButtonWithContent(
-                text = stringResource(id = R.string.sign_in_with_google),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 24.dp, end = 24.dp),
-                onClick = { /*TODO*/ },
-                {
-                    Icon(
-                        painter = painterResource(id = R.drawable.icon_google),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(20.dp)
-                            .align(alignment = Alignment.Start),
-                        tint = Color.Unspecified
-                    )
-                }
-            )
-            Spacer(modifier = Modifier.padding(4.dp))
+
             Text(
-                text = stringResource(R.string.new_to_futureme),
+                text = stringResource(R.string.joined_before_question),
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = { /*TODO pagina de sign up*/ },
+                onClick = { /*TODO navigare catre login*/ },
             ) {
                 Text(
-                    text = stringResource(R.string.create_account),
+                    text = stringResource(id = R.string.sign_in),
                     letterSpacing = 1.sp,
                     style = Typography.button
                 )
             }
         }
     }
-
-    SignIn(
-        showErrorMessage = { errorMessage ->
-            showMessage(context, errorMessage)
-        }
-    )
 }

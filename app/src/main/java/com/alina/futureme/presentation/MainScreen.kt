@@ -37,7 +37,7 @@ fun MainScreen() {
         //TODO o variabila startDestination in care se verifica daca utilizatorul este logat sau nu
         Scaffold {innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)){
-                FutureMeNavHost(navController =navController , startDestination = Screen.SignInScreen.route)
+                FutureMeNavHost(navController =navController , startDestination = Screen.SignUpScreen.route)
             }
         }
     }

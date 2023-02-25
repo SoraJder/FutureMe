@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.alina.futureme.presentation.home.HomeScreen
 import com.alina.futureme.presentation.sign_in.SignInScreen
+import com.alina.futureme.presentation.sign_up.SignUpScreen
 
 @Composable
 fun FutureMeNavHost(navController: NavHostController, startDestination:String){
@@ -18,6 +19,9 @@ fun FutureMeNavHost(navController: NavHostController, startDestination:String){
         }
         composable(Screen.SignInScreen.route){
             SignInScreen()
+        }
+        composable(Screen.SignUpScreen.route){
+            SignUpScreen()
         }
     }
 }

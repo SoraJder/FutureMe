@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthenticationRepositoryImpl @Inject constructor(
-    val auth: FirebaseAuth
+   private val auth: FirebaseAuth
 ) : AuthenticationRepository {
 
     override val currentUser: FirebaseUser?
@@ -24,7 +24,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
             auth.signInWithEmailAndPassword(email, password).await()
             Resource.Success(true)
         } catch (e: Exception) {
-            Resource.Error(e.message)
+            Resource.Failure(e)
         }
     }
 
@@ -36,7 +36,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
             auth.createUserWithEmailAndPassword(email, password)
             Resource.Success(true)
         } catch (e: java.lang.Exception) {
-            Resource.Error(e.message)
+            Resource.Failure(e)
         }
     }
 

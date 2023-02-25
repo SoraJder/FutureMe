@@ -10,4 +10,9 @@
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="new_to_futureme">Don\'t have account?</string>
     <string name="create_account">Create account</string>
+    <string name="name">Name</string>
+    <string name="validate_name_error">Please, input a valid name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="validate_equal_password_error">Password must be equal</string>
+    <string name="joined_before_question">Joined us before?</string>
 </resources>
