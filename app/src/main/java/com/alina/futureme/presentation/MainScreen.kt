@@ -1,89 +1,49 @@
 package com.alina.futureme.presentation
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.alina.futureme.common.Constants.HOME_SCREEN
 import com.alina.futureme.common.Constants.SIGN_IN_SCREEN
+import com.alina.futureme.navigation.FutureMeNavHost
 import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.theme.FutureMeTheme
 
 @Composable
-fun MainScreen(){
-    val bottomBarState = rememberSaveable{ mutableStateOf(true)}
+fun MainScreen() {
+    val bottomBarState = rememberSaveable { mutableStateOf(true) }
 
     FutureMeTheme {
         val navController = rememberNavController()
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-        when(navBackStackEntry?.destination?.route){
-           HOME_SCREEN -> {
-              // bottomBarState.value = true
-           }
-            SIGN_IN_SCREEN ->{
+        /*when (navBackStackEntry?.destination?.route) {
+            HOME_SCREEN -> {
+                // bottomBarState.value = true
+            }
+            SIGN_IN_SCREEN -> {
                 //bottomBarState.value = false
             }
-        }
+        }*/
 
-        Scaffold {
-                NavHost(
-                    navController = navController,
-                    modifier =Modifier.padding(it),
-                    startDestination = Screen.Home.route ){
-                    composable(Screen.Home.route){
-                        HomeScreen(navController)
-                    }
-                    composable(Screen.SignInScreen.route){
-                        SignInScreen(navController)
-                    }
-                }
+        //TODO o variabila startDestination in care se verifica daca utilizatorul este logat sau nu
+        Scaffold {innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)){
+                FutureMeNavHost(navController =navController , startDestination = Screen.SignInScreen.route)
             }
-
-    }
-}
-
-@Composable
-fun HomeScreen(navController: NavController) {
-    Box(contentAlignment = Alignment.Center){
-        Column {
-            Text(text = "HOME", textAlign = TextAlign.Center)
-            Button(
-                onClick = {navController.navigate(SIGN_IN_SCREEN)},
-                content = {Text(text = "Go to sign in")}
-            )
         }
     }
 }
 
-@Composable
-fun SignInScreen(navController: NavController) {
-    Box(contentAlignment = Alignment.Center){
-        Column {
-            Text(text = "SIGN IN", textAlign = TextAlign.Center)
-            Button(
-                onClick = {navController.navigate(HOME_SCREEN)},
-                content = {Text(text = "Go to home")}
-            )
-        }
-
-    }
-}
+//TODO bottom bar implementat mai jos, in viitor o poti pune la componente comune
 /*@Composable
 fun BottomBar(navController: NavController, bottomBarState: MutableState<Boolean>) {
     val items = listOf(

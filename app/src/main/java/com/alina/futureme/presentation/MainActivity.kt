@@ -1,11 +1,8 @@
-package com.alina.futureme
+package com.alina.futureme.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.compose.rememberNavController
-import com.alina.futureme.presentation.MainScreen
-import com.alina.futureme.presentation.theme.FutureMeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

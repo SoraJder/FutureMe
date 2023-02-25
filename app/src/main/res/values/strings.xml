@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">FutureMe</string>
+    <string name="email_text_field">Email Address</string>
+    <string name="validate_email_error">The format of the mail does not seem right</string>
+    <string name="validate_password_error">Must mix capital and non-capital letters, a number, special character and a minimum length of 8</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or_between_lines">OR</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="new_to_futureme">Don\'t have account?</string>
+    <string name="create_account">Create account</string>
 </resources>

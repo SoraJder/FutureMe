@@ -11,4 +11,4 @@ val SecondaryLightColor: Color = Color(0XFFFFF7FF)
 val SecondaryDarkColor: Color = Color(0XFFA094B7)
 
 val PrimaryTextColor: Color = Color(0XFF000000)
-val SecondaryTextColor: Color = Color(0XFF000000)
+val SecondaryTextColor: Color = Color(0XFFFFFFFF)
