@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.sign_in
+package com.alina.futureme.presentation.authentication.sign_in
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,11 +8,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,18 +20,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.showMessage
-import com.alina.futureme.components.CustomTextField
-import com.alina.futureme.components.PrimaryButton
-import com.alina.futureme.components.PrimaryButtonWithContent
-import com.alina.futureme.components.TextWithLinesOnSides
+import com.alina.futureme.components.*
+import com.alina.futureme.navigation.Screen
+import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
 fun SignInScreen(
-    viewModel: SignInViewModel = hiltViewModel()
+    viewModel: AuthenticationViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val context = LocalContext.current
 
@@ -49,7 +47,7 @@ fun SignInScreen(
         email: String,
         password: String,
     ): Boolean {
-        val passwordRegex =Utils.isPasswordValid(password)
+        val passwordRegex = Utils.isPasswordValid(password)
         val emailRegex = Utils.isEmailValid(email)
 
         validateEmailText = emailRegex
@@ -124,8 +122,8 @@ fun SignInScreen(
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
                     // TODO sign in propriu zis
-                    if (validateData(emailText,passwordText)) {
-                        viewModel.signInWithEmailAndPassword(emailText, passwordText)
+                    if (validateData(emailText, passwordText)) {
+                        viewModel.signIn(emailText, passwordText)
                     }
                 },
             )
@@ -153,7 +151,7 @@ fun SignInScreen(
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = { /*TODO pagina de sign up*/ },
+                onClick = { navController.navigate(Screen.SignUpScreen.route) },
             ) {
                 Text(
                     text = stringResource(R.string.create_account),
@@ -164,9 +162,7 @@ fun SignInScreen(
         }
     }
 
-    SignIn(
-        showErrorMessage = { errorMessage ->
-            showMessage(context, errorMessage)
-        }
-    )
+    SignIn(navController = navController){errorMessage ->
+        showMessage(context,errorMessage)
+    }
 }

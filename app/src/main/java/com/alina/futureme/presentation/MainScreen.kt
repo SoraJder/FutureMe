@@ -10,8 +10,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.alina.futureme.common.Constants.HOME_SCREEN
-import com.alina.futureme.common.Constants.SIGN_IN_SCREEN
 import com.alina.futureme.navigation.FutureMeNavHost
 import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.theme.FutureMeTheme
@@ -37,7 +35,7 @@ fun MainScreen() {
         //TODO o variabila startDestination in care se verifica daca utilizatorul este logat sau nu
         Scaffold {innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)){
-                FutureMeNavHost(navController =navController , startDestination = Screen.SignUpScreen.route)
+                FutureMeNavHost(navController =navController , startDestination = Screen.SignInScreen.route)
             }
         }
     }
