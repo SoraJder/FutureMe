@@ -1,20 +1,21 @@
 package com.alina.futureme.presentation.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.alina.futureme.navigation.Screen
+import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: AuthenticationViewModel = hiltViewModel(),
     navController: NavController
 ) {
     Column(
@@ -27,6 +28,19 @@ fun HomeScreen(
             textAlign = TextAlign.Center,
             modifier = Modifier.wrapContentHeight()
         )
+        Button(
+            onClick = {
+                viewModel.signOut()
+                navController.navigate(Screen.SignInScreen.route) {
+                    popUpTo(Screen.Home.route) { inclusive = true }
+                }
+            },
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth()
+        ) {
+            Text(text = "Sign Out")
+        }
     }
 
 }
