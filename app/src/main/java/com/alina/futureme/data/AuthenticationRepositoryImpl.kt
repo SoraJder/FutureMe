@@ -5,7 +5,6 @@ import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.domain.repository.AuthenticationRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,18 +30,32 @@ class AuthenticationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun signUpWithEmail(
-        name: String,
         email: String,
         password: String
     ): Resource<FirebaseUser> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
-            result?.user?.updateProfile(
-                UserProfileChangeRequest.Builder().setDisplayName(name).build()
-            )?.await()
             Resource.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun sendEmailVerification() : Resource<Boolean> {
+        return try {
+           auth.currentUser?.sendEmailVerification()?.await()
+            Resource.Success(true)
+        } catch (e:Exception){
+            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun sendPasswordResetEmail(email: String): Resource<Boolean> {
+        return try {
+            auth.sendPasswordResetEmail(email).await()
+            Resource.Success(true)
+        } catch (e:Exception){
             Resource.Failure(e)
         }
     }

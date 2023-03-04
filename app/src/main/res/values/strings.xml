@@ -15,4 +15,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="validate_equal_password_error">Password must be equal</string>
     <string name="joined_before_question">Joined us before?</string>
+    <string name="forgot_password_additional_text">Don`t worry! It happens. Please enter the address associated with your account</string>
+    <string name="submit">Submit</string>
 </resources>

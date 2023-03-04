@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.authentication.sign_up
+package com.alina.futureme.presentation.authentication.forgot_password
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,27 +11,31 @@ import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
 @Composable
-fun SignUp(
+fun ForgotPassword(
     viewModel: AuthenticationViewModel = hiltViewModel(),
     navController: NavController,
+    showSuccessMessage: (successMessage: String?) -> Unit,
     showErrorMessage: (errorMessage: String?) -> Unit
 ) {
-    val signUpFlow = viewModel.signUpFlow.collectAsState()
+    val forgotPasswordFlow = viewModel.forgotPasswordFlow.collectAsState()
 
-    signUpFlow.value.let {
-        when(it){
+    forgotPasswordFlow.value.let {
+        when (it) {
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
-                LaunchedEffect(Unit) {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.SignUpScreen.route) { inclusive = true }
+                val isEmailSend = it.data
+                if (isEmailSend) {
+
+                    LaunchedEffect(Unit) {
+                        showSuccessMessage("Check the email to reset password")
+
+                        navController.popBackStack(Screen.SignInScreen.route, false)
                     }
                 }
             }
-            else -> {}
         }
     }
 }

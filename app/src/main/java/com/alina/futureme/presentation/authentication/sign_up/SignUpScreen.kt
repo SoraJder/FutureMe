@@ -31,7 +31,6 @@ import com.alina.futureme.components.CustomTextField
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
-import com.alina.futureme.presentation.authentication.SignUp
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
@@ -154,7 +153,7 @@ fun SignUpScreen(
                             confirmPasswordText
                         )
                     ) {
-                        viewModel.signUp(nameText, emailText, passwordText)
+                        viewModel.signUp(emailText, passwordText)
                     } else {
                         Log.d(ContentValues.TAG, "Error")
                     }
