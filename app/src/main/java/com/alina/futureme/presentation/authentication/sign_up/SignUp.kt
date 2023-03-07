@@ -19,19 +19,19 @@ fun SignUp(
     val signUpFlow = viewModel.signUpFlow.collectAsState()
 
     signUpFlow.value.let {
-        when(it){
+        when (it) {
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.SignUpScreen.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.VerifyEmailScreen.route)
                 }
+                viewModel.sendEmailVerification()
+                viewModel.currentUser
             }
-            else -> {}
+            null -> Unit
         }
     }
 }

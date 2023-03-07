@@ -42,11 +42,11 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun sendEmailVerification() : Resource<Boolean> {
+    override suspend fun sendEmailVerification(): Resource<Boolean> {
         return try {
-           auth.currentUser?.sendEmailVerification()?.await()
+            auth.currentUser?.sendEmailVerification()?.await()
             Resource.Success(true)
-        } catch (e:Exception){
+        } catch (e: Exception) {
             Resource.Failure(e)
         }
     }
@@ -55,7 +55,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return try {
             auth.sendPasswordResetEmail(email).await()
             Resource.Success(true)
-        } catch (e:Exception){
+        } catch (e: Exception) {
             Resource.Failure(e)
         }
     }

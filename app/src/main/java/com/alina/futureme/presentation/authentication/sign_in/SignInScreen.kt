@@ -127,7 +127,6 @@ fun SignInScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
-                    // TODO sign in propriu zis
                     if (validateData(emailText, passwordText)) {
                         viewModel.signIn(emailText, passwordText)
                     }

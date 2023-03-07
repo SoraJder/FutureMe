@@ -1,7 +1,5 @@
 package com.alina.futureme.presentation.authentication.sign_up
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -154,8 +152,6 @@ fun SignUpScreen(
                         )
                     ) {
                         viewModel.signUp(emailText, passwordText)
-                    } else {
-                        Log.d(ContentValues.TAG, "Error")
                     }
                 },
             )

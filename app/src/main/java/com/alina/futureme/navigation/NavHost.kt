@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.alina.futureme.presentation.authentication.forgot_password.ForgotPasswordScreen
 import com.alina.futureme.presentation.authentication.sign_in.SignInScreen
 import com.alina.futureme.presentation.authentication.sign_up.SignUpScreen
+import com.alina.futureme.presentation.authentication.verify_email.VerifyEmailScreen
 import com.alina.futureme.presentation.home.HomeScreen
 
 @Composable
@@ -26,6 +27,9 @@ fun FutureMeNavHost(navController: NavHostController, startDestination: String) 
         }
         composable(Screen.ForgotPasswordScreen.route) {
             ForgotPasswordScreen(navController = navController)
+        }
+        composable(Screen.VerifyEmailScreen.route){
+            VerifyEmailScreen(navController = navController)
         }
     }
 }
