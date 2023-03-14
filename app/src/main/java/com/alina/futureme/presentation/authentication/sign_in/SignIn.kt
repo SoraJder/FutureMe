@@ -27,7 +27,7 @@ fun SignIn(
             }
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
-                if (viewModel.isEmailVerified() == true) {
+                if (viewModel.isEmailVerified()==true) {
                     LaunchedEffect(Unit) {
                         navController.navigate(Screen.Home.route) {
                             popUpTo(Screen.SignInScreen.route) { inclusive = true }

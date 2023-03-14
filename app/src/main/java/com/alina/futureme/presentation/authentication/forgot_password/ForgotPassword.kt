@@ -28,10 +28,8 @@ fun ForgotPassword(
             is Resource.Success -> {
                 val isEmailSend = it.data
                 if (isEmailSend) {
-
                     LaunchedEffect(Unit) {
                         showSuccessMessage("Check the email to reset password")
-
                         navController.popBackStack(Screen.SignInScreen.route, false)
                     }
                 }

@@ -3,6 +3,8 @@ package com.alina.futureme.data
 import com.alina.futureme.common.Resource
 import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.domain.repository.AuthenticationRepository
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
@@ -23,6 +25,16 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return try {
             val result = auth.signInWithEmailAndPassword(email, password).await()
             Resource.Success(result.user!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun googleSignIn(credential: AuthCredential): Resource<AuthResult> {
+        return try {
+            val result = auth.signInWithCredential(credential).await()
+            Resource.Success(result)
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.Failure(e)
