@@ -158,7 +158,7 @@ fun SignUpScreen(
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = {/*TODO go to sign*/ },
+                onClick = {viewModel.onNavigateToSignInButtonClicked() },
             ) {
                 Text(
                     text = stringResource(id = R.string.sign_in),
@@ -169,7 +169,7 @@ fun SignUpScreen(
         }
     }
 
-    SignUp() { errorMessage ->
-        Utils.showMessage(context, errorMessage)
+    SignUp { message ->
+        Utils.showMessage(context, message)
     }
 }

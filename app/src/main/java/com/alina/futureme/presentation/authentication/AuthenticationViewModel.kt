@@ -61,7 +61,19 @@ class AuthenticationViewModel @Inject constructor(
         _signUpFlow.value = null
     }
 
-    fun onNavigateToSignUpButtonClicked(){
+    fun onNavigateToSignUpButtonClicked() {
         appNavigator.tryNavigateTo(Destination.SignUpScreen())
+    }
+
+    fun onNavigateToSignInButtonClicked() {
+        appNavigator.tryNavigateBack(Destination.SignInScreen())
+    }
+
+    fun onNavigateToForgotPasswordButtonClicked() {
+        appNavigator.tryNavigateTo(Destination.ForgotPasswordScreen())
+    }
+
+    fun onNavigateToHomeButtonClicked() {
+        appNavigator.tryNavigateTo(Destination.HomeScreen())
     }
 }

@@ -102,7 +102,7 @@ fun SignInScreen(
             )
 
             TextButton(
-                onClick = { /*TODO*/ },
+                onClick = { viewModel.onNavigateToForgotPasswordButtonClicked() },
                 modifier = Modifier
                     .align(
                         alignment = Alignment.End
@@ -124,7 +124,7 @@ fun SignInScreen(
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
                     if (validateData(emailText, passwordText)) {
-                        //signIn(emailText, passwordText)
+                        viewModel.signIn(emailText,passwordText)
                     }
                 },
             )
@@ -163,8 +163,7 @@ fun SignInScreen(
         }
     }
 
-    SignIn(
-    ) { errorMessage ->
+    SignIn { errorMessage ->
         showMessage(context, errorMessage)
     }
 }

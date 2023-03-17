@@ -1,11 +1,9 @@
 package com.alina.futureme.presentation.authentication.sign_in
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.alina.futureme.R
 import com.alina.futureme.common.Resource
 import com.alina.futureme.components.ProgressBar
@@ -26,7 +24,7 @@ fun SignIn(
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 if (viewModel.isEmailVerified() == true) {
-
+                    viewModel.onNavigateToHomeButtonClicked()
                 } else {
                     showErrorMessage(stringResource(R.string.email_was_not_confirmed))
                 }
