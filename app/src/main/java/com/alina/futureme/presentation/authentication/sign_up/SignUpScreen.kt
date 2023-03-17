@@ -22,19 +22,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.components.CustomTextField
 import com.alina.futureme.components.PrimaryButton
-import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
 fun SignUpScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
-    navController: NavController
 ) {
     val context = LocalContext.current
 
@@ -161,7 +158,7 @@ fun SignUpScreen(
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = { navController.popBackStack(Screen.SignInScreen.route, false) },
+                onClick = {/*TODO go to sign*/ },
             ) {
                 Text(
                     text = stringResource(id = R.string.sign_in),
@@ -172,7 +169,7 @@ fun SignUpScreen(
         }
     }
 
-    SignUp(navController = navController) { errorMessage ->
+    SignUp() { errorMessage ->
         Utils.showMessage(context, errorMessage)
     }
 }

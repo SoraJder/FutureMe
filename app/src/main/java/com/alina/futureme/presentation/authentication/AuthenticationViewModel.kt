@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alina.futureme.common.Resource
 import com.alina.futureme.domain.repository.AuthenticationRepository
+import com.alina.futureme.navigation.AppNavigator
+import com.alina.futureme.navigation.Destination
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val repository: AuthenticationRepository
+    private val repository: AuthenticationRepository,
+    private val appNavigator: AppNavigator
 ) : ViewModel() {
 
     private val _signInFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
@@ -56,5 +59,9 @@ class AuthenticationViewModel @Inject constructor(
         repository.signOut()
         _signInFlow.value = null
         _signUpFlow.value = null
+    }
+
+    fun onNavigateToSignUpButtonClicked(){
+        appNavigator.tryNavigateTo(Destination.SignUpScreen())
     }
 }

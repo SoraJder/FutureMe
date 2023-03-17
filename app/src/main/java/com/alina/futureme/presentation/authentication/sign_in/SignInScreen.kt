@@ -23,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.showMessage
@@ -31,17 +30,14 @@ import com.alina.futureme.components.CustomTextField
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.PrimaryButtonWithContent
 import com.alina.futureme.components.TextWithLinesOnSides
-import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
 fun SignInScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
-    navController: NavController
 ) {
     val context = LocalContext.current
-
     var emailText by rememberSaveable { mutableStateOf("") }
     var passwordText by rememberSaveable { mutableStateOf("") }
     var isPasswordsVisible by rememberSaveable { mutableStateOf(false) }
@@ -106,7 +102,7 @@ fun SignInScreen(
             )
 
             TextButton(
-                onClick = { navController.navigate(Screen.ForgotPasswordScreen.route) },
+                onClick = { /*TODO*/ },
                 modifier = Modifier
                     .align(
                         alignment = Alignment.End
@@ -128,7 +124,7 @@ fun SignInScreen(
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
                     if (validateData(emailText, passwordText)) {
-                        viewModel.signIn(emailText, passwordText)
+                        //signIn(emailText, passwordText)
                     }
                 },
             )
@@ -156,7 +152,7 @@ fun SignInScreen(
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = { navController.navigate(Screen.SignUpScreen.route) },
+                onClick = { viewModel.onNavigateToSignUpButtonClicked() },
             ) {
                 Text(
                     text = stringResource(R.string.create_account),
@@ -167,7 +163,8 @@ fun SignInScreen(
         }
     }
 
-    SignIn(navController = navController) { errorMessage ->
+    SignIn(
+    ) { errorMessage ->
         showMessage(context, errorMessage)
     }
 }

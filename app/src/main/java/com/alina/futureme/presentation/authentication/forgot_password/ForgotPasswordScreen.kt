@@ -21,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.showMessage
@@ -33,7 +32,6 @@ import com.alina.futureme.presentation.theme.Typography
 @Composable
 fun ForgotPasswordScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
-    navController: NavController
 ) {
     val context = LocalContext.current
 
@@ -111,7 +109,6 @@ fun ForgotPasswordScreen(
     }
 
     ForgotPassword(
-        navController = navController,
         showSuccessMessage = { successMessage ->
             showMessage(context, successMessage)
         },

@@ -9,14 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
 @Composable
 fun HomeScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
-    navController: NavController
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -31,9 +28,7 @@ fun HomeScreen(
         Button(
             onClick = {
                 viewModel.signOut()
-                navController.navigate(Screen.SignInScreen.route) {
-                    popUpTo(Screen.Home.route) { inclusive = true }
-                }
+               //TODO go to sign in
             },
             modifier = Modifier
                 .padding(24.dp)

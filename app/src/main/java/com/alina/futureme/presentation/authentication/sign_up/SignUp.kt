@@ -4,16 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.alina.futureme.common.Resource
 import com.alina.futureme.components.ProgressBar
-import com.alina.futureme.navigation.Screen
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
 @Composable
 fun SignUp(
     viewModel: AuthenticationViewModel = hiltViewModel(),
-    navController: NavController,
     showErrorMessage: (errorMessage: String?) -> Unit
 ) {
     val signUpFlow = viewModel.signUpFlow.collectAsState()
@@ -26,10 +23,9 @@ fun SignUp(
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Screen.VerifyEmailScreen.route)
+                   // navController.navigate(Screen.VerifyEmailScreen.route)
                 }
                 viewModel.sendEmailVerification()
-                viewModel.currentUser
             }
             null -> Unit
         }

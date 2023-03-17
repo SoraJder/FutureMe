@@ -20,9 +20,4 @@ class FirebaseModule {
     @Singleton
     @Provides
     fun providesAuthRepository(impl: AuthenticationRepositoryImpl): AuthenticationRepository = impl
-
-  /*  @Singleton
-    @Provides
-    fun providesFirebaseFirestore(): FirebaseFirestore = Firebase.firestore*/
-
 }
