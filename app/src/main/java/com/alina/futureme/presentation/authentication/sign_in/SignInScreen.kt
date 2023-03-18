@@ -1,5 +1,7 @@
 package com.alina.futureme.presentation.authentication.sign_in
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
+import com.alina.futureme.common.Constants.WEB_CLIENT_ID
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.showMessage
 import com.alina.futureme.components.CustomTextField
@@ -32,6 +35,10 @@ import com.alina.futureme.components.PrimaryButtonWithContent
 import com.alina.futureme.components.TextWithLinesOnSides
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 @Composable
 fun SignInScreen(
@@ -44,6 +51,18 @@ fun SignInScreen(
 
     var validateEmailText by rememberSaveable { mutableStateOf(true) }
     var validatePasswordText by rememberSaveable { mutableStateOf(true) }
+
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
+            val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val result = account.getResult(ApiException::class.java)
+                val credentials = GoogleAuthProvider.getCredential(result.idToken, null)
+                viewModel.googleSignIn(credentials)
+            } catch (it: ApiException) {
+                print(it)
+            }
+        }
 
     fun validateData(
         email: String,
@@ -124,7 +143,7 @@ fun SignInScreen(
                     .padding(start = 24.dp, end = 24.dp),
                 onClick = {
                     if (validateData(emailText, passwordText)) {
-                        viewModel.signIn(emailText,passwordText)
+                        viewModel.signIn(emailText, passwordText)
                     }
                 },
             )
@@ -134,7 +153,16 @@ fun SignInScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 24.dp),
-                onClick = { /*TODO*/ },
+                onClick = {
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(WEB_CLIENT_ID)
+                        .requestEmail()
+                        .build()
+
+                    val googleSingInClient = GoogleSignIn.getClient(context, gso)
+
+                    launcher.launch(googleSingInClient.signInIntent)
+                },
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_google),
@@ -164,6 +192,10 @@ fun SignInScreen(
     }
 
     SignIn { errorMessage ->
+        showMessage(context, errorMessage)
+    }
+
+    GoogleSignIn { errorMessage ->
         showMessage(context, errorMessage)
     }
 }

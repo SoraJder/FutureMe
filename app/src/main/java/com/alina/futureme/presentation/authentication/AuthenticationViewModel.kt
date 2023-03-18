@@ -6,6 +6,8 @@ import com.alina.futureme.common.Resource
 import com.alina.futureme.domain.repository.AuthenticationRepository
 import com.alina.futureme.navigation.AppNavigator
 import com.alina.futureme.navigation.Destination
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +24,9 @@ class AuthenticationViewModel @Inject constructor(
     private val _signInFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signInFlow: StateFlow<Resource<FirebaseUser>?> = _signInFlow
 
+    private val _googleSignInFlow = MutableStateFlow<Resource<AuthResult>?>(null)
+    val googleSignInFlow:StateFlow<Resource<AuthResult>?> = _googleSignInFlow
+
     private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signUpFlow: StateFlow<Resource<FirebaseUser>?> = _signUpFlow
 
@@ -37,6 +42,11 @@ class AuthenticationViewModel @Inject constructor(
         _signInFlow.value = result
     }
 
+    fun googleSignIn(credentials: AuthCredential) = viewModelScope.launch {
+        _googleSignInFlow.value=Resource.Loading
+        val result = repository.googleSignIn(credentials)
+        _googleSignInFlow.value = result
+    }
     fun signUp(email: String, password: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
         val result = repository.signUpWithEmail(email, password)
@@ -67,6 +77,10 @@ class AuthenticationViewModel @Inject constructor(
 
     fun onNavigateToSignInButtonClicked() {
         appNavigator.tryNavigateBack(Destination.SignInScreen())
+    }
+
+    fun onNavigateToVerifyEmail() {
+        appNavigator.tryNavigateTo(Destination.VerifyEmailScreen())
     }
 
     fun onNavigateToForgotPasswordButtonClicked() {

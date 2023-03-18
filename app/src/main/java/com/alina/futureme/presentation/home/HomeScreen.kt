@@ -28,7 +28,7 @@ fun HomeScreen(
         Button(
             onClick = {
                 viewModel.signOut()
-               viewModel.onNavigateToSignUpButtonClicked()
+                viewModel.onNavigateToSignInButtonClicked()
             },
             modifier = Modifier
                 .padding(24.dp)
@@ -37,5 +37,4 @@ fun HomeScreen(
             Text(text = "Sign Out")
         }
     }
-
 }
