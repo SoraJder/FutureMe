@@ -88,7 +88,11 @@ class AuthenticationViewModel @Inject constructor(
         appNavigator.tryNavigateTo(Destination.ForgotPasswordScreen())
     }
 
-    fun onNavigateToHomeButtonClicked() {
-        appNavigator.tryNavigateTo(Destination.HomeScreen())
+    fun navPopBackStack() {
+        appNavigator.tryNavigateBack(null, false)
+    }
+
+    fun onNavigateToOnboardScreen(){
+        appNavigator.tryNavigateTo(Destination.OnboardScreen())
     }
 }

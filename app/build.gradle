@@ -86,6 +86,10 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:$hilt_compiler"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose"
 
+    // Pager and Indicators - Accompanist
+    implementation "com.google.accompanist:accompanist-pager:0.29.1-alpha"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.29.1-alpha"
+
     //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 

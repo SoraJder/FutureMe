@@ -21,7 +21,8 @@ fun GoogleSignIn(
             }
             Resource.Loading -> ProgressBar()
             is Resource.Success -> {
-                viewModel.onNavigateToHomeButtonClicked()
+                viewModel.navPopBackStack()
+                viewModel.onNavigateToOnboardScreen()
             }
             null -> Unit
         }

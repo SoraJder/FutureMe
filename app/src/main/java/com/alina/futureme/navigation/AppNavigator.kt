@@ -29,7 +29,7 @@ interface AppNavigator {
         isSingleTop: Boolean = false,
     )
 }
-
+//TODO de adaugate popBackStack
 sealed class NavigationIntent {
     data class NavigateBack(
         val route: String? = null,

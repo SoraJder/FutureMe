@@ -20,6 +20,7 @@ import com.alina.futureme.presentation.authentication.sign_in.SignInScreen
 import com.alina.futureme.presentation.authentication.sign_up.SignUpScreen
 import com.alina.futureme.presentation.authentication.verify_email.VerifyEmailScreen
 import com.alina.futureme.presentation.home.HomeScreen
+import com.alina.futureme.presentation.onboarding.OnboardScreen
 import com.alina.futureme.presentation.theme.FutureMeTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -41,7 +42,7 @@ fun MainScreen(
         ) {
             FutureMeNavHost(
                 navController = navController,
-                startDestination = Destination.SignInScreen
+                startDestination = Destination.OnboardScreen
             ) {
                 composable(destination = Destination.HomeScreen) {
                     HomeScreen()
@@ -57,6 +58,9 @@ fun MainScreen(
                 }
                 composable(destination = Destination.ForgotPasswordScreen) {
                     ForgotPasswordScreen()
+                }
+                composable(destination = Destination.OnboardScreen) {
+                    OnboardScreen()
                 }
             }
         }
