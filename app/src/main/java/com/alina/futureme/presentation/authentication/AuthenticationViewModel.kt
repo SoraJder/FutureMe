@@ -79,6 +79,7 @@ class AuthenticationViewModel @Inject constructor(
         appNavigator.tryNavigateBack(Destination.SignInScreen())
     }
 
+    //TODO cand dai back din verifyEmail sa se duca direct la signIn
     fun onNavigateToVerifyEmail() {
         appNavigator.tryNavigateTo(Destination.VerifyEmailScreen())
     }

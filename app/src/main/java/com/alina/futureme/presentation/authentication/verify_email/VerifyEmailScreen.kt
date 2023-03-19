@@ -13,12 +13,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.components.PrimaryButton
+import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
-fun VerifyEmailScreen() {
+fun VerifyEmailScreen(
+    viewModel: AuthenticationViewModel = hiltViewModel()
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -69,9 +73,10 @@ fun VerifyEmailScreen() {
             Spacer(modifier = Modifier.height(16.dp))
             PrimaryButton(
                 text = stringResource(R.string.go_to_sign_in),
-                modifier = Modifier.fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp),
-                onClick = { /*navController.popBackStack(Screen.SignInScreen.route, false)*/}
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 24.dp),
+                onClick = { viewModel.onNavigateToSignInButtonClicked()}
             )
         }
     }
