@@ -70,7 +70,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
     //Compose
-    implementation 'com.google.accompanist:accompanist-adaptive:0.29.1-alpha'
+    implementation 'com.google.accompanist:accompanist-adaptive:0.29.2-rc'
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines"
@@ -87,11 +87,14 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose"
 
     // Pager and Indicators - Accompanist
-    implementation "com.google.accompanist:accompanist-pager:0.29.1-alpha"
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.29.1-alpha"
+    implementation 'com.google.accompanist:accompanist-pager:0.29.2-rc'
+    implementation 'com.google.accompanist:accompanist-pager-indicators:0.29.2-rc'
 
     //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Splash Screen API
+    implementation "androidx.core:core-splashscreen:1.1.0-alpha01"
 
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")

@@ -27,7 +27,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel(),
+    startDestinationScreen: Destination,
 ) {
     val navController = rememberNavController()
 
@@ -36,13 +37,14 @@ fun MainScreen(
         navHostController = navController
     )
     FutureMeTheme {
+
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
             FutureMeNavHost(
                 navController = navController,
-                startDestination = Destination.OnboardScreen
+                startDestination = startDestinationScreen
             ) {
                 composable(destination = Destination.HomeScreen) {
                     HomeScreen()

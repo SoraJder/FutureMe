@@ -4,4 +4,12 @@
     <style name="Theme.FutureMe" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/primaryDarkColor</item>
     </style>
+
+    <style name="Theme.SplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_futureme</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="postSplashScreenTheme">@style/Theme.FutureMe</item>
+    </style>
+
 </resources>
