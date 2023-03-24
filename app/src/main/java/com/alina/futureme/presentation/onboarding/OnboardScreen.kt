@@ -2,14 +2,21 @@ package com.alina.futureme.presentation.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -17,9 +24,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.presentation.theme.Typography
-import com.google.accompanist.pager.*
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalAnimationApi::class)
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun OnboardScreen(
     viewModel: OnboardViewModel = hiltViewModel()
@@ -37,18 +46,31 @@ fun OnboardScreen(
     ) {
         HorizontalPager(
             modifier = Modifier.weight(10f),
-            count = 3,
+            pageCount = 3,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { position ->
             PagerScreen(onboardPage = pages[position])
         }
-        HorizontalPagerIndicator(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .weight(1f),
-            pagerState = pagerState
-        )
+        Row(
+            Modifier
+                .height(50.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            repeat(3) { iteration ->
+                val color =
+                    if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
+                Box(
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(10.dp)
+                )
+            }
+        }
         FinishButton(
             modifier = Modifier.weight(1f),
             pagerState = pagerState
@@ -71,7 +93,7 @@ fun PagerScreen(onboardPage: OnboardPage) {
     ) {
         Image(
             modifier = Modifier
-               .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.6f),
             painter = painterResource(id = onboardPage.image),
             contentDescription = "Pager Image"
@@ -97,8 +119,8 @@ fun PagerScreen(onboardPage: OnboardPage) {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @ExperimentalAnimationApi
-@ExperimentalPagerApi
 @Composable
 fun FinishButton(
     modifier: Modifier,
