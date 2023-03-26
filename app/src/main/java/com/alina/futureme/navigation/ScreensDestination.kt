@@ -8,6 +8,7 @@ import com.alina.futureme.common.Constants.SIGN_UP_SCREEN
 import com.alina.futureme.common.Constants.VERIFY_EMAIL_SCREEN
 
 sealed class Destination(protected val route: String, vararg params: String) {
+
     val fullRoute: String = if (params.isEmpty()) route else {
         val builder = StringBuilder(route)
         params.forEach { builder.append("/{${it}}") }
@@ -15,16 +16,17 @@ sealed class Destination(protected val route: String, vararg params: String) {
     }
 
     sealed class NoArgumentsDestination(route: String) : Destination(route) {
+
         operator fun invoke(): String = route
     }
 
     object HomeScreen : NoArgumentsDestination(HOME_SCREEN)
 
-    object SignInScreen: NoArgumentsDestination(SIGN_IN_SCREEN)
-    object ForgotPasswordScreen: NoArgumentsDestination(FORGOT_PASSWORD_SCREEN)
-    object SignUpScreen: NoArgumentsDestination(SIGN_UP_SCREEN)
-    object VerifyEmailScreen: NoArgumentsDestination(VERIFY_EMAIL_SCREEN)
-    object OnboardScreen: NoArgumentsDestination(ONBOARD_SCREEN)
+    object SignInScreen : NoArgumentsDestination(SIGN_IN_SCREEN)
+    object ForgotPasswordScreen : NoArgumentsDestination(FORGOT_PASSWORD_SCREEN)
+    object SignUpScreen : NoArgumentsDestination(SIGN_UP_SCREEN)
+    object VerifyEmailScreen : NoArgumentsDestination(VERIFY_EMAIL_SCREEN)
+    object OnboardScreen : NoArgumentsDestination(ONBOARD_SCREEN)
 }
 
 internal fun String.appendParams(vararg params: Pair<String, Any?>): String {

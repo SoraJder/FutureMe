@@ -17,10 +17,10 @@ import com.alina.futureme.presentation.theme.Typography
 
 @Composable
 fun PrimaryButton(
-    text:String,
+    text: String,
     modifier: Modifier,
-    onClick: () ->Unit,
-){
+    onClick: () -> Unit,
+) {
     Button(
         onClick = onClick,
         modifier = modifier,
@@ -47,11 +47,11 @@ fun PrimaryButton(
 
 @Composable
 fun PrimaryButtonWithContent(
-    text:String,
+    text: String,
     modifier: Modifier,
-    onClick: () ->Unit,
+    onClick: () -> Unit,
     content: @Composable () -> Unit
-){
+) {
     Button(
         onClick = onClick,
         modifier = modifier,

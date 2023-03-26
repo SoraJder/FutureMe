@@ -5,15 +5,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alina.futureme.data.AuthenticationRepositoryImpl
-import com.alina.futureme.data.DataStoreRepositoryImpl
+import com.alina.futureme.data.repository.AuthenticationRepositoryImpl
+import com.alina.futureme.data.repository.DataStoreRepository
 import com.alina.futureme.navigation.Destination
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //TODO o pagina de loading
 class SplashViewModel @Inject constructor(
-    private val dataStoreRepositoryImpl: DataStoreRepositoryImpl,
+    private val dataStoreRepositoryImpl: DataStoreRepository,
     private val authenticationRepositoryImpl: AuthenticationRepositoryImpl
 ) : ViewModel() {
 

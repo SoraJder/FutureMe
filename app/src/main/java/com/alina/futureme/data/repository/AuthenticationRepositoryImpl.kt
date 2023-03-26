@@ -1,4 +1,4 @@
-package com.alina.futureme.data
+package com.alina.futureme.data.repository
 
 import com.alina.futureme.common.Resource
 import com.alina.futureme.common.firebase_utils.await

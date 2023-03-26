@@ -11,12 +11,12 @@ import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 fun GoogleSignIn(
     viewModel: AuthenticationViewModel = hiltViewModel(),
     showErrorMessage: (errorMessage: String?) -> Unit,
-){
+) {
     val googleSignInFlow = viewModel.googleSignInFlow.collectAsState()
 
     googleSignInFlow.value.let {
-        when(it){
-            is Resource.Failure ->{
+        when (it) {
+            is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
             Resource.Loading -> ProgressBar()

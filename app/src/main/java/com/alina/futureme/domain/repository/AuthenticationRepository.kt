@@ -4,6 +4,7 @@ import com.alina.futureme.common.Resource
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+
 interface AuthenticationRepository {
 
     val currentUser: FirebaseUser?
@@ -12,8 +13,8 @@ interface AuthenticationRepository {
     suspend fun googleSignIn(credential: AuthCredential): Resource<AuthResult>?
     suspend fun signUpWithEmail(email: String, password: String): Resource<FirebaseUser>?
 
-    suspend fun sendEmailVerification() : Resource<Boolean>
+    suspend fun sendEmailVerification(): Resource<Boolean>
 
-    suspend fun sendPasswordResetEmail(email: String) : Resource<Boolean>
+    suspend fun sendPasswordResetEmail(email: String): Resource<Boolean>
     fun signOut()
 }

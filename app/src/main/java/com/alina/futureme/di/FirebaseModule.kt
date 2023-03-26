@@ -1,8 +1,10 @@
 package com.alina.futureme.di
 
-import com.alina.futureme.data.AuthenticationRepositoryImpl
-import com.alina.futureme.domain.repository.AuthenticationRepository
+import com.alina.futureme.data.data_source.UserRemoteDataSource
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,8 +15,23 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class FirebaseModule {
 
+    companion object {
+
+        const val USERS_PATH: String = "users"
+    }
+
     @Provides
     @Singleton
-    fun provideFirebaseAuth():FirebaseAuth = FirebaseAuth.getInstance()
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun providesFirebaseFirestore(): FirebaseFirestore = Firebase.firestore
+
+    @Provides
+    fun providesUserRemoteDataSource(firestore: FirebaseFirestore): UserRemoteDataSource =
+        UserRemoteDataSource(
+            firestore.collection(USERS_PATH)
+        )
 
 }

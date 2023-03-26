@@ -1,4 +1,4 @@
-package com.alina.futureme.data
+package com.alina.futureme.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -15,7 +15,7 @@ import java.io.IOException
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.ONBOARD_PREFERENCE)
 
-class DataStoreRepositoryImpl(context: Context) {
+class DataStoreRepository(context: Context) {
 
     private object PreferencesKey {
 

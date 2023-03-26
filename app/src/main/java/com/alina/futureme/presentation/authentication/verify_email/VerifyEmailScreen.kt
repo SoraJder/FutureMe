@@ -76,7 +76,7 @@ fun VerifyEmailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 24.dp),
-                onClick = { viewModel.onNavigateToSignInButtonClicked()}
+                onClick = { viewModel.onNavigateToSignInButtonClicked() }
             )
         }
     }

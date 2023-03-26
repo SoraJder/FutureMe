@@ -25,7 +25,7 @@ class AuthenticationViewModel @Inject constructor(
     val signInFlow: StateFlow<Resource<FirebaseUser>?> = _signInFlow
 
     private val _googleSignInFlow = MutableStateFlow<Resource<AuthResult>?>(null)
-    val googleSignInFlow:StateFlow<Resource<AuthResult>?> = _googleSignInFlow
+    val googleSignInFlow: StateFlow<Resource<AuthResult>?> = _googleSignInFlow
 
     private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signUpFlow: StateFlow<Resource<FirebaseUser>?> = _signUpFlow
@@ -43,10 +43,11 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     fun googleSignIn(credentials: AuthCredential) = viewModelScope.launch {
-        _googleSignInFlow.value=Resource.Loading
+        _googleSignInFlow.value = Resource.Loading
         val result = repository.googleSignIn(credentials)
         _googleSignInFlow.value = result
     }
+
     fun signUp(email: String, password: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
         val result = repository.signUpWithEmail(email, password)
@@ -80,7 +81,7 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     //TODO SignOut -> datastore va lua valoarea false, asta pentru pagina de settings
-    fun onNavigateSignOutButtonClicked(){
+    fun onNavigateSignOutButtonClicked() {
         appNavigator.tryNavigateTo(Destination.SignInScreen())
     }
 
@@ -97,7 +98,7 @@ class AuthenticationViewModel @Inject constructor(
         appNavigator.tryNavigateBack(null, false)
     }
 
-    fun onNavigateToOnboardScreen(){
+    fun onNavigateToOnboardScreen() {
         appNavigator.tryNavigateTo(Destination.OnboardScreen())
     }
 }

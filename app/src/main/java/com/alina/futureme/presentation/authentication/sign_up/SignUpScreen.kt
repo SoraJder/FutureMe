@@ -158,7 +158,7 @@ fun SignUpScreen(
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(
-                onClick = {viewModel.onNavigateToSignInButtonClicked() },
+                onClick = { viewModel.onNavigateToSignInButtonClicked() },
             ) {
                 Text(
                     text = stringResource(id = R.string.sign_in),
