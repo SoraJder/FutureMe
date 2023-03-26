@@ -9,10 +9,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.sign
 
 @Singleton
 class AuthenticationRepositoryImpl @Inject constructor(
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
 ) : AuthenticationRepository {
 
     override val currentUser: FirebaseUser?
@@ -43,7 +44,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override suspend fun signUpWithEmail(
         email: String,
-        password: String
+        password: String,
     ): Resource<FirebaseUser> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()

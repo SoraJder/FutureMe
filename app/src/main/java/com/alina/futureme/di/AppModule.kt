@@ -1,8 +1,10 @@
 package com.alina.futureme.di
 
 import android.content.Context
+import com.alina.futureme.data.data_source.UserRemoteDataSource
 import com.alina.futureme.data.repository.AuthenticationRepositoryImpl
 import com.alina.futureme.data.repository.DataStoreRepository
+import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.repository.AuthenticationRepository
 import dagger.Module
 import dagger.Provides
@@ -24,4 +26,10 @@ class AppModule {
     fun providesDataStoreRepository(
         @ApplicationContext context: Context
     ) = DataStoreRepository(context = context)
+
+    @Provides
+    fun providesUserRepository(
+        userRemoteDataSourceImpl: UserRemoteDataSource,
+    ): UserRepository =
+        UserRepository(userRemoteDataSourceImpl)
 }

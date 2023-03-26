@@ -5,9 +5,9 @@ import java.time.OffsetDateTime
 data class User(
     val email: String,
     val name: String,
-    val country: String? = null,
-    val birthDate: OffsetDateTime? = null,
-    val phoneNumber: String,
+    val country: String?,
+    val birthDate: OffsetDateTime?,
+    val phoneNumber: String?,
     val lettersReceived: List<String> = emptyList(),
 )
 

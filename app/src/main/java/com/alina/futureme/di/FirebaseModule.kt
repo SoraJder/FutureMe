@@ -25,7 +25,6 @@ class FirebaseModule {
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
-    @Singleton
     fun providesFirebaseFirestore(): FirebaseFirestore = Firebase.firestore
 
     @Provides

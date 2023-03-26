@@ -3,6 +3,8 @@ package com.alina.futureme.presentation.authentication
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alina.futureme.common.Resource
+import com.alina.futureme.data.repository.UserRepository
+import com.alina.futureme.domain.model.User
 import com.alina.futureme.domain.repository.AuthenticationRepository
 import com.alina.futureme.navigation.AppNavigator
 import com.alina.futureme.navigation.Destination
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val repository: AuthenticationRepository,
+    private val authenticationRepository: AuthenticationRepository,
+    private val userRepository: UserRepository,
     private val appNavigator: AppNavigator
 ) : ViewModel() {
 
@@ -33,45 +36,67 @@ class AuthenticationViewModel @Inject constructor(
     private val _forgotPasswordFlow = MutableStateFlow<Resource<Boolean>>(Resource.Success(false))
     val forgotPasswordFlow: StateFlow<Resource<Boolean>> = _forgotPasswordFlow
 
-    private val currentUser: FirebaseUser?
-        get() = repository.currentUser
+    private val _userExistFlow = MutableStateFlow<Resource<Boolean>>(Resource.Success(false))
+    val userExistFlow: StateFlow<Resource<Boolean>> = _userExistFlow
 
+    private val currentUser: FirebaseUser?
+        get() = authenticationRepository.currentUser
+
+    //FIREBASE FUNCTION PROVIDED
     fun signIn(email: String, password: String) = viewModelScope.launch {
         _signInFlow.value = Resource.Loading
-        val result = repository.signInWithEmail(email, password)
+        val result = authenticationRepository.signInWithEmail(email, password)
         _signInFlow.value = result
     }
 
     fun googleSignIn(credentials: AuthCredential) = viewModelScope.launch {
         _googleSignInFlow.value = Resource.Loading
-        val result = repository.googleSignIn(credentials)
+        val result = authenticationRepository.googleSignIn(credentials)
         _googleSignInFlow.value = result
     }
 
     fun signUp(email: String, password: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
-        val result = repository.signUpWithEmail(email, password)
+        val result = authenticationRepository.signUpWithEmail(email, password)
         _signUpFlow.value = result
     }
 
     fun forgotPassword(email: String) = viewModelScope.launch {
         _forgotPasswordFlow.value = Resource.Loading
-        val result = repository.sendPasswordResetEmail(email)
+        val result = authenticationRepository.sendPasswordResetEmail(email)
         _forgotPasswordFlow.value = result
     }
 
     fun sendEmailVerification() = viewModelScope.launch {
-        repository.sendEmailVerification()
+        authenticationRepository.sendEmailVerification()
     }
 
     fun isEmailVerified() = currentUser?.isEmailVerified
 
+
     fun signOut() {
-        repository.signOut()
+        authenticationRepository.signOut()
         _signInFlow.value = null
         _signUpFlow.value = null
     }
 
+    //CREATE USER IN FIRESTORE
+    fun createUser(name: String) {
+        viewModelScope.launch {
+            userRepository.addUserInFirestore(
+                User(
+                    email = currentUser?.email ?: "",
+                    name = name,
+                    country = null,
+                    birthDate = null,
+                    phoneNumber = null,
+                    lettersReceived = emptyList()
+                )
+            )
+        }
+    }
+
+    //NAVIGATION PART
     fun onNavigateToSignUpButtonClicked() {
         appNavigator.tryNavigateTo(Destination.SignUpScreen())
     }

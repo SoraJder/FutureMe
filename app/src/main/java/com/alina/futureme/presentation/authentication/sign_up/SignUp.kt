@@ -10,6 +10,7 @@ import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 @Composable
 fun SignUp(
     viewModel: AuthenticationViewModel = hiltViewModel(),
+    name: String,
     showMessage: (message: String?) -> Unit,
 ) {
     val signUpFlow = viewModel.signUpFlow.collectAsState()
@@ -23,6 +24,7 @@ fun SignUp(
             is Resource.Success -> {
                 viewModel.sendEmailVerification()
                 viewModel.onNavigateToVerifyEmail()
+                viewModel.createUser(name)
                 showMessage("Email verification was sent")
             }
             null -> Unit

@@ -169,7 +169,7 @@ fun SignUpScreen(
         }
     }
 
-    SignUp { message ->
+    SignUp(name = nameText) { message ->
         Utils.showMessage(context, message)
     }
 }
