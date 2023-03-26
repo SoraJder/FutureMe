@@ -33,7 +33,7 @@ class AuthenticationViewModel @Inject constructor(
     private val _forgotPasswordFlow = MutableStateFlow<Resource<Boolean>>(Resource.Success(false))
     val forgotPasswordFlow: StateFlow<Resource<Boolean>> = _forgotPasswordFlow
 
-    val currentUser: FirebaseUser?
+    private val currentUser: FirebaseUser?
         get() = repository.currentUser
 
     fun signIn(email: String, password: String) = viewModelScope.launch {
@@ -77,6 +77,11 @@ class AuthenticationViewModel @Inject constructor(
 
     fun onNavigateToSignInButtonClicked() {
         appNavigator.tryNavigateBack(Destination.SignInScreen())
+    }
+
+    //TODO SignOut -> datastore va lua valoarea false, asta pentru pagina de settings
+    fun onNavigateSignOutButtonClicked(){
+        appNavigator.tryNavigateTo(Destination.SignInScreen())
     }
 
     //TODO cand dai back din verifyEmail sa se duca direct la signIn
