@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.sign
 
 @Singleton
 class AuthenticationRepositoryImpl @Inject constructor(
@@ -70,6 +69,15 @@ class AuthenticationRepositoryImpl @Inject constructor(
             Resource.Success(true)
         } catch (e: Exception) {
             Resource.Failure(e)
+        }
+    }
+
+    override suspend fun checkIfUserExists(email: String): Boolean {
+        return try {
+            auth.fetchSignInMethodsForEmail(email).await()
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 

@@ -36,10 +36,10 @@ class AuthenticationViewModel @Inject constructor(
     private val _forgotPasswordFlow = MutableStateFlow<Resource<Boolean>>(Resource.Success(false))
     val forgotPasswordFlow: StateFlow<Resource<Boolean>> = _forgotPasswordFlow
 
-    private val _userExistFlow = MutableStateFlow<Resource<Boolean>>(Resource.Success(false))
-    val userExistFlow: StateFlow<Resource<Boolean>> = _userExistFlow
+    private val _userExistFlow = MutableStateFlow<Boolean?>(null)
+    val userExistFlow: StateFlow<Boolean?> = _userExistFlow
 
-    private val currentUser: FirebaseUser?
+    val currentUser: FirebaseUser?
         get() = authenticationRepository.currentUser
 
     //FIREBASE FUNCTION PROVIDED
@@ -71,8 +71,12 @@ class AuthenticationViewModel @Inject constructor(
         authenticationRepository.sendEmailVerification()
     }
 
-    fun isEmailVerified() = currentUser?.isEmailVerified
+    fun checkIfUserExist(email: String) = viewModelScope.launch {
+        val result = authenticationRepository.checkIfUserExists(email)
+        _userExistFlow.value = result
+    }
 
+    fun isEmailVerified() = currentUser?.isEmailVerified
 
     fun signOut() {
         authenticationRepository.signOut()
