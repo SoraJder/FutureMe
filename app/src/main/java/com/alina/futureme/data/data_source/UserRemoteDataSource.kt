@@ -34,6 +34,15 @@ class UserRemoteDataSource @Inject constructor(
                 .await()
         }
 
+    suspend fun userExistsInFirestore(email: String): Boolean {
+        return try {
+            val userDoc = usersRef.document(email).get().await()
+            return userDoc?.exists() ?: false
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     //TODO posibil sa fie nevoie si de o functie get User by email
     //Emailul e identificator unic
 }

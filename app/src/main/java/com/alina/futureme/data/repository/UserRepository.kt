@@ -16,4 +16,7 @@ class UserRepository @Inject constructor(
 
     suspend fun deleteUserInFirestore(user: User) =
         userRemoteDataSource.deleteUserInFirestore(user = user)
+
+   suspend fun userExistsInFirestore(email: String): Boolean =
+        userRemoteDataSource.userExistsInFirestore(email = email)
 }

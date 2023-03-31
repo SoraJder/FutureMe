@@ -17,5 +17,4 @@ interface AuthenticationRepository {
 
     suspend fun sendPasswordResetEmail(email: String): Resource<Boolean>
     fun signOut()
-    suspend fun checkIfUserExists(email: String): Boolean
 }

@@ -1,13 +1,11 @@
 package com.alina.futureme.domain.model
 
-import java.time.OffsetDateTime
-
 data class User(
     val email: String,
     val name: String,
-    val country: String?,
-    val birthDate: OffsetDateTime?,
-    val phoneNumber: String?,
+    val country: String,
+    val birthDate: String,
+    val phoneNumber: String,
     val lettersReceived: List<String> = emptyList(),
 )
 

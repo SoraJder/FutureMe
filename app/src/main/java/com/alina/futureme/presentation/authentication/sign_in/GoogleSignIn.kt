@@ -13,9 +13,9 @@ fun GoogleSignIn(
     showErrorMessage: (errorMessage: String?) -> Unit,
 ) {
     val googleSignInFlow = viewModel.googleSignInFlow.collectAsState()
-    val userExist = viewModel.userExistFlow.collectAsState().value
+    val userExistFlow = viewModel.userExistFlow.collectAsState()
 
-    googleSignInFlow.value.let {
+    googleSignInFlow.value.let { it ->
         when (it) {
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
@@ -25,19 +25,25 @@ fun GoogleSignIn(
                 val currentUser = viewModel.currentUser
 
                 currentUser?.email?.let { email ->
-                    viewModel.checkIfUserExist(email)
+                    viewModel.userExistsInFirestore(email)
 
-                    when (userExist) {
-                        true -> {
-                            viewModel.createUser(currentUser.displayName!!)
-                            viewModel.navPopBackStack()
-                            viewModel.onNavigateToOnboardScreen()
+                    userExistFlow.value.let { userExist ->
+                        when (userExist) {
+                            true -> {
+                                viewModel.navPopBackStack()
+                                viewModel.onNavigateToOnboardScreen()
+                            }
+                            false -> {
+                                viewModel.createUser(currentUser.displayName!!)
+                                viewModel.navPopBackStack()
+                                viewModel.onNavigateToOnboardScreen()
+                            }
+                            null -> Unit
                         }
-                        false -> {
-                            showErrorMessage("Can not create user")
-                        }
-                        null -> {}
                     }
+
+                    viewModel.navPopBackStack()
+                    viewModel.onNavigateToOnboardScreen()
                 }
             }
             null -> Unit

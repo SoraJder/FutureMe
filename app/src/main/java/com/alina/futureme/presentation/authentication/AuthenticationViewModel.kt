@@ -71,12 +71,11 @@ class AuthenticationViewModel @Inject constructor(
         authenticationRepository.sendEmailVerification()
     }
 
-    fun checkIfUserExist(email: String) = viewModelScope.launch {
-        val result = authenticationRepository.checkIfUserExists(email)
-        _userExistFlow.value = result
-    }
-
     fun isEmailVerified() = currentUser?.isEmailVerified
+
+    fun userExistsInFirestore(email: String) = viewModelScope.launch {
+        _userExistFlow.value = userRepository.userExistsInFirestore(email)
+    }
 
     fun signOut() {
         authenticationRepository.signOut()
@@ -91,9 +90,9 @@ class AuthenticationViewModel @Inject constructor(
                 User(
                     email = currentUser?.email ?: "",
                     name = name,
-                    country = null,
-                    birthDate = null,
-                    phoneNumber = null,
+                    country = "",
+                    birthDate = "",
+                    phoneNumber = "",
                     lettersReceived = emptyList()
                 )
             )

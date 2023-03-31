@@ -71,15 +71,5 @@ class AuthenticationRepositoryImpl @Inject constructor(
             Resource.Failure(e)
         }
     }
-
-    override suspend fun checkIfUserExists(email: String): Boolean {
-        return try {
-            auth.fetchSignInMethodsForEmail(email).await()
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
-
     override fun signOut() = auth.signOut()
 }
