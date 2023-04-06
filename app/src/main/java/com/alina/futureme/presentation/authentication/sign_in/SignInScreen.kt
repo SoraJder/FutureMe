@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -80,7 +81,7 @@ fun SignInScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Transparent)
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
@@ -132,7 +133,7 @@ fun SignInScreen(
                 Text(
                     text = stringResource(R.string.forgot_password),
                     letterSpacing = 1.sp,
-                    style = Typography.button
+                    style = Typography.labelLarge
                 )
             }
 
@@ -177,7 +178,8 @@ fun SignInScreen(
             Spacer(modifier = Modifier.padding(4.dp))
             Text(
                 text = stringResource(R.string.new_to_futureme),
-                modifier = Modifier.padding(top = 15.dp)
+                modifier = Modifier.padding(top = 15.dp),
+                color = MaterialTheme.colorScheme.secondary
             )
             TextButton(
                 onClick = { viewModel.onNavigateToSignUpButtonClicked() },
@@ -185,7 +187,7 @@ fun SignInScreen(
                 Text(
                     text = stringResource(R.string.create_account),
                     letterSpacing = 1.sp,
-                    style = Typography.button
+                    style = Typography.labelLarge
                 )
             }
         }

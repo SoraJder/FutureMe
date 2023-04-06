@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alina.futureme.presentation.theme.PrimaryTextColor
-import com.alina.futureme.presentation.theme.SecondaryColor
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
@@ -25,7 +24,7 @@ fun PrimaryButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = SecondaryColor
+            containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         shape = RoundedCornerShape(8.dp),
     ) {
@@ -35,11 +34,11 @@ fun PrimaryButton(
         ) {
             Text(
                 text = text,
-                style = Typography.button,
+                style = Typography.labelLarge,
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(start = 4.dp),
-                color = PrimaryTextColor
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -56,7 +55,7 @@ fun PrimaryButtonWithContent(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = SecondaryColor
+            containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         shape = RoundedCornerShape(8.dp),
     ) {
@@ -67,11 +66,11 @@ fun PrimaryButtonWithContent(
             content()
             Text(
                 text = text,
-                style = Typography.button,
+                style = Typography.labelLarge,
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(start = 4.dp),
-                color = PrimaryTextColor
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

@@ -4,10 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -26,7 +26,7 @@ fun VerifyEmailScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Transparent)
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
@@ -47,27 +47,31 @@ fun VerifyEmailScreen(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = stringResource(R.string.email_confirmation),
-                style = Typography.h6
+                style = Typography.headlineMedium,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = stringResource(R.string.nice_to_meet_you),
-                style = Typography.body2,
+                style = Typography.bodyMedium,
                 modifier = Modifier.padding(4.dp),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = stringResource(R.string.ready_to_start_verify_email),
-                style = Typography.body2,
+                style = Typography.bodyMedium,
                 modifier = Modifier.padding(4.dp),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = stringResource(R.string.verifiy_spam_folder),
-                style = Typography.body2,
+                style = Typography.bodyMedium,
                 modifier = Modifier.padding(4.dp),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Spacer(modifier = Modifier.height(16.dp))

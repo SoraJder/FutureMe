@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,7 +14,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -43,9 +43,8 @@ fun ForgotPasswordScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Transparent)
-    )
-    {
+            .background(color = MaterialTheme.colorScheme.background)
+    ) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
@@ -70,7 +69,8 @@ fun ForgotPasswordScreen(
                 modifier = Modifier
                     .padding(top = 32.dp, start = 40.dp)
                     .fillMaxWidth(),
-                style = Typography.h5
+                style = Typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Text(
@@ -79,7 +79,8 @@ fun ForgotPasswordScreen(
                 modifier = Modifier
                     .padding(start = 40.dp, bottom = 32.dp)
                     .fillMaxWidth(),
-                style = Typography.caption
+                style = Typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Spacer(modifier = Modifier.height(10.dp))

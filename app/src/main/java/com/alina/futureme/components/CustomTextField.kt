@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
@@ -22,8 +21,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.alina.futureme.R
-import com.alina.futureme.presentation.theme.PrimaryColor
-import com.alina.futureme.presentation.theme.PrimaryLightColor
 import com.alina.futureme.presentation.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -46,12 +43,12 @@ fun CustomTextField(
         value = text,
         onValueChange = { onValueChange(it) },
         shape = RoundedCornerShape(8.dp),
-        label = { Text(text = placeholder, style = Typography.caption) },
+        label = { Text(text = placeholder, style = Typography.labelLarge) },
         placeholder = { Text(text = placeholder) },
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = PrimaryColor,
-            unfocusedBorderColor = PrimaryLightColor
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.secondary
         ),
         modifier = Modifier
             .fillMaxWidth()
@@ -95,8 +92,8 @@ fun CustomTextField(
     if (showError) {
         Text(
             text = errorMessage,
-            color = Color.Red,
-            style = Typography.caption,
+            color = MaterialTheme.colorScheme.error,
+            style = Typography.labelMedium,
             modifier = Modifier
                 .padding(start = 10.dp)
                 .offset(y = (-1).dp)

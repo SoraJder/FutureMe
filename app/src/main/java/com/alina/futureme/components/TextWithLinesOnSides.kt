@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.alina.futureme.presentation.theme.PrimaryLightColor
 
 @Composable
 fun TextWithLinesOnSides(text: String) {
@@ -24,16 +24,20 @@ fun TextWithLinesOnSides(text: String) {
 
         Divider(
             modifier = Modifier.weight(0.8f),
-            color = PrimaryLightColor, thickness = 2.dp
+            color = MaterialTheme.colorScheme.primary,
+            thickness = 2.dp
         )
         Text(
-            text = text, modifier = Modifier
+            text = text,
+            modifier = Modifier
                 .weight(0.2f),
-            style = TextStyle(textAlign = TextAlign.Center)
+            style = TextStyle(textAlign = TextAlign.Center),
+            color = MaterialTheme.colorScheme.secondary
         )
         Divider(
             modifier = Modifier.weight(0.8f),
-            color = PrimaryLightColor, thickness = 2.dp
+            color = MaterialTheme.colorScheme.primary,
+            thickness = 2.dp
         )
     }
 }

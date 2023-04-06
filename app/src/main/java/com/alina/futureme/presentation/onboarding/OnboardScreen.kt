@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +43,9 @@ fun OnboardScreen(
     val pagerState = rememberPagerState()
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
         HorizontalPager(
             modifier = Modifier.weight(10f),
@@ -101,10 +104,11 @@ fun PagerScreen(onboardPage: OnboardPage) {
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
-            style = Typography.h4,
+            style = Typography.headlineSmall,
             text = onboardPage.title,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             modifier = Modifier
@@ -112,9 +116,10 @@ fun PagerScreen(onboardPage: OnboardPage) {
                 .padding(horizontal = 40.dp)
                 .padding(top = 20.dp),
             text = onboardPage.description,
-            style = Typography.subtitle1,
+            style = Typography.bodyMedium,
             fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

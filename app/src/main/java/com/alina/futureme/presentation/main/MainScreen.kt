@@ -37,7 +37,6 @@ fun MainScreen(
         navHostController = navController
     )
     FutureMeTheme {
-
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
