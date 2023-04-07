@@ -57,7 +57,7 @@ class AuthenticationViewModel @Inject constructor(
 
     fun signUp(email: String, password: String, name: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
-        val result = authenticationRepository.signUpWithEmail(email, password,name)
+        val result = authenticationRepository.signUpWithEmail(email, password, name)
         _signUpFlow.value = result
     }
 
@@ -108,8 +108,9 @@ class AuthenticationViewModel @Inject constructor(
         appNavigator.tryNavigateBack(Destination.SignInScreen())
     }
 
-    //TODO SignOut -> datastore va lua valoarea false, asta pentru pagina de settings
+    //TODO SignOut -> datastore va lua valoarea false, asta pentru pagina de profile
     fun onNavigateSignOutButtonClicked() {
+        appNavigator.tryNavigateBack()
         appNavigator.tryNavigateTo(Destination.SignInScreen())
     }
 
@@ -121,7 +122,9 @@ class AuthenticationViewModel @Inject constructor(
     fun onNavigateToForgotPasswordButtonClicked() {
         appNavigator.tryNavigateTo(Destination.ForgotPasswordScreen())
     }
+
     fun onNavigateToOnboardScreen() {
+        appNavigator.tryNavigateBack()
         appNavigator.tryNavigateTo(Destination.OnboardScreen())
     }
 }

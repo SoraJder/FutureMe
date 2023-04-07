@@ -23,6 +23,7 @@ class OnboardViewModel @Inject constructor(
     }
 
     fun navigateToHomeScreen() {
+        appNavigator.tryNavigateBack()
         appNavigator.tryNavigateTo(Destination.HomeScreen())
     }
 }

@@ -9,6 +9,10 @@ object Constants {
     const val FORGOT_PASSWORD_SCREEN = "Forgot password"
     const val VERIFY_EMAIL_SCREEN = "Verify email"
     const val ONBOARD_SCREEN = "Onboard"
+    const val PROFILE_SCREEN= "Profile"
+    const val WRITE_LETTER_SCREEN= "Write Letter"
+    const val READ_LETTER_SCREEN = "Read Letter"
+    const val SEND_INSTANT_LETTER_SCREEN = "Send Instant Letter"
 
     //google web client id
     const val WEB_CLIENT_ID =

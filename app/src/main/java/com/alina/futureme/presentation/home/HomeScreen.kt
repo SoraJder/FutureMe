@@ -4,11 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.*
@@ -30,46 +27,43 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun HomeScreen(
-    viewModel: AuthenticationViewModel = hiltViewModel(),
+    authenticationViewModel: AuthenticationViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(color = MaterialTheme.colorScheme.tertiaryContainer)
 
-    val userName = viewModel.currentUser?.displayName!!
+    val userName = authenticationViewModel.currentUser?.displayName!!
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState()),
     ) {
-        HomeCard(userName)
+        HomeCard(
+            userName = userName,
+            onProfileClick = {
+                homeViewModel.onNavigateToProfile()
+            }
+        )
 
         ButtonCard(
             image = R.drawable.note,
             text = "Write Letter"
-        )
+        ) {
+            homeViewModel.onNavigateToWriteLetter()
+        }
 
         ButtonCard(
             image = R.drawable.reading_book,
-            text = "Read Letter"
+            text = "Read Letter",
+            onClick = homeViewModel.onNavigateToReadLetter()
         )
-
         ButtonCard(
             image = R.drawable.message,
             text = "Send Instant Letter"
-        )
-
-        Button(
-            onClick = {
-                viewModel.onNavigateSignOutButtonClicked()
-                viewModel.signOut()
-            },
-            modifier = Modifier
-                .padding(24.dp)
-                .fillMaxWidth()
         ) {
-            Text(text = "Sign Out")
+            homeViewModel.onNavigateToSendInstantLetter()
         }
     }
 }
@@ -79,7 +73,8 @@ fun HomeScreen(
 fun ButtonCard(
     @DrawableRes
     image: Int,
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -91,7 +86,7 @@ fun ButtonCard(
                 shape = RoundedCornerShape(10.dp)
             ),
         onClick = {
-            //TODO de adaugat callback
+            onClick
         },
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
@@ -118,11 +113,14 @@ fun ButtonCard(
 }
 
 @Composable
-fun HomeCard(userName: String) {
+fun HomeCard(
+    userName: String,
+    onProfileClick: () -> Unit
+) {
     Surface(
         color = MaterialTheme.colorScheme.tertiaryContainer,
         modifier = Modifier
-            .height(275.dp)
+            .height(250.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(60.dp).copy(topStart = ZeroCornerSize, topEnd = ZeroCornerSize)
     ) {
@@ -138,7 +136,7 @@ fun HomeCard(userName: String) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_futureme),
                     contentDescription = null,
-                    modifier = Modifier.size(96.dp)
+                    modifier = Modifier.size(80.dp)
                 )
                 Text(
                     text = stringResource(id = R.string.app_name),
@@ -158,9 +156,8 @@ fun HomeCard(userName: String) {
                     //TODO deschidere dialog alert somehow
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                ProfileButton {
-                    //TODO navigare pagina de profile
-                }
+
+                ProfileButton(onProfileClick)
                 Spacer(modifier = Modifier.width(16.dp))
             }
 
