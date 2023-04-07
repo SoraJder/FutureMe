@@ -148,13 +148,14 @@ fun SignUpScreen(
                             confirmPasswordText
                         )
                     ) {
-                        viewModel.signUp(emailText, passwordText)
+                        viewModel.signUp(emailText, passwordText,nameText)
                     }
                 },
             )
 
             Text(
                 text = stringResource(R.string.joined_before_question),
+                color= MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(

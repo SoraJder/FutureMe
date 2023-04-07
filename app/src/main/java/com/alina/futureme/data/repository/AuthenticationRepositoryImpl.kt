@@ -3,10 +3,7 @@ package com.alina.futureme.data.repository
 import com.alina.futureme.common.Resource
 import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.domain.repository.AuthenticationRepository
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -44,9 +41,13 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override suspend fun signUpWithEmail(
         email: String,
         password: String,
+        name: String
     ): Resource<FirebaseUser> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
+            result.user?.updateProfile(
+                UserProfileChangeRequest.Builder().setDisplayName(name).build()
+            )
             Resource.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -71,5 +72,6 @@ class AuthenticationRepositoryImpl @Inject constructor(
             Resource.Failure(e)
         }
     }
+
     override fun signOut() = auth.signOut()
 }

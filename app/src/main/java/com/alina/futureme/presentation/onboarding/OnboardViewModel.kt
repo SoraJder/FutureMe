@@ -25,8 +25,4 @@ class OnboardViewModel @Inject constructor(
     fun navigateToHomeScreen() {
         appNavigator.tryNavigateTo(Destination.HomeScreen())
     }
-
-    fun navPopBackStack() {
-        appNavigator.tryNavigateBack(null, false)
-    }
 }

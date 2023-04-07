@@ -55,9 +55,9 @@ class AuthenticationViewModel @Inject constructor(
         _googleSignInFlow.value = result
     }
 
-    fun signUp(email: String, password: String) = viewModelScope.launch {
+    fun signUp(email: String, password: String, name: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
-        val result = authenticationRepository.signUpWithEmail(email, password)
+        val result = authenticationRepository.signUpWithEmail(email, password,name)
         _signUpFlow.value = result
     }
 
@@ -121,11 +121,6 @@ class AuthenticationViewModel @Inject constructor(
     fun onNavigateToForgotPasswordButtonClicked() {
         appNavigator.tryNavigateTo(Destination.ForgotPasswordScreen())
     }
-
-    fun navPopBackStack() {
-        appNavigator.tryNavigateBack(null, false)
-    }
-
     fun onNavigateToOnboardScreen() {
         appNavigator.tryNavigateTo(Destination.OnboardScreen())
     }

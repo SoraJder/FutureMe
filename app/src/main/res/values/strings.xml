@@ -24,4 +24,6 @@
     <string name="verifiy_spam_folder">In case you don\'t find the link in inbox, please check the spam folder.</string>
     <string name="went_wrong">Something went wrong</string>
     <string name="email_was_not_confirmed">Your email is not confirmed. Another email confirmation has been sent.</string>
+    <string name="faq">FAQ</string>
+    <string name="hi">Hi,</string>
 </resources>

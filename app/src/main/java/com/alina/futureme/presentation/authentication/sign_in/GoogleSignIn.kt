@@ -15,7 +15,7 @@ fun GoogleSignIn(
     val googleSignInFlow = viewModel.googleSignInFlow.collectAsState()
     val userExistFlow = viewModel.userExistFlow.collectAsState()
 
-    googleSignInFlow.value.let { it ->
+    googleSignInFlow.value.let {
         when (it) {
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
@@ -29,21 +29,13 @@ fun GoogleSignIn(
 
                     userExistFlow.value.let { userExist ->
                         when (userExist) {
-                            true -> {
-                                viewModel.navPopBackStack()
-                                viewModel.onNavigateToOnboardScreen()
-                            }
                             false -> {
                                 viewModel.createUser(currentUser.displayName!!)
-                                viewModel.navPopBackStack()
-                                viewModel.onNavigateToOnboardScreen()
                             }
-                            null -> Unit
+                            else -> Unit
                         }
+                        viewModel.onNavigateToOnboardScreen()
                     }
-
-                    viewModel.navPopBackStack()
-                    viewModel.onNavigateToOnboardScreen()
                 }
             }
             null -> Unit

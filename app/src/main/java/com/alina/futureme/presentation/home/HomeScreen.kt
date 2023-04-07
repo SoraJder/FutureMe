@@ -1,34 +1,65 @@
 package com.alina.futureme.presentation.home
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.ZeroCornerSize
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.futureme.R
+import com.alina.futureme.components.FAQButton
+import com.alina.futureme.components.ProfileButton
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
+import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun HomeScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = MaterialTheme.colorScheme.tertiaryContainer)
+
+    val userName = viewModel.currentUser?.displayName!!
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(color = MaterialTheme.colorScheme.background)
+            .verticalScroll(rememberScrollState()),
     ) {
-        Text(
-            text = "Home",
-            textAlign = TextAlign.Center,
-            modifier = Modifier.wrapContentHeight()
+        HomeCard(userName)
+
+        ButtonCard(
+            image = R.drawable.note,
+            text = "Write Letter"
         )
+
+        ButtonCard(
+            image = R.drawable.reading_book,
+            text = "Read Letter"
+        )
+
+        ButtonCard(
+            image = R.drawable.message,
+            text = "Send Instant Letter"
+        )
+
         Button(
             onClick = {
                 viewModel.onNavigateSignOutButtonClicked()
@@ -39,6 +70,114 @@ fun HomeScreen(
                 .fillMaxWidth()
         ) {
             Text(text = "Sign Out")
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ButtonCard(
+    @DrawableRes
+    image: Int,
+    text: String
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp, horizontal = 32.dp)
+            .shadow(
+                elevation = 8.dp,
+                ambientColor = MaterialTheme.colorScheme.scrim,
+                shape = RoundedCornerShape(10.dp)
+            ),
+        onClick = {
+            //TODO de adaugat callback
+        },
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+            Text(
+                text = text,
+                style = Typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
+    }
+}
+
+@Composable
+fun HomeCard(userName: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.tertiaryContainer,
+        modifier = Modifier
+            .height(275.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(60.dp).copy(topStart = ZeroCornerSize, topEnd = ZeroCornerSize)
+    ) {
+        Column {
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_futureme),
+                    contentDescription = null,
+                    modifier = Modifier.size(96.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    style = Typography.displayMedium,
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.End,
+            ) {
+                FAQButton {
+                    //TODO deschidere dialog alert somehow
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                ProfileButton {
+                    //TODO navigare pagina de profile
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+
+            Text(
+                text = stringResource(R.string.hi) + " " + userName,
+                style = Typography.headlineMedium,
+                modifier = Modifier.padding(start = 16.dp),
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary
+            )
+            Text(
+                text = "What is your message for future?",
+                style = Typography.bodyLarge,
+                modifier = Modifier.padding(start = 16.dp),
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary
+            )
         }
     }
 }

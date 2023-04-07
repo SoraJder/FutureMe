@@ -79,7 +79,6 @@ fun OnboardScreen(
             pagerState = pagerState
         ) {
             viewModel.saveOnboardState(completed = true)
-            viewModel.navPopBackStack()
             viewModel.navigateToHomeScreen()
         }
     }

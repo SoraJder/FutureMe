@@ -56,21 +56,21 @@ android {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.core:core-ktx:1.10.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     implementation "androidx.activity:activity-compose:1.7.0"
-    implementation "androidx.compose.ui:ui:1.4.0"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.4.0"
-    implementation "androidx.compose.material:material:1.4.0"
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore:24.1.1'
+    implementation "androidx.compose.ui:ui:1.4.1"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.4.1"
+    implementation "androidx.compose.material:material:1.4.1"
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-firestore:24.4.5'
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.0"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.4.0"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:1.4.0"
-    implementation "androidx.navigation:navigation-compose:2.6.0-alpha07"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.1"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.4.1"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.4.1"
+    implementation "androidx.navigation:navigation-compose:2.6.0-alpha09"
 
     //Compose
     implementation 'com.google.accompanist:accompanist-adaptive:0.30.0'
@@ -90,10 +90,10 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:1.1.0-alpha01"
 
     // Pager and Indicators
-    implementation "androidx.compose.foundation:foundation:1.4.0"
+    implementation "androidx.compose.foundation:foundation:1.4.1"
 
     //DataStore
-    implementation 'androidx.datastore:datastore-preferences:1.1.0-alpha01'
+    implementation 'androidx.datastore:datastore-preferences:1.1.0-alpha04'
 
     //Splash API
     implementation 'androidx.core:core-splashscreen:1.0.0'
@@ -101,14 +101,15 @@ dependencies {
     // Accompanist
     implementation "com.google.accompanist:accompanist-pager:0.30.0" // Pager
     implementation "com.google.accompanist:accompanist-pager-indicators:0.30.0" // Pager Indicators
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.0" //Status Bar
 
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:31.2.3")
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
-    implementation "com.google.android.gms:play-services-auth:20.4.1"
-    implementation("androidx.compose.material3:material3:1.1.0-alpha08")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha08")
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.6'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
+    implementation "com.google.android.gms:play-services-auth:20.5.0"
+    implementation("androidx.compose.material3:material3:1.1.0-beta02")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-beta02")
 }

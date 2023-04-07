@@ -24,7 +24,6 @@ fun SignIn(
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 if (viewModel.isEmailVerified() == true) {
-                    viewModel.navPopBackStack()
                     viewModel.onNavigateToOnboardScreen()
                 } else {
                     showErrorMessage(stringResource(R.string.email_was_not_confirmed))
