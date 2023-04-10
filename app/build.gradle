@@ -73,7 +73,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.6.0-alpha09"
 
     //Compose
-    implementation 'com.google.accompanist:accompanist-adaptive:0.30.0'
+   implementation "androidx.compose.material:material-icons-extended:1.4.1"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta"
@@ -102,6 +102,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:0.30.0" // Pager
     implementation "com.google.accompanist:accompanist-pager-indicators:0.30.0" // Pager Indicators
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.0" //Status Bar
+    implementation "com.google.accompanist:accompanist-navigation-material:0.29.2-rc"
+    implementation 'com.google.accompanist:accompanist-adaptive:0.30.0'
 
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:31.2.3")

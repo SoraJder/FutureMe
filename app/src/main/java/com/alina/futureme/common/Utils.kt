@@ -2,6 +2,8 @@ package com.alina.futureme.common
 
 import android.content.Context
 import android.widget.Toast
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 object Utils {
 
@@ -20,5 +22,11 @@ object Utils {
         val passwordRegex =
             """^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@${'$'}%^&*-]).{8,}""".toRegex()
         return passwordRegex.matches(password)
+    }
+
+    fun getDate(): String {
+        val currentDate = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("MMMM d'th', yyyy")
+        return currentDate.format(formatter)
     }
 }
