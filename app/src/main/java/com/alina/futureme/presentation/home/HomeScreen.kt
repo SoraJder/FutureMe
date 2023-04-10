@@ -57,7 +57,7 @@ fun HomeScreen(
         ButtonCard(
             image = R.drawable.reading_book,
             text = "Read Letter",
-            onClick = homeViewModel.onNavigateToReadLetter()
+            onClick = { homeViewModel.onNavigateToReadLetter() }
         )
         ButtonCard(
             image = R.drawable.message,
@@ -85,9 +85,7 @@ fun ButtonCard(
                 ambientColor = MaterialTheme.colorScheme.scrim,
                 shape = RoundedCornerShape(10.dp)
             ),
-        onClick = {
-            onClick
-        },
+        onClick = onClick,
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
@@ -124,7 +122,9 @@ fun HomeCard(
             .fillMaxWidth(),
         shape = RoundedCornerShape(60.dp).copy(topStart = ZeroCornerSize, topEnd = ZeroCornerSize)
     ) {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
             Row(
                 modifier = Modifier
@@ -133,11 +133,6 @@ fun HomeCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_futureme),
-                    contentDescription = null,
-                    modifier = Modifier.size(80.dp)
-                )
                 Text(
                     text = stringResource(id = R.string.app_name),
                     style = Typography.displayMedium,
@@ -150,7 +145,7 @@ fun HomeCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.End,
+                horizontalArrangement = Arrangement.Center,
             ) {
                 FAQButton {
                     //TODO deschidere dialog alert somehow
