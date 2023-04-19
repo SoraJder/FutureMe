@@ -1,10 +1,13 @@
 package com.alina.futureme.navigation
 
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.bottomSheet
 
 @Composable
 fun FutureMeNavHost(
@@ -30,6 +33,21 @@ fun NavGraphBuilder.composable(
     content: @Composable (NavBackStackEntry) -> Unit
 ) {
     composable(
+        route = destination.fullRoute,
+        arguments = arguments,
+        deepLinks = deepLinks,
+        content = content
+    )
+}
+
+@OptIn(ExperimentalMaterialNavigationApi::class)
+fun NavGraphBuilder.bottomSheet(
+    destination: Destination,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    content: @Composable ColumnScope.(backstackEntry: NavBackStackEntry) -> Unit
+) {
+    bottomSheet(
         route = destination.fullRoute,
         arguments = arguments,
         deepLinks = deepLinks,

@@ -3,8 +3,10 @@ package com.alina.futureme.presentation.letters.write_letter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.PhotoCamera
@@ -20,13 +22,16 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.components.TransparentHintTextField
 import com.alina.futureme.presentation.theme.Typography
 
 @Composable
-fun WriteLetterScreen() {
+fun WriteLetterScreen(
+    viewModel: WriteLetterViewModel = hiltViewModel()
+) {
 
     var letterTitle by rememberSaveable {
         mutableStateOf("A letter from " + Utils.getDate())
@@ -42,6 +47,7 @@ fun WriteLetterScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(rememberScrollState())
     ) {
         TransparentHintTextField(
             text = letterTitle,
@@ -53,7 +59,10 @@ fun WriteLetterScreen() {
             },
             textStyle = Typography.titleMedium,
             singleLine = true,
-            modifier = Modifier.padding(24.dp)
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth()
+                .focusRequester(focusRequester)
         )
 
         Card(
@@ -70,7 +79,7 @@ fun WriteLetterScreen() {
             shape = RoundedCornerShape(10.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
         ) {
-           TransparentHintTextField(
+            TransparentHintTextField(
                 text = letterText.value,
                 hint = "Dear future me...",
                 onValueChange = { letterText.value = it },
@@ -84,7 +93,7 @@ fun WriteLetterScreen() {
         }
 
         TextButton(
-            onClick = {/*TODO apare bottom sheet cu idei*/ },
+            onClick = { viewModel.showBottomSheet() },
             modifier = Modifier
                 .align(alignment = Alignment.End)
                 .padding(horizontal = 16.dp)
