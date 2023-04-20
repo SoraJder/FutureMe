@@ -28,4 +28,5 @@
     <string name="hi">Hi,</string>
     <string name="name_this_letter_hint">Name this wonderful letter please</string>
     <string name="dont_have_any_idea">Need ideas for your letter?</string>
+    <string name="send">Send</string>
 </resources>

@@ -27,7 +27,9 @@ import com.alina.futureme.presentation.theme.Typography
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun BottomSheetIdeasScreen() {
+fun BottomSheetIdeasScreen(
+    onSelected: () -> Unit
+) {
 
     val pages = listOf(
         BottomSheetIdeasPage.FirstIdea,
@@ -66,7 +68,7 @@ fun BottomSheetIdeasScreen() {
                 state = pagerState,
                 verticalAlignment = Alignment.CenterVertically
             ) { position ->
-                BottomSheetPagerScreen(page = pages[position])
+                BottomSheetPagerScreen(page = pages[position], onSelected = onSelected)
             }
 
             Row(
@@ -97,6 +99,7 @@ fun BottomSheetIdeasScreen() {
 @Composable
 fun BottomSheetPagerScreen(
     page: BottomSheetIdeasPage,
+    onSelected: () -> Unit,
     viewModel: WriteLetterViewModel = hiltViewModel()
 ) {
     Card(
@@ -108,6 +111,7 @@ fun BottomSheetPagerScreen(
                 shape = RoundedCornerShape(10.dp)
             )
             .clickable {
+                onSelected()
                 viewModel.updateText(page.letterTemplate)
             },
         shape = RoundedCornerShape(10.dp)
