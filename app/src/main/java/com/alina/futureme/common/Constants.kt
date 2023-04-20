@@ -13,7 +13,6 @@ object Constants {
     const val WRITE_LETTER_SCREEN= "Write Letter"
     const val READ_LETTER_SCREEN = "Read Letter"
     const val SEND_INSTANT_LETTER_SCREEN = "Send Instant Letter"
-    const val BOTTOM_SHEET_IDEAS_SCREEN = "Ideas bottom sheet"
 
     //google web client id
     const val WEB_CLIENT_ID =
@@ -44,4 +43,75 @@ object Constants {
     const val GRATEFUL_TITLE= "Write a list of things you are grateful for"
     const val PREDICTION_TITLE = "Make a prediction about your life"
     const val FAVORITE_TITLE = "Give your future self a list of your current favorite things"
+
+    const val ACHIEVE_TEXT = "Dear FutureMe,\n\nI commit to achieving the following goals in three months' time \n\n"+
+    "Goal 1:\nI will achieve this by...\n\nGoal 2:\nI will achieve this by...\n\nGoal 3:\nI will achieve this by..."
+    const val PREDICTION_TEXT="Dear FutureMe, \n" +
+            "\n" +
+            "When I receive this letter I hope to be: \n" +
+            "\n" +
+            "Living in... \n" +
+            "\n" +
+            "Focusing on... \n" +
+            "\n" +
+            "Working at... \n" +
+            "\n" +
+            "Taking joy in... \n" +
+            "\n" +
+            "Learning more about... \n" +
+            "\n" +
+            "Spending time with... \n" +
+            "\n" +
+            "Spending my money on..."
+    const val ADVICE_TEXT = "Dear FutureMe, \n" +
+            "\n" +
+            "Life can get overwhelming and sometimes we lose sight of what is important. So, I thought I would send you some important advice worth remembering. \n" +
+            "\n" +
+            "Advice about friendship: \n" +
+            "\n" +
+            "Advice about love: \n" +
+            "\n" +
+            "Advice about health: \n" +
+            "\n" +
+            "Advice about work-life balance: \n" +
+            "\n" +
+            "Advice about family: \n" +
+            "\n" +
+            "Advice about happiness: \n" +
+            "\n" +
+            "Advice about resilience:"
+    const val GRATITUDE_TEXT="Dear FutureMe, \n" +
+            "\n" +
+            "Sometimes the challenges of life can get you down. So, I'm sending you a list of things that I am grateful for today. I hope this will remind you to appreciate the simple positive things that every day brings. \n" +
+            "\n" +
+            "My Gratitude List \n" +
+            "\n" +
+            "1. \n" +
+            "2. \n" +
+            "3. \n" +
+            "4. \n" +
+            "5."
+    const val FAVORITE_TEXT="Dear FutureMe, \n" +
+            "\n" +
+            "These are a few of my (current) favorite things. I wonder if anything has changed? \n" +
+            "\n" +
+            "1. Favorite song/album/artist \n" +
+            "\n" +
+            "2. TV show I am currently binge watching \n" +
+            "\n" +
+            "3. Favorite book \n" +
+            "\n" +
+            "4. Favorite person to hang out with \n" +
+            "\n" +
+            "5. Best movie I have seen lately \n" +
+            "\n" +
+            "6. Favorite thing to do on the weekend \n" +
+            "\n" +
+            "7. Go-to snack \n" +
+            "\n" +
+            "8. Most memorable quote I heard recently \n" +
+            "\n" +
+            "9. Four things I would take to a dessert island \n" +
+            "\n" +
+            "10. Favorite person to hang out with"
 }

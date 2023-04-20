@@ -26,22 +26,37 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.common.Utils
 import com.alina.futureme.components.TransparentHintTextField
+import com.alina.futureme.presentation.letters.write_letter.bottom_sheet_tips.BottomSheetIdeasScreen
 import com.alina.futureme.presentation.theme.Typography
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WriteLetterScreen(
     viewModel: WriteLetterViewModel = hiltViewModel()
 ) {
+    val coroutineScope = rememberCoroutineScope()
+    val modalSheetState = rememberModalBottomSheetState()
 
     var letterTitle by rememberSaveable {
         mutableStateOf("A letter from " + Utils.getDate())
     }
 
-    val letterText = remember {
-        mutableStateOf("")
-    }
+    val letterText: String by viewModel.letterText.collectAsState()
 
     val focusRequester = remember { FocusRequester() }
+
+    if (modalSheetState.isVisible) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                coroutineScope.launch {
+                    modalSheetState.hide()
+                }
+            }
+        ) {
+            BottomSheetIdeasScreen()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -80,9 +95,11 @@ fun WriteLetterScreen(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
         ) {
             TransparentHintTextField(
-                text = letterText.value,
+                text = letterText,
                 hint = "Dear future me...",
-                onValueChange = { letterText.value = it },
+                onValueChange = {
+                    viewModel.updateText(it)
+                },
                 textStyle = Typography.bodyLarge,
                 singleLine = false,
                 modifier = Modifier
@@ -93,7 +110,11 @@ fun WriteLetterScreen(
         }
 
         TextButton(
-            onClick = { viewModel.showBottomSheet() },
+            onClick = {
+                coroutineScope.launch {
+                    modalSheetState.show()
+                }
+            },
             modifier = Modifier
                 .align(alignment = Alignment.End)
                 .padding(horizontal = 16.dp)
