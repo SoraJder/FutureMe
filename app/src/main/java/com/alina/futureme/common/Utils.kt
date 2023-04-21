@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.random.Random
 
 object Utils {
 
@@ -29,4 +30,8 @@ object Utils {
         val formatter = DateTimeFormatter.ofPattern("MMMM d'th', yyyy")
         return currentDate.format(formatter)
     }
+
+    fun getRandomDate(year: Int): LocalDate =
+        LocalDate.of(year, 1, 1).plusDays((Random.nextLong(365)))
+
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.alina.futureme.common.Utils
 import com.alina.futureme.navigation.AppNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,14 +19,21 @@ class WriteLetterViewModel @Inject constructor(
     private val _letterText: MutableState<String> = mutableStateOf("")
     val letterText: State<String> = _letterText
 
-    private val _letterTitle:MutableState<String> = mutableStateOf("A letter from " + Utils.getDate())
-    val letterTitle:State<String> = _letterTitle
+    private val _letterTitle: MutableState<String> =
+        mutableStateOf("A letter from " + Utils.getDate())
+    val letterTitle: State<String> = _letterTitle
 
     private val _mediaFile: MutableState<Uri?> = mutableStateOf(null)
-    val mediaFile:State<Uri?> = _mediaFile
+    val mediaFile: State<Uri?> = _mediaFile
 
     private val _email: MutableState<String> = mutableStateOf("")
     val email: State<String> = _email
+
+    private val _isPublic: MutableState<Boolean> = mutableStateOf(false)
+    val isPublic: State<Boolean> = _isPublic
+
+    private val _selectedDate: MutableState<LocalDate?> = mutableStateOf(null)
+    val selectedDate: State<LocalDate?> = _selectedDate
 
     fun updateText(letterText: String) {
         _letterText.value = letterText
@@ -35,12 +43,20 @@ class WriteLetterViewModel @Inject constructor(
         _letterTitle.value = letterTitle
     }
 
-    fun updateMediaFile(file:Uri?){
-        _mediaFile.value=file
+    fun updateMediaFile(file: Uri?) {
+        _mediaFile.value = file
     }
 
-    fun updateEmail(email:String){
-        _email.value=email
+    fun updateEmail(email: String) {
+        _email.value = email
+    }
+
+    fun updateIsPublic(isPublic: Boolean) {
+        _isPublic.value = isPublic
+    }
+
+    fun updateSelectedDate(selectedDate: LocalDate) {
+        _selectedDate.value = selectedDate
     }
 
     fun onNavigateBack() {
