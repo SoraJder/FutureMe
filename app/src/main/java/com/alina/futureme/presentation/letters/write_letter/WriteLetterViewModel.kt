@@ -6,6 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.alina.futureme.common.Utils
+import com.alina.futureme.common.Utils.isEmailValid
 import com.alina.futureme.navigation.AppNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
@@ -57,6 +58,17 @@ class WriteLetterViewModel @Inject constructor(
 
     fun updateSelectedDate(selectedDate: LocalDate) {
         _selectedDate.value = selectedDate
+    }
+
+    fun checkFields(): Boolean {
+        return if (_letterText.value.isBlank() || _letterTitle.value.isBlank() ||
+            _email.value.isBlank() || _selectedDate.value == null
+        ) {
+            false
+        } else {
+            if (isEmailValid(_email.value)) return true
+            false
+        }
     }
 
     fun onNavigateBack() {

@@ -208,7 +208,6 @@ fun WriteLetterScreen(
                     modifier = Modifier
                         .padding(start = 24.dp, end = 24.dp)
                         .fillMaxWidth()
-                        .focusRequester(focusRequester)
                 )
 
                 Row(
@@ -337,7 +336,6 @@ fun WriteLetterScreen(
                     modifier = Modifier
                         .padding(horizontal = 24.dp)
                         .fillMaxWidth()
-                        .focusRequester(focusRequester)
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -429,12 +427,12 @@ fun WriteLetterScreen(
                         .fillMaxWidth()
                         .padding(start = 24.dp, end = 24.dp),
                     onClick = {
-                        if (letterText.isNotBlank() && letterTitle.isNotBlank()) {
+                        if (viewModel.checkFields()) {
                             // viewModel.navigateToSendLetterScreen()
                         } else {
                             Utils.showMessage(
                                 context,
-                                "Please fill the letter title or/and letter text"
+                                "Please select date and fill title, letter and email in proper way"
                             )
                         }
                     },
