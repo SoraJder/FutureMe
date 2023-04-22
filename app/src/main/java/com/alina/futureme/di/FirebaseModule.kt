@@ -1,5 +1,6 @@
 package com.alina.futureme.di
 
+import com.alina.futureme.data.data_source.LetterRemoteDataSource
 import com.alina.futureme.data.data_source.UserRemoteDataSource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 class FirebaseModule {
 
     companion object {
-
+        const val LETTERS_PATH: String = "letters"
         const val USERS_PATH: String = "users"
     }
 
@@ -31,6 +32,12 @@ class FirebaseModule {
     fun providesUserRemoteDataSource(firestore: FirebaseFirestore): UserRemoteDataSource =
         UserRemoteDataSource(
             firestore.collection(USERS_PATH)
+        )
+
+    @Provides
+    fun providesLetterRemoteDataSource(firestore: FirebaseFirestore): LetterRemoteDataSource =
+        LetterRemoteDataSource(
+            firestore.collection(LETTERS_PATH)
         )
 
 }
