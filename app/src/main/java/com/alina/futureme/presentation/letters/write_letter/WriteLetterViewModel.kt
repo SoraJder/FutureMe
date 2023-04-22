@@ -5,16 +5,24 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.isEmailValid
+import com.alina.futureme.data.repository.LetterRepository
+import com.alina.futureme.domain.model.Letter
 import com.alina.futureme.navigation.AppNavigator
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 class WriteLetterViewModel @Inject constructor(
-    private val appNavigator: AppNavigator
+    private val appNavigator: AppNavigator,
+    private val letterRepository: LetterRepository,
+    private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
 
     private val _letterText: MutableState<String> = mutableStateOf("")
@@ -69,6 +77,31 @@ class WriteLetterViewModel @Inject constructor(
             if (isEmailValid(_email.value)) return true
             false
         }
+    }
+
+    fun sendLetter() = viewModelScope.launch {
+        letterRepository.addLetterInFirestore(
+            Letter(
+                sender = firebaseAuth.currentUser?.email ?: "",
+                receiver = _email.value,
+                dateToArrive = _selectedDate.value!!,
+                dateWasSend = LocalDateTime.now(),
+                title = _letterTitle.value,
+                text = _letterText.value,
+                image = _mediaFile.value,
+                public = _isPublic.value
+            )
+        )
+        clearFields()
+    }
+
+    private fun clearFields() {
+        _email.value = ""
+        _selectedDate.value = null
+        _letterTitle.value = ""
+        _letterText.value = ""
+        _mediaFile.value = null
+        _isPublic.value = false
     }
 
     fun onNavigateBack() {

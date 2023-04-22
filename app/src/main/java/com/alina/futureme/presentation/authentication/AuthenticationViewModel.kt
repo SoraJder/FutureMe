@@ -69,6 +69,7 @@ class AuthenticationViewModel @Inject constructor(
 
     fun sendEmailVerification() = viewModelScope.launch {
         authenticationRepository.sendEmailVerification()
+        signOut()
     }
 
     fun isEmailVerified() = currentUser?.isEmailVerified

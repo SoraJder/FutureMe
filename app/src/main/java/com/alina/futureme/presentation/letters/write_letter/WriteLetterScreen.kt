@@ -428,7 +428,11 @@ fun WriteLetterScreen(
                         .padding(start = 24.dp, end = 24.dp),
                     onClick = {
                         if (viewModel.checkFields()) {
-                            // viewModel.navigateToSendLetterScreen()
+                            viewModel.sendLetter()
+                            Utils.showMessage(
+                                context,
+                                "Yey! Your letter to the future was sent"
+                            )
                         } else {
                             Utils.showMessage(
                                 context,

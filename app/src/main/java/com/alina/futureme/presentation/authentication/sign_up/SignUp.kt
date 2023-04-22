@@ -22,9 +22,9 @@ fun SignUp(
             }
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
+                viewModel.createUser(name)
                 viewModel.sendEmailVerification()
                 viewModel.onNavigateToVerifyEmail()
-                viewModel.createUser(name)
                 showMessage("Email verification was sent")
             }
             null -> Unit

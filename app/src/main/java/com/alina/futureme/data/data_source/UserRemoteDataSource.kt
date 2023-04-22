@@ -14,7 +14,7 @@ class UserRemoteDataSource @Inject constructor(
         runCatching {
             usersRef
                 .document(user.email)
-                .set(user)
+                .set(user.asMap())
                 .await()
         }
 
