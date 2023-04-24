@@ -8,7 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.material3.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -21,8 +27,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.alina.futureme.R
@@ -84,6 +90,7 @@ fun CustomTextField(
             isPasswordTextField -> PasswordVisualTransformation()
             else -> VisualTransformation.None
         },
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         keyboardActions = KeyboardActions(
             onDone = {
                 keyboardController?.hide()
@@ -132,20 +139,12 @@ fun TransparentHintTextField(
             ),
             cursorBrush = SolidColor(androidx.compose.material.MaterialTheme.colors.onBackground),
             modifier = Modifier
-                .fillMaxWidth()
-                .onPreviewKeyEvent {
-                    if (it.key == Key.Enter && it.nativeKeyEvent.action == ACTION_DOWN) {
-                        focusManager.moveFocus(FocusDirection.Down)
-                        true
-                    } else {
-                        false
-                    }
-                },
+                .fillMaxWidth(),
             keyboardActions = KeyboardActions(
                 onDone = {
                     keyboardController?.hide()
-                },
-                onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    focusManager.clearFocus()
+                }
             ),
             singleLine = singleLine,
         )

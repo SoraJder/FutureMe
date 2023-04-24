@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +19,7 @@ import javax.inject.Singleton
 class FirebaseModule {
 
     companion object {
+
         const val LETTERS_PATH: String = "letters"
         const val USERS_PATH: String = "users"
     }
@@ -27,6 +30,9 @@ class FirebaseModule {
 
     @Provides
     fun providesFirebaseFirestore(): FirebaseFirestore = Firebase.firestore
+
+    @Provides
+    fun providesFirebaseStorage(): StorageReference = Firebase.storage.reference
 
     @Provides
     fun providesUserRemoteDataSource(firestore: FirebaseFirestore): UserRemoteDataSource =

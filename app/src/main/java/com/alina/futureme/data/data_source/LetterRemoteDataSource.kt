@@ -9,7 +9,6 @@ import javax.inject.Inject
 class LetterRemoteDataSource @Inject constructor(
     private val lettersRef: CollectionReference
 ) {
-
     suspend fun addLetterInFirestore(letter: Letter) =
         runCatching {
             lettersRef

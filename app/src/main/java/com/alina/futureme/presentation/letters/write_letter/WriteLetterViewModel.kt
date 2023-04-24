@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alina.futureme.common.Utils
 import com.alina.futureme.common.Utils.isEmailValid
+import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.domain.model.Letter
 import com.alina.futureme.navigation.AppNavigator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -22,7 +24,8 @@ import javax.inject.Inject
 class WriteLetterViewModel @Inject constructor(
     private val appNavigator: AppNavigator,
     private val letterRepository: LetterRepository,
-    private val firebaseAuth: FirebaseAuth
+    firebaseAuth: FirebaseAuth,
+    private val storageReference: StorageReference
 ) : ViewModel() {
 
     private val _letterText: MutableState<String> = mutableStateOf("")
@@ -44,6 +47,8 @@ class WriteLetterViewModel @Inject constructor(
     private val _selectedDate: MutableState<LocalDate?> = mutableStateOf(null)
     val selectedDate: State<LocalDate?> = _selectedDate
 
+    private val currentUser = firebaseAuth.currentUser?.email ?: ""
+
     fun updateText(letterText: String) {
         _letterText.value = letterText
     }
@@ -52,7 +57,7 @@ class WriteLetterViewModel @Inject constructor(
         _letterTitle.value = letterTitle
     }
 
-    fun updateMediaFile(file: Uri?) {
+    fun updateMediaFile(file: Uri?) = viewModelScope.launch {
         _mediaFile.value = file
     }
 
@@ -80,15 +85,18 @@ class WriteLetterViewModel @Inject constructor(
     }
 
     fun sendLetter() = viewModelScope.launch {
+
+        val downloadUrl = uploadToStorage()
+
         letterRepository.addLetterInFirestore(
             Letter(
-                sender = firebaseAuth.currentUser?.email ?: "",
+                sender = currentUser,
                 receiver = _email.value,
                 dateToArrive = _selectedDate.value!!,
                 dateWasSend = LocalDateTime.now(),
                 title = _letterTitle.value,
                 text = _letterText.value,
-                image = _mediaFile.value,
+                image = downloadUrl,
                 public = _isPublic.value
             )
         )
@@ -103,6 +111,11 @@ class WriteLetterViewModel @Inject constructor(
         _mediaFile.value = null
         _isPublic.value = false
     }
+
+    private suspend fun uploadToStorage(): Uri =
+        storageReference.child(currentUser + "_" + _email.value + "_" + LocalDate.now())
+            .putFile(_mediaFile.value!!).await()
+            .storage.downloadUrl.await()
 
     fun onNavigateBack() {
         appNavigator.tryNavigateBack()

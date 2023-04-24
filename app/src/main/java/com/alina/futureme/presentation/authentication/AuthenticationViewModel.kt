@@ -109,7 +109,6 @@ class AuthenticationViewModel @Inject constructor(
         appNavigator.tryNavigateBack(Destination.SignInScreen())
     }
 
-    //TODO SignOut -> datastore va lua valoarea false, asta pentru pagina de profile
     fun onNavigateSignOutButtonClicked() {
         appNavigator.tryNavigateBack()
         appNavigator.tryNavigateTo(Destination.SignInScreen())
