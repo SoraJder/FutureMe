@@ -114,4 +114,9 @@ object Constants {
             "9. Four things I would take to a dessert island \n" +
             "\n" +
             "10. Favorite person to hang out with"
+
+    //LETTER ROW TABS
+    const val POPULAR_TAB = "Popular"
+    const val RECENT_TAB = "Recent"
+    const val LIKED_TAB = "Liked"
 }

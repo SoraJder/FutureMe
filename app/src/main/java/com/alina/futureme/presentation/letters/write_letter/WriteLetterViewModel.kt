@@ -86,7 +86,7 @@ class WriteLetterViewModel @Inject constructor(
 
     fun sendLetter() = viewModelScope.launch {
 
-        val downloadUrl = uploadToStorage()
+        val downloadUrl = if (_mediaFile.value != null) uploadToStorage() else null
 
         letterRepository.addLetterInFirestore(
             Letter(

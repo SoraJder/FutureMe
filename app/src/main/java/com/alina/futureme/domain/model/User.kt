@@ -7,6 +7,7 @@ data class User(
     val birthDate: String,
     val phoneNumber: String,
     val lettersReceived: List<String> = emptyList(),
+    val likedLetters: List<String> = emptyList()
 )
 
 fun User.asMap(): Map<String, Any?> = mapOf(
@@ -16,4 +17,5 @@ fun User.asMap(): Map<String, Any?> = mapOf(
     "birthDate" to birthDate,
     "phoneNumber" to phoneNumber,
     "lettersReceived" to lettersReceived,
+    "likedLetters" to likedLetters
 )
