@@ -14,6 +14,7 @@ data class Letter(
     val text: String,
     val public: Boolean,
     val numberOfLikes:Int = 0,
+    val wasReceived: Boolean = false
 ) {
 
     val id: String = receiver + "_" + dateWasSend.toString()
@@ -29,5 +30,6 @@ fun Letter.asMap(): Map<String, Any?> = mapOf(
     "image" to image?.toString(),
     "text" to text,
     "public" to public,
-    "numberOfLikes" to numberOfLikes
+    "numberOfLikes" to numberOfLikes,
+    "wasReceived" to wasReceived
 )
