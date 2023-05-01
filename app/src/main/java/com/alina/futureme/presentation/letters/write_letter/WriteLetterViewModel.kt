@@ -92,11 +92,11 @@ class WriteLetterViewModel @Inject constructor(
             Letter(
                 sender = currentUser,
                 receiver = _email.value,
-                dateToArrive = _selectedDate.value!!,
-                dateWasSend = LocalDateTime.now(),
+                dateToArrive = _selectedDate.value!!.toString(),
+                dateWasSend = LocalDateTime.now().toString(),
                 title = _letterTitle.value,
                 text = _letterText.value,
-                image = downloadUrl,
+                image = downloadUrl.toString(),
                 public = _isPublic.value
             )
         )

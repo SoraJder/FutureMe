@@ -10,4 +10,6 @@ class LetterRepository @Inject constructor(
 
     suspend fun addLetterInFirestore(letter: Letter) =
         letterRemoteDataSource.addLetterInFirestore(letter = letter)
+
+    suspend fun getPublicLetters() = letterRemoteDataSource.getPublicLetters()
 }

@@ -1,35 +1,45 @@
 package com.alina.futureme.domain.model
 
-import android.net.Uri
-import java.time.LocalDate
-import java.time.LocalDateTime
-
 data class Letter(
-    val sender: String,
-    val receiver: String,
-    val dateToArrive: LocalDate,
-    val dateWasSend: LocalDateTime,
-    val title: String,
-    val image: Uri?,
-    val text: String,
-    val public: Boolean,
-    val numberOfLikes:Int = 0,
+    val sender: String = "",
+    val receiver: String = "",
+    val dateToArrive: String = "",
+    val dateWasSend: String = "",
+    val title: String = "",
+    val image: String? = null,
+    val text: String = "",
+    val public: Boolean = false,
+    val numberOfLikes: Int = 0,
     val wasReceived: Boolean = false
 ) {
 
-    val id: String = receiver + "_" + dateWasSend.toString()
+    var id: String = receiver + "_" + dateWasSend
 }
 
 fun Letter.asMap(): Map<String, Any?> = mapOf(
     "id" to id,
     "sender" to sender,
     "receiver" to receiver,
-    "dateToArrive" to dateToArrive.toString(),
-    "dateWasSend" to dateWasSend.toString(),
+    "dateToArrive" to dateToArrive,
+    "dateWasSend" to dateWasSend,
     "title" to title,
-    "image" to image?.toString(),
+    "image" to image,
     "text" to text,
     "public" to public,
     "numberOfLikes" to numberOfLikes,
     "wasReceived" to wasReceived
 )
+
+fun Letter.toPopularLetter() =
+    PopularLetter(
+        id = id,
+        title = title,
+        text = text,
+        image = image,
+        numberOfLikes = numberOfLikes,
+        dateToArrive = dateToArrive,
+        dateWasSend = dateWasSend,
+        score = 0.0,
+        popularScore = 0.0,
+        recentScore = 0.0
+    )

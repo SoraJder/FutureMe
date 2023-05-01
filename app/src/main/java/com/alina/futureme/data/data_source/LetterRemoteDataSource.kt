@@ -9,6 +9,7 @@ import javax.inject.Inject
 class LetterRemoteDataSource @Inject constructor(
     private val lettersRef: CollectionReference
 ) {
+
     suspend fun addLetterInFirestore(letter: Letter) =
         runCatching {
             lettersRef
@@ -16,5 +17,16 @@ class LetterRemoteDataSource @Inject constructor(
                 .set(letter.asMap())
                 .await()
         }
+
+    suspend fun getPublicLetters(): List<Letter?> =
+        lettersRef
+            .whereEqualTo("wasReceived", true)
+            .whereEqualTo("public", true)
+            .get()
+            .await()
+            .documents
+            .map {
+                it.toObject(Letter::class.java)
+            }
 
 }
