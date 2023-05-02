@@ -6,9 +6,11 @@ import androidx.compose.material.icons.rounded.StarRate
 import androidx.compose.material.icons.rounded.Timelapse
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.alina.futureme.common.Constants.LIKED_TAB
-import com.alina.futureme.common.Constants.POPULAR_TAB
-import com.alina.futureme.common.Constants.RECENT_TAB
+import com.alina.common.Constants.LIKED_TAB
+import com.alina.common.Constants.POPULAR_TAB
+import com.alina.common.Constants.RECENT_TAB
+import com.alina.futureme.presentation.letters.read_letters.liked.LikedLetters
+import com.alina.futureme.presentation.letters.read_letters.popular.PopularLetters
 import com.alina.futureme.presentation.letters.read_letters.recent.RecentLetter
 
 sealed class TabRowItem(

@@ -2,7 +2,7 @@ package com.alina.futureme.presentation.letters.read_letters.popular
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alina.futureme.common.Resource
+import com.alina.common.Resource
 import com.alina.futureme.data.recommendation.Recommendation
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.domain.model.PopularLetter
@@ -24,12 +24,15 @@ class PopularLettersViewModel @Inject constructor(
     val popularLettersFlow: StateFlow<Resource<List<PopularLetter>>> =
         _popularLettersFlow.asStateFlow()
 
-    fun getPopularLetters() = viewModelScope.launch {
-        _popularLettersFlow.value = Resource.Loading
+    init {
+        viewModelScope.launch {
+            _popularLettersFlow.value = Resource.Loading
 
-        val popularLetters: List<PopularLetter> = letterRepository.getPublicLetters().mapNotNull {
-            it?.toPopularLetter()
+            val popularLetters: List<PopularLetter> =
+                letterRepository.getPublicLetters().mapNotNull {
+                    it?.toPopularLetter()
+                }
+            _popularLettersFlow.value = Recommendation.getRecommendations(popularLetters)
         }
-        _popularLettersFlow.value = Recommendation.getRecommendations(popularLetters)
     }
 }

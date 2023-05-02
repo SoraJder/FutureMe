@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.letters.read_letters
+package com.alina.futureme.presentation.letters.read_letters.liked
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

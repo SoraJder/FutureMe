@@ -1,6 +1,6 @@
 package com.alina.futureme.data.recommendation
 
-import com.alina.futureme.common.Resource
+import com.alina.common.Resource
 import com.alina.futureme.domain.model.PopularLetter
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit

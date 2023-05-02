@@ -1,4 +1,4 @@
-package com.alina.futureme.common
+package com.alina.common
 
 import android.content.Context
 import android.widget.Toast

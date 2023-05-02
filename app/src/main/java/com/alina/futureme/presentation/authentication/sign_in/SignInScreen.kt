@@ -33,10 +33,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.common.Constants.WEB_CLIENT_ID
+import com.alina.common.Utils
+import com.alina.common.Utils.showMessage
 import com.alina.futureme.R
-import com.alina.futureme.common.Constants.WEB_CLIENT_ID
-import com.alina.futureme.common.Utils
-import com.alina.futureme.common.Utils.showMessage
 import com.alina.futureme.components.CustomTextField
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.PrimaryButtonWithContent

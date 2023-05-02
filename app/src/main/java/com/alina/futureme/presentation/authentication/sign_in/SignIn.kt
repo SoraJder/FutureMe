@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.common.Resource
 import com.alina.futureme.R
-import com.alina.futureme.common.Resource
 import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 

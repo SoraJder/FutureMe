@@ -1,4 +1,4 @@
-package com.alina.futureme.common
+package com.alina.common
 
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()

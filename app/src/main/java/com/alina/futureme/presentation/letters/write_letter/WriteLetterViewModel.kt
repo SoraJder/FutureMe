@@ -6,9 +6,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alina.futureme.common.Utils
-import com.alina.futureme.common.Utils.isEmailValid
-import com.alina.futureme.common.firebase_utils.await
+import com.alina.common.Utils
+import com.alina.common.Utils.isEmailValid
+import com.alina.common.firebase_utils.await
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.domain.model.Letter
 import com.alina.futureme.navigation.AppNavigator

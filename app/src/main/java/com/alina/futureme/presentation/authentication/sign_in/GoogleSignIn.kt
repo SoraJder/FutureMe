@@ -3,7 +3,7 @@ package com.alina.futureme.presentation.authentication.sign_in
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.futureme.common.Resource
+import com.alina.common.Resource
 import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
