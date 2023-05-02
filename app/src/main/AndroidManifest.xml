@@ -15,6 +15,7 @@
         android:theme="@style/Theme.CustomSplashScreenTheme"
         tools:targetApi="31">
         <activity
+            android:configChanges="uiMode"
             android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CustomSplashScreenTheme"

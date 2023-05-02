@@ -35,7 +35,7 @@ fun ReadLetterScreen() {
                     selected = index == pagerState.currentPage,
                     text = { Text(text = item.title) },
                     icon = { Icon(item.icon, "") },
-                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
+                    onClick = { coroutineScope.launch { pagerState.scrollToPage(index) } },
                 )
             }
         }

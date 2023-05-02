@@ -1,5 +1,6 @@
 package com.alina.futureme.presentation.letters.read_letters.popular
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -12,8 +13,8 @@ fun PopularLetters(
 ) {
     val popularLetterFlow = viewModel.popularLettersFlow.collectAsState()
 
-    popularLetterFlow.value.let {
-        when (it) {
+    popularLetterFlow.value.let { resource ->
+        when (resource) {
             is Resource.Failure -> {
                 PopularLettersScreenError()
             }
@@ -21,16 +22,11 @@ fun PopularLetters(
             is Resource.Loading -> ProgressBar()
 
             is Resource.Success -> {
-                PopularLettersSuccess(list = it.data)
+                PopularLettersSuccess(list = resource.data)
+                resource.data.forEach {
+                    Log.d("RECOMANDARE", "[${it.score}, ${it.title}, ${it.text}]")
+                }
             }
         }
     }
-
-    /* Column(
-         modifier = Modifier.fillMaxSize(),
-         verticalArrangement = Arrangement.Center,
-         horizontalAlignment = Alignment.CenterHorizontally
-     ) {
-         Text(text = "Popular")
-     }*/
 }

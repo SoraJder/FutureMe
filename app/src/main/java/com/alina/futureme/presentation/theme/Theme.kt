@@ -78,8 +78,6 @@ fun FutureMeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
         DarkColors
     }
 
-
-
     MaterialTheme(
         colorScheme = colors,
         content = content,

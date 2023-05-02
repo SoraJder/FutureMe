@@ -31,7 +31,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(color = MaterialTheme.colorScheme.tertiaryContainer)
+    systemUiController.setStatusBarColor(MaterialTheme.colorScheme.onTertiaryContainer)
 
     val userName = authenticationViewModel.currentUser?.displayName!!
 

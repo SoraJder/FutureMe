@@ -31,8 +31,8 @@ object Recommendation {
     fun getRecommendations(popularLetter: List<PopularLetter>): Resource<List<PopularLetter>> {
         return try {
             calculateScore(popularLetter)
-            popularLetter.sortedByDescending { it.score }
-            Resource.Success(popularLetter)
+            val sortedList = popularLetter.sortedByDescending { it.score }
+            Resource.Success(sortedList)
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.Failure(e)
