@@ -11,7 +11,11 @@ interface AuthenticationRepository {
     suspend fun signInWithEmail(email: String, password: String): Resource<FirebaseUser>?
 
     suspend fun googleSignIn(credential: AuthCredential): Resource<AuthResult>?
-    suspend fun signUpWithEmail(email: String, password: String,name:String): Resource<FirebaseUser>?
+    suspend fun signUpWithEmail(
+        email: String,
+        password: String,
+        name: String
+    ): Resource<FirebaseUser>?
 
     suspend fun sendEmailVerification(): Resource<Boolean>
 

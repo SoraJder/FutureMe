@@ -18,15 +18,15 @@ class LetterRemoteDataSource @Inject constructor(
                 .await()
         }
 
-    suspend fun getPublicLetters(): List<Letter?> =
+    suspend fun getPublicLetters() =
         lettersRef
             .whereEqualTo("wasReceived", true)
             .whereEqualTo("public", true)
             .get()
             .await()
             .documents
-            .map {
-                it.toObject(Letter::class.java)
+            .map { document ->
+                document.toObject(Letter::class.java)
             }
 
 }

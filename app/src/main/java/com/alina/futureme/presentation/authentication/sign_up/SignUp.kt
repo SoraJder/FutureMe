@@ -20,6 +20,7 @@ fun SignUp(
             is Resource.Failure -> {
                 showMessage(it.e.message)
             }
+
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 viewModel.createUser(name)
@@ -27,6 +28,7 @@ fun SignUp(
                 viewModel.onNavigateToVerifyEmail()
                 showMessage("Email verification was sent")
             }
+
             null -> Unit
         }
     }

@@ -21,6 +21,7 @@ fun SignIn(
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
+
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 if (viewModel.isEmailVerified() == true) {
@@ -30,6 +31,7 @@ fun SignIn(
                     viewModel.sendEmailVerification()
                 }
             }
+
             null -> Unit
         }
     }

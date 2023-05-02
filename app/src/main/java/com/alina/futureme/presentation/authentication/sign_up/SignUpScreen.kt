@@ -2,7 +2,13 @@ package com.alina.futureme.presentation.authentication.sign_up
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -148,14 +154,14 @@ fun SignUpScreen(
                             confirmPasswordText
                         )
                     ) {
-                        viewModel.signUp(emailText, passwordText,nameText)
+                        viewModel.signUp(emailText, passwordText, nameText)
                     }
                 },
             )
 
             Text(
                 text = stringResource(R.string.joined_before_question),
-                color= MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(top = 15.dp)
             )
             TextButton(

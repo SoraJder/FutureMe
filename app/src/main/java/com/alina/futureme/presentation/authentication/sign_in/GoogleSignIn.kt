@@ -20,6 +20,7 @@ fun GoogleSignIn(
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
+
             Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 val currentUser = viewModel.currentUser
@@ -32,12 +33,14 @@ fun GoogleSignIn(
                             false -> {
                                 viewModel.createUser(currentUser.displayName!!)
                             }
+
                             else -> Unit
                         }
                         viewModel.onNavigateToOnboardScreen()
                     }
                 }
             }
+
             null -> Unit
         }
     }

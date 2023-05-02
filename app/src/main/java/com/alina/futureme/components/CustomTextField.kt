@@ -122,7 +122,7 @@ fun TransparentHintTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     textStyle: TextStyle,
-    singleLine:Boolean
+    singleLine: Boolean
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current

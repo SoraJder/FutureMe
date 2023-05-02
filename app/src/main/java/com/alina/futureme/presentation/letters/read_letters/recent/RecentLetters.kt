@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.letters.read_letters
+package com.alina.futureme.presentation.letters.read_letters.recent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

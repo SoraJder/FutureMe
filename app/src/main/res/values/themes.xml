@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.FutureMe" parent="android:Theme.Material.NoActionBar"/>
+    <style name="Theme.FutureMe" parent="android:Theme.Material.NoActionBar" />
 
     <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>

@@ -9,12 +9,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.alina.futureme.common.Constants.LIKED_TAB
 import com.alina.futureme.common.Constants.POPULAR_TAB
 import com.alina.futureme.common.Constants.RECENT_TAB
+import com.alina.futureme.presentation.letters.read_letters.recent.RecentLetter
 
 sealed class TabRowItem(
-    val title:String,
-    val icon:ImageVector,
-    val screen: @Composable () ->Unit
-){
+    val title: String,
+    val icon: ImageVector,
+    val screen: @Composable () -> Unit
+) {
+
     object PopularLetters : TabRowItem(
         title = POPULAR_TAB,
         icon = Icons.Rounded.StarRate,
@@ -24,12 +26,12 @@ sealed class TabRowItem(
     object RecentLetters : TabRowItem(
         title = RECENT_TAB,
         icon = Icons.Rounded.Timelapse,
-        screen = { RecentLetter()}
+        screen = { RecentLetter() }
     )
 
-    object LikedLetter: TabRowItem(
+    object LikedLetter : TabRowItem(
         title = LIKED_TAB,
         icon = Icons.Rounded.Favorite,
-        screen = { LikedLetters()}
+        screen = { LikedLetters() }
     )
 }

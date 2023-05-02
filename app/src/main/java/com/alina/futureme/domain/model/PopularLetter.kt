@@ -5,10 +5,10 @@ data class PopularLetter(
     val title: String,
     val text: String,
     val image: String?,
-    val numberOfLikes:Int,
+    val numberOfLikes: Int,
     val dateToArrive: String,
     val dateWasSend: String,
     var score: Double,
-    var popularScore:Double,
-    var recentScore:Double
+    var popularScore: Double,
+    var recentScore: Double
 )

@@ -38,5 +38,5 @@ class AppModule {
     @Provides
     fun providesLetterRepository(
         letterRemoteDataSource: LetterRemoteDataSource
-    ):LetterRepository = LetterRepository(letterRemoteDataSource)
+    ): LetterRepository = LetterRepository(letterRemoteDataSource)
 }

@@ -17,9 +17,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun ReadLetterScreen() {
     val tabs = listOf(
-       TabRowItem.PopularLetters,
-       TabRowItem.RecentLetters,
-       TabRowItem.LikedLetter
+        TabRowItem.PopularLetters,
+        TabRowItem.RecentLetters,
+        TabRowItem.LikedLetter
     )
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()

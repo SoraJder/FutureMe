@@ -105,6 +105,7 @@ fun NavigationEffects(
                         navHostController.popBackStack()
                     }
                 }
+
                 is NavigationIntent.NavigateTo -> {
                     navHostController.navigate(intent.route) {
                         launchSingleTop = intent.isSingleTop

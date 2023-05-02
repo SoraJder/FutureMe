@@ -9,8 +9,8 @@ object Constants {
     const val FORGOT_PASSWORD_SCREEN = "Forgot password"
     const val VERIFY_EMAIL_SCREEN = "Verify email"
     const val ONBOARD_SCREEN = "Onboard"
-    const val PROFILE_SCREEN= "Profile"
-    const val WRITE_LETTER_SCREEN= "Write Letter"
+    const val PROFILE_SCREEN = "Profile"
+    const val WRITE_LETTER_SCREEN = "Write Letter"
     const val READ_LETTER_SCREEN = "Read Letter"
     const val SEND_INSTANT_LETTER_SCREEN = "Send Instant Letter"
 
@@ -39,14 +39,15 @@ object Constants {
     const val BOTTOM_SHEET_EXPLANATION = "Tap to apply this template to your letter"
 
     const val ACHIEVE_TITLE = "Write down some goals you want to achieve over the next months"
-    const val FUTURE_ADVICE_TITLE="Give future you some life advice to remember"
-    const val GRATEFUL_TITLE= "Write a list of things you are grateful for"
+    const val FUTURE_ADVICE_TITLE = "Give future you some life advice to remember"
+    const val GRATEFUL_TITLE = "Write a list of things you are grateful for"
     const val PREDICTION_TITLE = "Make a prediction about your life"
     const val FAVORITE_TITLE = "Give your future self a list of your current favorite things"
 
-    const val ACHIEVE_TEXT = "Dear FutureMe,\n\nI commit to achieving the following goals in three months' time \n\n"+
-    "Goal 1:\nI will achieve this by...\n\nGoal 2:\nI will achieve this by...\n\nGoal 3:\nI will achieve this by..."
-    const val PREDICTION_TEXT="Dear FutureMe, \n" +
+    const val ACHIEVE_TEXT =
+        "Dear FutureMe,\n\nI commit to achieving the following goals in three months' time \n\n" +
+                "Goal 1:\nI will achieve this by...\n\nGoal 2:\nI will achieve this by...\n\nGoal 3:\nI will achieve this by..."
+    const val PREDICTION_TEXT = "Dear FutureMe, \n" +
             "\n" +
             "When I receive this letter I hope to be: \n" +
             "\n" +
@@ -80,7 +81,7 @@ object Constants {
             "Advice about happiness: \n" +
             "\n" +
             "Advice about resilience:"
-    const val GRATITUDE_TEXT="Dear FutureMe, \n" +
+    const val GRATITUDE_TEXT = "Dear FutureMe, \n" +
             "\n" +
             "Sometimes the challenges of life can get you down. So, I'm sending you a list of things that I am grateful for today. I hope this will remind you to appreciate the simple positive things that every day brings. \n" +
             "\n" +
@@ -91,7 +92,7 @@ object Constants {
             "3. \n" +
             "4. \n" +
             "5."
-    const val FAVORITE_TEXT="Dear FutureMe, \n" +
+    const val FAVORITE_TEXT = "Dear FutureMe, \n" +
             "\n" +
             "These are a few of my (current) favorite things. I wonder if anything has changed? \n" +
             "\n" +

@@ -3,7 +3,11 @@ package com.alina.futureme.data.repository
 import com.alina.futureme.common.Resource
 import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.domain.repository.AuthenticationRepository
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 

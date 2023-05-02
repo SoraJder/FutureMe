@@ -21,6 +21,7 @@ fun ForgotPassword(
             is Resource.Failure -> {
                 showErrorMessage(it.e.message)
             }
+
             is Resource.Loading -> ProgressBar()
             is Resource.Success -> {
                 val isEmailSend = it.data
