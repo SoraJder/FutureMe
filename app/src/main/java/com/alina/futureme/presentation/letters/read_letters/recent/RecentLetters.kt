@@ -1,20 +1,31 @@
 package com.alina.futureme.presentation.letters.read_letters.recent
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.common.Resource
+import com.alina.futureme.components.LetterScreenError
+import com.alina.futureme.components.LetterScreenSuccess
+import com.alina.futureme.components.ProgressBar
 
 @Composable
-fun RecentLetter() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Recent")
+fun RecentLetter(
+    viewModel: RecentLettersViewModel = hiltViewModel()
+
+) {
+    val recentLetterFlow = viewModel.recentLetterFlow.collectAsState()
+
+    recentLetterFlow.value.let { resource ->
+        when (resource) {
+            is Resource.Failure -> {
+                LetterScreenError()
+            }
+
+            is Resource.Loading -> ProgressBar()
+
+            is Resource.Success -> {
+                LetterScreenSuccess(list = resource.data)
+            }
+        }
     }
 }

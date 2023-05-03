@@ -34,7 +34,7 @@ object Utils {
     fun getRandomDate(year: Int): LocalDate =
         LocalDate.of(year, 1, 1).plusDays((Random.nextLong(365)))
 
-    fun formmatedDate(stringDate:String): String? {
+    fun formmatedDate(stringDate:String): String {
         val date = LocalDate.parse(stringDate)
         val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy")
         return date.format(formatter)

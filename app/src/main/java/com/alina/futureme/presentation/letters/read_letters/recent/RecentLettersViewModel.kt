@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.letters.read_letters.popular
+package com.alina.futureme.presentation.letters.read_letters.recent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,24 +15,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PopularLettersViewModel @Inject constructor(
+class RecentLettersViewModel @Inject constructor(
     private val letterRepository: LetterRepository
 ) : ViewModel() {
 
-    private val _popularLetterFlow =
+    private val _recentLetterFlow =
         MutableStateFlow<Resource<List<ShowLetter>>>(Resource.Loading)
-    val popularLetterFlow: StateFlow<Resource<List<ShowLetter>>> =
-        _popularLetterFlow.asStateFlow()
+    val recentLetterFlow: StateFlow<Resource<List<ShowLetter>>> =
+        _recentLetterFlow.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _popularLetterFlow.value = Resource.Loading
+            _recentLetterFlow.value = Resource.Loading
 
             val showLetters: List<ShowLetter> =
                 letterRepository.getPublicLetters().mapNotNull {
                     it?.toShowLetter()
                 }
-            _popularLetterFlow.value = Recommendation.getRecommendations(showLetters)
+            _recentLetterFlow.value = Recommendation.getRecent(showLetters)
         }
     }
 }

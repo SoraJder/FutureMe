@@ -30,8 +30,8 @@ fun Letter.asMap(): Map<String, Any?> = mapOf(
     "wasReceived" to wasReceived
 )
 
-fun Letter.toPopularLetter() =
-    PopularLetter(
+fun Letter.toShowLetter() =
+    ShowLetter(
         id = id,
         title = title,
         text = text,

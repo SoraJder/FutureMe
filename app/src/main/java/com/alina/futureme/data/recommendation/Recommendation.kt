@@ -1,15 +1,15 @@
 package com.alina.futureme.data.recommendation
 
 import com.alina.common.Resource
-import com.alina.futureme.domain.model.PopularLetter
+import com.alina.futureme.domain.model.ShowLetter
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import kotlin.math.ln
 
 object Recommendation {
 
-    private fun calculateScore(popularLetter: List<PopularLetter>) {
-        popularLetter.forEach { letter ->
+    private fun calculateScore(showLetter: List<ShowLetter>) {
+        showLetter.forEach { letter ->
             letter.let {
                 it.popularScore = ln(it.numberOfLikes.toDouble() + 1)
 
@@ -28,10 +28,20 @@ object Recommendation {
         }
     }
 
-    fun getRecommendations(popularLetter: List<PopularLetter>): Resource<List<PopularLetter>> {
+    fun getRecommendations(showLetter: List<ShowLetter>): Resource<List<ShowLetter>> {
         return try {
-            calculateScore(popularLetter)
-            val sortedList = popularLetter.sortedByDescending { it.score }
+            calculateScore(showLetter)
+            val sortedList = showLetter.sortedByDescending { it.score }
+            Resource.Success(sortedList)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
+    fun getRecent(showLetter: List<ShowLetter>): Resource<List<ShowLetter>> {
+        return try {
+            val sortedList = showLetter.sortedByDescending { it.dateToArrive }
             Resource.Success(sortedList)
         } catch (e: Exception) {
             e.printStackTrace()

@@ -1,6 +1,6 @@
 package com.alina.futureme.domain.model
 
-data class PopularLetter(
+data class ShowLetter(
     val id: String,
     val title: String,
     val text: String,
