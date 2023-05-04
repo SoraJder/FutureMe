@@ -3,6 +3,7 @@ package com.alina.futureme.data.data_source
 import com.alina.futureme.domain.model.Letter
 import com.alina.futureme.domain.model.asMap
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FieldValue
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -29,4 +30,10 @@ class LetterRemoteDataSource @Inject constructor(
                 document.toObject(Letter::class.java)
             }
 
+    fun updateNumberOfLikes(letterId: String, value: Int) =
+        runCatching {
+            lettersRef
+                .document(letterId)
+                .update("numberOfLikes", FieldValue.increment(value.toLong()))
+        }
 }

@@ -4,9 +4,12 @@ import com.alina.futureme.domain.model.User
 import com.alina.futureme.domain.model.asMap
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 class UserRemoteDataSource @Inject constructor(
     private val usersRef: CollectionReference
 ) {
@@ -27,14 +30,14 @@ class UserRemoteDataSource @Inject constructor(
                 .await()
         }
 
-     fun addUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
+    fun addUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
         runCatching {
             usersRef
                 .document(email)
                 .update("likedLetters", FieldValue.arrayUnion(likedLetter))
         }
 
-     fun removeUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
+    fun removeUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
         runCatching {
             usersRef
                 .document(email)
@@ -58,14 +61,16 @@ class UserRemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getLikedLetters(email: String): List<String>? =
-        usersRef
-            .document(email)
-            .get()
-            .await()
-            .toObject(User::class.java)
-            ?.likedLetters
-
-    //TODO posibil sa fie nevoie si de o functie get User by email
-    //Emailul e identificator unic
+    fun observeLikedLettersChanged(email: String) = callbackFlow {
+        val listener =usersRef.document(email).addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+            val list = snapshot?.get("likedLetters") as? List<String> ?: emptyList()
+            trySend(list)
+        }
+        awaitClose {
+            listener.remove()
+        }
+    }
 }

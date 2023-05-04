@@ -12,4 +12,7 @@ class LetterRepository @Inject constructor(
         letterRemoteDataSource.addLetterInFirestore(letter = letter)
 
     suspend fun getPublicLetters() = letterRemoteDataSource.getPublicLetters()
+
+    fun updateNumberOfLikes(letterId: String, value: Int) =
+        letterRemoteDataSource.updateNumberOfLikes(letterId, value)
 }

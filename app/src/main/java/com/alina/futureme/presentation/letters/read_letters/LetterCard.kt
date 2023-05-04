@@ -81,7 +81,7 @@ fun LetterCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = letter.text,
+                text = if (letter.text.length > 100) letter.text.take(100) + "..." else letter.text,
                 style = Typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -123,34 +123,27 @@ fun LetterCard(
                     modifier = Modifier.weight(1f)
                 )
 
-                Text(
-                    text = letter.numberOfLikes.toString(),
-                    style = Typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
                 Spacer(modifier = Modifier.width(2.dp))
                 IconToggleButton(
-                    checked = isFavorite.value,
-                    onCheckedChange = {
-                        if (isFavorite.value){
+                    checked = isFavorite.value, onCheckedChange = {
+                        if (isFavorite.value) {
                             viewModel.removeLetter(letterId = letter.id)
-                        }else{
+                            viewModel.updateNumberOfLikes(letterId = letter.id, value = -1)
+                        } else {
                             viewModel.addLetter(letterId = letter.id)
+                            viewModel.updateNumberOfLikes(letterId = letter.id, value = 1)
                         }
                         isFavorite.value = !isFavorite.value
-                    },
-                    modifier = Modifier
+                    }, modifier = Modifier
                         .size(18.dp)
                         .align(Alignment.CenterVertically)
                 ) {
                     Icon(
-                        tint = color,
-                        imageVector = if (isFavorite.value) {
+                        tint = color, imageVector = if (isFavorite.value) {
                             Icons.Filled.Favorite
                         } else {
                             Icons.Default.FavoriteBorder
-                        },
-                        contentDescription = null
+                        }, contentDescription = null
                     )
                 }
 
@@ -162,8 +155,7 @@ fun LetterCard(
 @Composable
 fun LetterScreenError() {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -186,7 +178,7 @@ fun LetterScreenSuccess(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            list.forEachIndexed {_, letter ->
+            list.forEachIndexed { _, letter ->
 
                 item {
                     LetterCard(
