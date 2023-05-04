@@ -1,13 +1,13 @@
 package com.alina.futureme.domain.model
 
 data class User(
-    val email: String,
-    val name: String,
-    val country: String,
-    val birthDate: String,
-    val phoneNumber: String,
-    val lettersReceived: List<String> = emptyList(),
-    val likedLetters: List<String> = emptyList()
+    var email: String="",
+    var name: String="",
+    var country: String="",
+    var birthDate: String="",
+    var phoneNumber: String="",
+    var lettersReceived: List<String> = emptyList(),
+    var likedLetters: List<String> = emptyList()
 )
 
 fun User.asMap(): Map<String, Any?> = mapOf(

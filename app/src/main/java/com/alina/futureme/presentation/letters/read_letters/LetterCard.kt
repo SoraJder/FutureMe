@@ -1,4 +1,4 @@
-package com.alina.futureme.components
+package com.alina.futureme.presentation.letters.read_letters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,12 +27,14 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.common.Utils
 import com.alina.futureme.domain.model.ShowLetter
 import com.alina.futureme.presentation.theme.Typography
@@ -40,20 +42,28 @@ import com.alina.futureme.presentation.theme.Typography
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LetterCard(
-    letterTitle: String,
-    letterText: String,
-    letterArrivedDate: String,
-    letterSendDate: String,
-    modifier: Modifier,
-    onCardClick: () -> Unit,
-    onFavoriteClick: (Boolean) -> Unit
+    letter: ShowLetter,
+    modifier: Modifier = Modifier,
+    viewModel: ReadLetterViewModel = hiltViewModel()
 ) {
-    val isFavorite = remember { mutableStateOf(false) }
+    val likedLetters = viewModel.likedLetters.collectAsState().value
+
+    val isFavorite = rememberSaveable {
+        if (likedLetters?.contains(letter.id) == true) {
+            mutableStateOf(true)
+        } else {
+            mutableStateOf(false)
+        }
+    }
     val color: Color =
         if (isFavorite.value) Color.Red else MaterialTheme.colorScheme.onPrimaryContainer
+
+    val sendDate = Utils.formmatedDate(letter.dateWasSend.take(10))
+    val arrivedDate = Utils.formmatedDate(letter.dateToArrive)
+
     Card(
         modifier = modifier,
-        onClick = onCardClick,
+        onClick = {},
         shape = RoundedCornerShape(10.dp),
         elevation = 2.dp,
         backgroundColor = MaterialTheme.colorScheme.primaryContainer
@@ -63,7 +73,7 @@ fun LetterCard(
         ) {
 
             Text(
-                text = letterTitle,
+                text = letter.title,
                 style = Typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -71,7 +81,7 @@ fun LetterCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = letterText,
+                text = letter.text,
                 style = Typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -92,7 +102,7 @@ fun LetterCard(
 
                 Spacer(modifier = Modifier.width(2.dp))
                 Text(
-                    text = letterSendDate,
+                    text = sendDate,
                     style = Typography.labelMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -107,15 +117,26 @@ fun LetterCard(
 
                 Spacer(modifier = Modifier.width(2.dp))
                 Text(
-                    text = letterArrivedDate,
+                    text = arrivedDate,
                     style = Typography.labelMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier.weight(1f)
                 )
 
+                Text(
+                    text = letter.numberOfLikes.toString(),
+                    style = Typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Spacer(modifier = Modifier.width(2.dp))
                 IconToggleButton(
                     checked = isFavorite.value,
                     onCheckedChange = {
+                        if (isFavorite.value){
+                            viewModel.removeLetter(letterId = letter.id)
+                        }else{
+                            viewModel.addLetter(letterId = letter.id)
+                        }
                         isFavorite.value = !isFavorite.value
                     },
                     modifier = Modifier
@@ -152,7 +173,7 @@ fun LetterScreenError() {
 
 @Composable
 fun LetterScreenSuccess(
-    list: List<ShowLetter>
+    list: List<ShowLetter>,
 ) {
     Box(
         modifier = Modifier
@@ -165,27 +186,16 @@ fun LetterScreenSuccess(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            list.forEachIndexed { index, letter ->
-
-                val sendDate = Utils.formmatedDate(letter.dateWasSend.take(10))
-                val arrivedDate = Utils.formmatedDate(letter.dateToArrive)
+            list.forEachIndexed {_, letter ->
 
                 item {
                     LetterCard(
-                        letterTitle = letter.title,
-                        letterText = letter.text,
-                        letterArrivedDate = arrivedDate,
-                        letterSendDate = sendDate,
+                        letter = letter,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp, horizontal = 16.dp)
-                            .wrapContentHeight(),
-                        onCardClick = {
-
-                        }
-                    ) {
-
-                    }
+                            .wrapContentHeight()
+                    )
                 }
             }
         }

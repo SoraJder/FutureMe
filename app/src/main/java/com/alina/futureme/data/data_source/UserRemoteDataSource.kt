@@ -3,6 +3,7 @@ package com.alina.futureme.data.data_source
 import com.alina.futureme.domain.model.User
 import com.alina.futureme.domain.model.asMap
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FieldValue
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -26,6 +27,20 @@ class UserRemoteDataSource @Inject constructor(
                 .await()
         }
 
+     fun addUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
+        runCatching {
+            usersRef
+                .document(email)
+                .update("likedLetters", FieldValue.arrayUnion(likedLetter))
+        }
+
+     fun removeUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
+        runCatching {
+            usersRef
+                .document(email)
+                .update("likedLetters", FieldValue.arrayRemove(likedLetter))
+        }
+
     suspend fun deleteUserInFirestore(user: User) =
         runCatching {
             usersRef
@@ -42,6 +57,14 @@ class UserRemoteDataSource @Inject constructor(
             false
         }
     }
+
+    suspend fun getLikedLetters(email: String): List<String>? =
+        usersRef
+            .document(email)
+            .get()
+            .await()
+            .toObject(User::class.java)
+            ?.likedLetters
 
     //TODO posibil sa fie nevoie si de o functie get User by email
     //Emailul e identificator unic

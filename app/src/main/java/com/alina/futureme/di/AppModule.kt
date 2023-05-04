@@ -8,6 +8,7 @@ import com.alina.futureme.data.repository.DataStoreRepository
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.repository.AuthenticationRepository
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,8 +33,9 @@ class AppModule {
     @Provides
     fun providesUserRepository(
         userRemoteDataSourceImpl: UserRemoteDataSource,
+        firebaseAuth: FirebaseAuth,
     ): UserRepository =
-        UserRepository(userRemoteDataSourceImpl)
+        UserRepository(userRemoteDataSourceImpl,firebaseAuth)
 
     @Provides
     fun providesLetterRepository(
