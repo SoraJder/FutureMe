@@ -24,6 +24,11 @@ import com.alina.futureme.components.ProfileButton
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.info.InfoDialog
+import com.maxkeppeler.sheets.info.models.InfoBody
+import com.maxkeppeler.sheets.info.models.InfoSelection
 
 @Composable
 fun HomeScreen(
@@ -110,11 +115,40 @@ fun ButtonCard(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeCard(
     userName: String,
     onProfileClick: () -> Unit
 ) {
+    val infoDialogState = rememberUseCaseState()
+
+    InfoDialog(
+        state = infoDialogState,
+        selection = InfoSelection(
+            onPositiveClick = {
+                infoDialogState.finish()
+            },
+            negativeButton = null
+        ),
+        header = Header.Custom(
+            header = {
+                Text(
+                    text = stringResource(R.string.frequently_asked_question),
+                    style = Typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 24.dp, end = 24.dp, top = 16.dp),
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+        ),
+        body = InfoBody.Default(
+            bodyText = stringResource(R.string.faq_text),
+        )
+    )
+
     Surface(
         color = MaterialTheme.colorScheme.tertiaryContainer,
         modifier = Modifier
@@ -148,7 +182,7 @@ fun HomeCard(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 FAQButton {
-                    //TODO deschidere dialog alert somehow
+                    infoDialogState.show()
                 }
                 Spacer(modifier = Modifier.width(16.dp))
 

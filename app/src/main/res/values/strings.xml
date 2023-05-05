@@ -31,4 +31,6 @@
     <string name="send">Send</string>
     <string name="home_screen">Home Screen</string>
     <string name="back">Go back</string>
+    <string name="faq_text">Q: What does the FutureMe App do?\nA: This App allows you to write a letter to future self. Write a letter, select a photo, enter email address and date to receive the letter. The letter will be sent to your selected email address on the selected date.\n\nQ: Why I didn\'t receive my letter on the selected date?\nA:There are several possible reasons:\n- Wrong email address.\n- The letter goes to your email\'s spam folder.\n- We have reached a daily limit to send letters. Your letter may send to you earlier or later depends on the available slot.\n\nQ: Is it free to send letters?\nA: Yes, is it free.\n\nQ: Who can I contact if I need an assistant?\nA: You may contact us at alinateca2001@gmail.com.</string>
+    <string name="frequently_asked_question">Frequently asked question</string>
 </resources>
