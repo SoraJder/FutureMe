@@ -22,7 +22,7 @@ class ReadLetterViewModel @Inject constructor(
     private val _likedLetters: MutableStateFlow<List<String>?> = MutableStateFlow(null)
     val likedLetters: StateFlow<List<String>?> = _likedLetters.asStateFlow()
 
-    private val _numberOfLikes:MutableStateFlow<Int> = MutableStateFlow(Int.MAX_VALUE)
+    private val _numberOfLikes:MutableStateFlow<Int> = MutableStateFlow(0)
 
     init {
         viewModelScope.launch {

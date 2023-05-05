@@ -61,8 +61,15 @@ class UserRemoteDataSource @Inject constructor(
         }
     }
 
+    suspend fun getLikedLetters(email: String) =
+        usersRef
+            .document(email)
+            .get()
+            .await()
+            .get("likedLetters") as List<String>?
+
     fun observeLikedLettersChanged(email: String) = callbackFlow {
-        val listener =usersRef.document(email).addSnapshotListener { snapshot, error ->
+        val listener = usersRef.document(email).addSnapshotListener { snapshot, error ->
             if (error != null) {
                 return@addSnapshotListener
             }

@@ -32,4 +32,6 @@ class UserRepository @Inject constructor(
 
     fun observeLikedLettersChanged() =
         userRemoteDataSource.observeLikedLettersChanged(currentUser!!)
+
+   suspend fun getLikedLetters() = userRemoteDataSource.getLikedLetters(currentUser!!)
 }

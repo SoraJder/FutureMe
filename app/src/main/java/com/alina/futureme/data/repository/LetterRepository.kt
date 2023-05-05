@@ -5,7 +5,7 @@ import com.alina.futureme.domain.model.Letter
 import javax.inject.Inject
 
 class LetterRepository @Inject constructor(
-    private val letterRemoteDataSource: LetterRemoteDataSource
+    private val letterRemoteDataSource: LetterRemoteDataSource,
 ) {
 
     suspend fun addLetterInFirestore(letter: Letter) =
@@ -15,4 +15,7 @@ class LetterRepository @Inject constructor(
 
     fun updateNumberOfLikes(letterId: String, value: Int) =
         letterRemoteDataSource.updateNumberOfLikes(letterId, value)
+
+    suspend fun getLetterById(id: String) =
+        letterRemoteDataSource.getLetterById(id)
 }

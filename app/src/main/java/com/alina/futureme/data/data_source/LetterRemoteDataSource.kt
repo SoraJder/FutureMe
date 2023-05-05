@@ -36,4 +36,11 @@ class LetterRemoteDataSource @Inject constructor(
                 .document(letterId)
                 .update("numberOfLikes", FieldValue.increment(value.toLong()))
         }
+
+    suspend fun getLetterById(id: String): Letter? =
+        lettersRef
+            .document(id)
+            .get()
+            .await()
+            .toObject(Letter::class.java)
 }

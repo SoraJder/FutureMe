@@ -4,14 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.common.Resource
+import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.letters.read_letters.LetterScreenError
 import com.alina.futureme.presentation.letters.read_letters.LetterScreenSuccess
-import com.alina.futureme.components.ProgressBar
 
 @Composable
 fun RecentLetter(
     viewModel: RecentLettersViewModel = hiltViewModel()
-
 ) {
     val recentLetterFlow = viewModel.recentLetterFlow.collectAsState()
 

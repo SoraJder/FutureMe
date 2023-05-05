@@ -1,20 +1,28 @@
 package com.alina.futureme.presentation.letters.read_letters.liked
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.common.Resource
+import com.alina.futureme.components.ProgressBar
+import com.alina.futureme.presentation.letters.read_letters.LetterScreenError
+import com.alina.futureme.presentation.letters.read_letters.LetterScreenSuccess
 
 @Composable
-fun LikedLetters() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Liked")
+fun LikedLetters(
+    viewModel: LikedLettersViewModel = hiltViewModel()
+) {
+    val likedLettersFlow = viewModel.likedLettersFlow.collectAsState()
+
+    likedLettersFlow.value.let { resource ->
+        when (resource) {
+            is Resource.Failure -> {
+                LetterScreenError()
+            }
+            Resource.Loading -> ProgressBar()
+            is Resource.Success -> {
+                LetterScreenSuccess(list = resource.data)
+            }
+        }
     }
 }
