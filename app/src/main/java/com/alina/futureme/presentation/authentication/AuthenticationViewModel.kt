@@ -78,6 +78,9 @@ class AuthenticationViewModel @Inject constructor(
         _userExistFlow.value = userRepository.userExistsInFirestore(email)
     }
 
+    fun removeUser()=viewModelScope.launch{
+        currentUser?.delete()
+    }
     fun signOut() {
         authenticationRepository.signOut()
         _signInFlow.value = null

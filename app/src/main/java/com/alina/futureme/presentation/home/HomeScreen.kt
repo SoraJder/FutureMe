@@ -160,20 +160,13 @@ fun HomeCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.app_name),
-                    style = Typography.displayMedium,
-                    textAlign = TextAlign.Start,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
+            Text(
+                text = stringResource(id = R.string.app_name),
+                style = Typography.displayMedium,
+                textAlign = TextAlign.Start,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+            )
 
             Row(
                 modifier = Modifier

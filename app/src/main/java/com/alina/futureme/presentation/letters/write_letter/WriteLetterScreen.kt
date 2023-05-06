@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.alina.futureme.R
 import com.alina.common.Utils
+import com.alina.futureme.R
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.TransparentHintTextField
 import com.alina.futureme.presentation.letters.write_letter.bottom_sheet_tips.BottomSheetIdeasScreen
@@ -293,7 +293,6 @@ fun WriteLetterScreen(
                         .shadow(
                             elevation = 8.dp,
                             ambientColor = MaterialTheme.colorScheme.scrim,
-                            shape = RoundedCornerShape(10.dp)
                         )
                         .clickable { focusRequester.requestFocus() },
                     shape = RoundedCornerShape(10.dp),
