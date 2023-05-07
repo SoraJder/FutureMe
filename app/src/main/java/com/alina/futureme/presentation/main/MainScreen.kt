@@ -25,6 +25,7 @@ import com.alina.futureme.presentation.letters.send_instant_letter.SendInstantLe
 import com.alina.futureme.presentation.letters.write_letter.WriteLetterScreen
 import com.alina.futureme.presentation.onboarding.OnboardScreen
 import com.alina.futureme.presentation.profile.ProfileScreen
+import com.alina.futureme.presentation.profile.see_letters.SeeYourLettersScreen
 import com.alina.futureme.presentation.theme.FutureMeTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -80,6 +81,9 @@ fun MainScreen(
                 }
                 composable(destination = Destination.SendInstantLetterScreen) {
                     SendInstantLetterScreen()
+                }
+                composable(destination = Destination.SeeYourLettersScreen) {
+                    SeeYourLettersScreen()
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.alina.futureme.presentation.profile
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,28 +45,23 @@ fun ProfileScreen(
     val infoDialogState = rememberUseCaseState()
 
     InfoDialog(
-        state = infoDialogState,
-        selection = InfoSelection(
-            onPositiveClick = {
-                authenticationViewModel.onNavigateSignOutButtonClicked()
-                authenticationViewModel.removeUser()
-                infoDialogState.finish()
-            },
-            onNegativeClick = {
-                infoDialogState.finish()
-            }
-        ),
-        body = InfoBody.Default(
+        state = infoDialogState, selection = InfoSelection(onPositiveClick = {
+            authenticationViewModel.onNavigateSignOutButtonClicked()
+            authenticationViewModel.removeUser()
+            infoDialogState.finish()
+        }, onNegativeClick = {
+            infoDialogState.finish()
+        }), body = InfoBody.Default(
             bodyText = "Are you sure you want to delete your account?\nAll your future letters will also be deleted!"
-        ),
-        header = Header.Default(
+        ), header = Header.Default(
             title = "Delete Account"
         )
     )
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.Start
     ) {
         ProfileSurface(userName = authenticationViewModel.currentUser?.displayName!!)
@@ -128,7 +124,9 @@ fun ProfileScreen(
         Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 32.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                profileViewModel.onNavigateToSeeYourLetters()
+            },
             modifier = Modifier
                 .padding(horizontal = 32.dp)
                 .align(Alignment.Start)
@@ -138,8 +136,7 @@ fun ProfileScreen(
             )
         ) {
             Text(
-                text = "See letters",
-                color = MaterialTheme.colorScheme.onSurface
+                text = "See letters", color = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -155,8 +152,7 @@ fun ProfileScreen(
             onClick = {
                 authenticationViewModel.onNavigateSignOutButtonClicked()
                 authenticationViewModel.signOut()
-            },
-            modifier = Modifier
+            }, modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp)
         ) {
@@ -166,14 +162,12 @@ fun ProfileScreen(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
-        TextButton(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(horizontal = 32.dp),
+        TextButton(modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+            .padding(horizontal = 32.dp),
             onClick = {
                 infoDialogState.show()
-            }
-        ) {
+            }) {
             Text(
                 text = "Delete account"
             )

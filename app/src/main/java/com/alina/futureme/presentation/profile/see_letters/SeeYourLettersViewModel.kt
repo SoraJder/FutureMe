@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation.letters.read_letters.liked
+package com.alina.futureme.presentation.profile.see_letters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,40 +10,34 @@ import com.alina.futureme.domain.model.ShowLetter
 import com.alina.futureme.domain.model.toShowLetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/*TODO Ce mai e de facut:
-    1. Cand un like este scos, scrisoarea sa dispara de pe ecran
-    2. Cand este dat un like pe alta pagina sa se updateze ecranul
-*/
 @HiltViewModel
-class LikedLettersViewModel @Inject constructor(
-    private val letterRepository: LetterRepository,
-    private val userRepository: UserRepository
+class SeeYourLettersViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val letterRepository: LetterRepository
 ) : ViewModel() {
 
-    private val _likedLettersFlow =
+    private val _lettersReceivedFlow =
         MutableStateFlow<Resource<List<ShowLetter>>>(Resource.Loading)
-    val likedLettersFlow: StateFlow<Resource<List<ShowLetter>>> =
-        _likedLettersFlow.asStateFlow()
+    val letterReceivedFlow = _lettersReceivedFlow.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _likedLettersFlow.value = Resource.Loading
+            _lettersReceivedFlow.value = Resource.Loading
 
-            val likedLetters = userRepository.getLikedLetters()
+            val receivedLetters = userRepository.getReceivedLetters()
             val showLetters: MutableList<ShowLetter> = mutableListOf()
 
-            likedLetters?.forEach { id ->
+            receivedLetters?.forEach { id ->
                 val showLetter = letterRepository.getLetterById(id)
                 showLetter?.let { letter ->
                     showLetters.add(letter.toShowLetter())
                 }
             }
-            _likedLettersFlow.value = Recommendation.getRecommendations(showLetters)
+            _lettersReceivedFlow.value = Recommendation.getRecent(showLetters)
         }
     }
 }
