@@ -12,6 +12,7 @@ import com.alina.futureme.navigation.Destination
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,6 +25,7 @@ class AuthenticationViewModel @Inject constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val userRepository: UserRepository,
     private val letterRepository: LetterRepository,
+    private val storageReference: StorageReference,
     private val appNavigator: AppNavigator
 ) : ViewModel() {
 
@@ -81,11 +83,18 @@ class AuthenticationViewModel @Inject constructor(
         _userExistFlow.value = userRepository.userExistsInFirestore(email)
     }
 
-    fun removeUser()=viewModelScope.launch{
+    fun removeUser() = viewModelScope.launch {
+        letterRepository.getImageUriFromLetter(currentUser?.email!!).forEach { uri ->
+            uri?.let {
+                storageReference.child(it).delete()
+            }
+        }
+
         letterRepository.deleteLettersWithSpecificReceiver(currentUser?.email!!)
         userRepository.deleteUserInFirestore(currentUser?.email!!)
         currentUser?.delete()?.await()
     }
+
     fun signOut() {
         authenticationRepository.signOut()
         _signInFlow.value = null

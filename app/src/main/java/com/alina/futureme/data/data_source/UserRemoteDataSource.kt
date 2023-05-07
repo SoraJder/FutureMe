@@ -22,14 +22,6 @@ class UserRemoteDataSource @Inject constructor(
                 .await()
         }
 
-    suspend fun updateUserInFirestore(user: User) =
-        runCatching {
-            usersRef
-                .document(user.email)
-                .update(user.asMap())
-                .await()
-        }
-
     fun addUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
         runCatching {
             usersRef

@@ -86,7 +86,12 @@ class WriteLetterViewModel @Inject constructor(
 
     fun sendLetter() = viewModelScope.launch {
 
-        val downloadUrl = if (_mediaFile.value != null) uploadToStorage() else null
+        var imageUri: String? = null
+        var downloadUrl: Uri? = null
+        if (_mediaFile.value != null) {
+            imageUri = currentUser + "_" + _email.value + "_" + LocalDate.now()
+            downloadUrl = uploadToStorage(imageUri)
+        }
 
         letterRepository.addLetterInFirestore(
             Letter(
@@ -97,6 +102,7 @@ class WriteLetterViewModel @Inject constructor(
                 title = _letterTitle.value,
                 text = _letterText.value,
                 image = downloadUrl.toString(),
+                imageUri = imageUri,
                 public = _isPublic.value
             )
         )
@@ -112,8 +118,8 @@ class WriteLetterViewModel @Inject constructor(
         _isPublic.value = false
     }
 
-    private suspend fun uploadToStorage(): Uri =
-        storageReference.child(currentUser + "_" + _email.value + "_" + LocalDate.now())
+    private suspend fun uploadToStorage(imageUri: String): Uri =
+        storageReference.child(imageUri)
             .putFile(_mediaFile.value!!).await()
             .storage.downloadUrl.await()
 

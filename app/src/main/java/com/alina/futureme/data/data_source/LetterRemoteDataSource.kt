@@ -30,6 +30,16 @@ class LetterRemoteDataSource @Inject constructor(
                 document.toObject(Letter::class.java)
             }
 
+    suspend fun getImageUriFromLetter(receiver: String) =
+        lettersRef
+            .whereEqualTo("receiver", receiver)
+            .get()
+            .await()
+            .documents
+            .map { documentSnapshot ->
+                documentSnapshot.toObject(Letter::class.java)?.imageUri
+            }
+
     suspend fun deleteLettersWithSpecificReveiver(receiver: String) =
         runCatching {
             lettersRef

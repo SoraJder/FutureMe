@@ -5,6 +5,7 @@ data class ShowLetter(
     val title: String,
     val text: String,
     val image: String?,
+    val imageUri:String?,
     val numberOfLikes: Int,
     val dateToArrive: String,
     val dateWasSend: String,

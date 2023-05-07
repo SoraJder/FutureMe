@@ -15,9 +15,6 @@ class UserRepository @Inject constructor(
     suspend fun addUserInFirestore(user: User) =
         userRemoteDataSource.addUserInFirestore(user = user)
 
-    suspend fun updateUserInFirestore(user: User) =
-        userRemoteDataSource.updateUserInFirestore(user = user)
-
     fun addUserLikedLettersInFirestore(likedLetters: String): Result<Any> =
         userRemoteDataSource.addUserLikedLetterInFirestore(currentUser!!, likedLetters)
 
