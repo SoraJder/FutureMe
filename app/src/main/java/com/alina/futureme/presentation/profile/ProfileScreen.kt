@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,12 +29,40 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.info.InfoDialog
+import com.maxkeppeler.sheets.info.models.InfoBody
+import com.maxkeppeler.sheets.info.models.InfoSelection
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     authenticationViewModel: AuthenticationViewModel = hiltViewModel(),
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val infoDialogState = rememberUseCaseState()
+
+    InfoDialog(
+        state = infoDialogState,
+        selection = InfoSelection(
+            onPositiveClick = {
+                authenticationViewModel.onNavigateSignOutButtonClicked()
+                authenticationViewModel.removeUser()
+                infoDialogState.finish()
+            },
+            onNegativeClick = {
+                infoDialogState.finish()
+            }
+        ),
+        body = InfoBody.Default(
+            bodyText = "Are you sure you want to delete your account?\nAll your future letters will also be deleted!"
+        ),
+        header = Header.Default(
+            title = "Delete Account"
+        )
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -87,7 +116,7 @@ fun ProfileScreen(
             textAlign = TextAlign.Start,
             modifier = Modifier.padding(horizontal = 32.dp)
         )
-        
+
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Your letters",
@@ -142,8 +171,7 @@ fun ProfileScreen(
                 .align(Alignment.CenterHorizontally)
                 .padding(horizontal = 32.dp),
             onClick = {
-                authenticationViewModel.onNavigateSignOutButtonClicked()
-                authenticationViewModel.removeUser()
+                infoDialogState.show()
             }
         ) {
             Text(

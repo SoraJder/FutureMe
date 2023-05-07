@@ -18,4 +18,7 @@ class LetterRepository @Inject constructor(
 
     suspend fun getLetterById(id: String) =
         letterRemoteDataSource.getLetterById(id)
+
+    suspend fun deleteLettersWithSpecificReceiver(receiver: String) =
+        letterRemoteDataSource.deleteLettersWithSpecificReveiver(receiver)
 }

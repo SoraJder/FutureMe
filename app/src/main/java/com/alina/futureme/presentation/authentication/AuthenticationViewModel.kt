@@ -3,6 +3,7 @@ package com.alina.futureme.presentation.authentication
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alina.common.Resource
+import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.model.User
 import com.alina.futureme.domain.repository.AuthenticationRepository
@@ -15,12 +16,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val userRepository: UserRepository,
+    private val letterRepository: LetterRepository,
     private val appNavigator: AppNavigator
 ) : ViewModel() {
 
@@ -79,7 +82,9 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     fun removeUser()=viewModelScope.launch{
-        currentUser?.delete()
+        letterRepository.deleteLettersWithSpecificReceiver(currentUser?.email!!)
+        userRepository.deleteUserInFirestore(currentUser?.email!!)
+        currentUser?.delete()?.await()
     }
     fun signOut() {
         authenticationRepository.signOut()

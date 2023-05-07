@@ -44,10 +44,10 @@ class UserRemoteDataSource @Inject constructor(
                 .update("likedLetters", FieldValue.arrayRemove(likedLetter))
         }
 
-    suspend fun deleteUserInFirestore(user: User) =
+    suspend fun deleteUserInFirestore(user: String) =
         runCatching {
             usersRef
-                .document(user.email)
+                .document(user)
                 .delete()
                 .await()
         }

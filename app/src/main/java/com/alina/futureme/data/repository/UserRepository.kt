@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(
     fun removeUserLikedLettersInFirestore(likedLetters: String): Result<Any> =
         userRemoteDataSource.removeUserLikedLetterInFirestore(currentUser!!, likedLetters)
 
-    suspend fun deleteUserInFirestore(user: User) =
+    suspend fun deleteUserInFirestore(user: String) =
         userRemoteDataSource.deleteUserInFirestore(user = user)
 
     suspend fun userExistsInFirestore(email: String): Boolean =

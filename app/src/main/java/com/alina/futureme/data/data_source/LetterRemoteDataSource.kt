@@ -30,6 +30,17 @@ class LetterRemoteDataSource @Inject constructor(
                 document.toObject(Letter::class.java)
             }
 
+    suspend fun deleteLettersWithSpecificReveiver(receiver: String) =
+        runCatching {
+            lettersRef
+                .whereEqualTo("receiver", receiver)
+                .get()
+                .await()
+                .forEach { queryDocumentSnapshot ->
+                    queryDocumentSnapshot.reference.delete()
+                }
+        }
+
     fun updateNumberOfLikes(letterId: String, value: Int) =
         runCatching {
             lettersRef
