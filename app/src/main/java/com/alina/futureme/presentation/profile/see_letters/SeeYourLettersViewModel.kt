@@ -8,6 +8,8 @@ import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.model.ShowLetter
 import com.alina.futureme.domain.model.toShowLetter
+import com.alina.futureme.navigation.AppNavigator
+import com.alina.futureme.navigation.Destination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SeeYourLettersViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val letterRepository: LetterRepository
+    private val letterRepository: LetterRepository,
+    private val appNavigator: AppNavigator
 ) : ViewModel() {
 
     private val _lettersReceivedFlow =
@@ -39,5 +42,9 @@ class SeeYourLettersViewModel @Inject constructor(
             }
             _lettersReceivedFlow.value = Recommendation.getRecent(showLetters)
         }
+    }
+
+    fun onNavigateBack() {
+        appNavigator.tryNavigateTo(Destination.ProfileScreen())
     }
 }
