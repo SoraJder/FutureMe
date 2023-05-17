@@ -16,24 +16,24 @@ import javax.inject.Inject
 class ReadLetterViewModel @Inject constructor(
     private val appNavigator: AppNavigator,
     private val userRepository: UserRepository,
-    private val letterRepository: LetterRepository
+    private val letterRepository: LetterRepository,
 ) : ViewModel() {
 
     private val _likedLetters: MutableStateFlow<List<String>?> = MutableStateFlow(null)
     val likedLetters: StateFlow<List<String>?> = _likedLetters.asStateFlow()
 
-    private val _numberOfLikes:MutableStateFlow<Int> = MutableStateFlow(0)
+    private val _numberOfLikes: MutableStateFlow<Int> = MutableStateFlow(0)
 
     init {
         viewModelScope.launch {
-          userRepository.observeLikedLettersChanged().collect{
-              _likedLetters.value= it
-          }
+            userRepository.observeLikedLettersChanged().collect {
+                _likedLetters.value = it
+            }
         }
     }
 
-    fun updateNumberOfLikes(letterId: String,value:Int){
-        _numberOfLikes.value+=value
+    fun updateNumberOfLikes(letterId: String, value: Int) {
+        _numberOfLikes.value += value
         letterRepository.updateNumberOfLikes(letterId, value)
     }
     fun removeLetter(letterId: String) {

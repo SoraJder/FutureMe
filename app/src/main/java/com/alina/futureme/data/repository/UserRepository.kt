@@ -18,6 +18,9 @@ class UserRepository @Inject constructor(
     fun addUserLikedLettersInFirestore(likedLetters: String): Result<Any> =
         userRemoteDataSource.addUserLikedLetterInFirestore(currentUser!!, likedLetters)
 
+    fun addReceivedLetterInFirestore(receivedLetter: String) =
+        userRemoteDataSource.addReceivedLetterInFirestore(currentUser!!, receivedLetter)
+
     fun removeUserLikedLettersInFirestore(likedLetters: String): Result<Any> =
         userRemoteDataSource.removeUserLikedLetterInFirestore(currentUser!!, likedLetters)
 

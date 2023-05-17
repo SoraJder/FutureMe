@@ -30,6 +30,16 @@ class LetterRemoteDataSource @Inject constructor(
                 document.toObject(Letter::class.java)
             }
 
+    suspend fun getNotReceivedLetters() =
+        lettersRef
+            .whereEqualTo("wasReceived", false)
+            .get()
+            .await()
+            .documents
+            .map { document ->
+                document.toObject(Letter::class.java)
+            }
+
     suspend fun getImageUriFromLetter(receiver: String) =
         lettersRef
             .whereEqualTo("receiver", receiver)
@@ -56,6 +66,13 @@ class LetterRemoteDataSource @Inject constructor(
             lettersRef
                 .document(letterId)
                 .update("numberOfLikes", FieldValue.increment(value.toLong()))
+        }
+
+    fun updateLettersWasReceived(letterId: String) =
+        runCatching {
+            lettersRef
+                .document(letterId)
+                .update("wasReceived", true)
         }
 
     suspend fun getLetterById(id: String): Letter? =

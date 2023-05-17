@@ -29,6 +29,13 @@ class UserRemoteDataSource @Inject constructor(
                 .update("likedLetters", FieldValue.arrayUnion(likedLetter))
         }
 
+    fun addReceivedLetterInFirestore(email: String, letterReceived: String) =
+        runCatching {
+            usersRef
+                .document(email)
+                .update("lettersReceived", FieldValue.arrayUnion(letterReceived))
+        }
+
     fun removeUserLikedLetterInFirestore(email: String, likedLetter: String): Result<Any> =
         runCatching {
             usersRef

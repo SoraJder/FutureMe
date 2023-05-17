@@ -95,10 +95,10 @@ fun WriteLetterScreen(
     CalendarDialog(
         state = selectSpecificDate,
         config = CalendarConfig(
-            yearSelection = true,
+            yearSelection = false,
             monthSelection = true,
             style = CalendarStyle.MONTH,
-            boundary = LocalDate.now()..LocalDate.now().plusYears(20)
+            boundary = LocalDate.now().plusDays(1)..LocalDate.now().plusYears(20L)
         ),
         selection = CalendarSelection.Date(
             selectedDate = selectedDate
