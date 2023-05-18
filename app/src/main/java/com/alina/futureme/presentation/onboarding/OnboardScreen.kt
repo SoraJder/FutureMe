@@ -1,5 +1,10 @@
 package com.alina.futureme.presentation.onboarding
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -26,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.presentation.theme.Typography
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(
     ExperimentalAnimationApi::class,
     ExperimentalFoundationApi::class
@@ -34,13 +40,20 @@ import com.alina.futureme.presentation.theme.Typography
 fun OnboardScreen(
     viewModel: OnboardViewModel = hiltViewModel()
 ) {
+
+    val permissionRequest = Manifest.permission.POST_NOTIFICATIONS
+    val notificationPermissionResultLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
+
+        }
+
     val pages = listOf(
         OnboardPage.FirstPage,
         OnboardPage.SecondPage,
         OnboardPage.ThirdPage
     )
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { pages.size }
 
     Column(
         modifier = Modifier
@@ -49,7 +62,6 @@ fun OnboardScreen(
     ) {
         HorizontalPager(
             modifier = Modifier.weight(10f),
-            pageCount = 3,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { position ->
@@ -78,6 +90,7 @@ fun OnboardScreen(
             modifier = Modifier.weight(1f),
             pagerState = pagerState
         ) {
+            notificationPermissionResultLauncher.launch(permissionRequest)
             viewModel.saveOnboardState(completed = true)
             viewModel.navigateToHomeScreen()
         }

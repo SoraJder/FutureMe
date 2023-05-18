@@ -39,7 +39,7 @@ fun BottomSheetIdeasScreen(
         BottomSheetIdeasPage.FifthIdea
     )
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { pages.size }
 
     Box(
         modifier = Modifier
@@ -64,7 +64,6 @@ fun BottomSheetIdeasScreen(
 
             HorizontalPager(
                 modifier = Modifier.weight(10f),
-                pageCount = 5,
                 state = pagerState,
                 verticalAlignment = Alignment.CenterVertically
             ) { position ->

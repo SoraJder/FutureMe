@@ -12,7 +12,6 @@ import com.alina.futureme.data.repository.UserRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @HiltWorker
 class NotificationWorker @AssistedInject constructor(
@@ -25,18 +24,15 @@ class NotificationWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        val currentTime = LocalDateTime.now()
-        if (currentTime.hour == 11) {
-            val letterList = letterRepository.getNotReceivedLetters()
-            letterList.forEach { letter ->
-                letter?.let {
-                    val date = it.dateToArrive
-                    val today = LocalDate.now().toString()
-                    if (date == today) {
-                        letterRepository.updateLettersWasReceived(it.id)
-                        userRepository.addReceivedLetterInFirestore(it.id)
-                        sendNotification()
-                    }
+        val letterList = letterRepository.getNotReceivedLetters()
+        letterList.forEach { letter ->
+            letter?.let {
+                val date = it.dateToArrive
+                val today = LocalDate.now().toString()
+                if (date == today) {
+                    letterRepository.updateLettersWasReceived(it.id)
+                    userRepository.addReceivedLetterInFirestore(it.id)
+                    sendNotification()
                 }
             }
         }

@@ -61,7 +61,7 @@ fun ReadLetterScreen(
         )
     )
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { tabs.size }
     val coroutineScope = rememberCoroutineScope()
 
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -115,7 +115,6 @@ fun ReadLetterScreen(
                     }
                 }
                 HorizontalPager(
-                    pageCount = tabs.size,
                     state = pagerState
                 ) {
                     tabs[pagerState.currentPage].screen()
