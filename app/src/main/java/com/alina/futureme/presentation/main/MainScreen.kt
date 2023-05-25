@@ -1,6 +1,8 @@
 package com.alina.futureme.presentation.main
 
 import android.app.Activity
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -11,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.navigation.Destination
 import com.alina.futureme.navigation.FutureMeNavHost
 import com.alina.futureme.navigation.NavigationIntent
@@ -30,7 +33,7 @@ import com.alina.futureme.presentation.theme.FutureMeTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
-//TODO Se schimba dark/light mode se navigheaza inapoi
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
@@ -47,7 +50,6 @@ fun MainScreen(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-
             FutureMeNavHost(
                 navController = navController,
                 startDestination = startDestinationScreen
@@ -84,6 +86,9 @@ fun MainScreen(
                 }
                 composable(destination = Destination.SeeYourLettersScreen) {
                     SeeYourLettersScreen()
+                }
+                composable(destination = Destination.LoadingScreen) {
+                    ProgressBar()
                 }
             }
         }

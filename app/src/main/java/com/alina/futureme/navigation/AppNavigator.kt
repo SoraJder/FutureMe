@@ -31,7 +31,6 @@ interface AppNavigator {
     )
 }
 
-//TODO de adaugate popBackStack
 sealed class NavigationIntent {
 
     data class NavigateBack(
