@@ -122,4 +122,43 @@ object Constants {
     const val POPULAR_TAB = "Popular"
     const val RECENT_TAB = "Recent"
     const val LIKED_TAB = "Liked"
+
+    //SEND INSTANT LETTERS
+    const val BIRTHDAY_SUBJECT="Happy Birthday!"
+    const val BIRTHDAY_TEXT="Hi ,\n\n" +
+            "Happy birthday friend! I want to wish you very warm congratulations on your special " +
+            "day and offer my best wishes for many, many more great birthdays to come in your future.\n\n" +
+            "I hope this particular birthday is the best one ever for you. Knowing you, you " +
+            "probably have a list of exciting things planned to do this year in order to celebrate " +
+            "it with your wonderful family. Keep this in mind: while everybody grows old, not " +
+            "everyone grows up!\n\n" +
+            "Sounds like me and you, right? Whenever I need to put a quick smile on my face, I " +
+            "just think about all the good times we've shared over the years. You look as young " +
+            "and beautiful as the first day I met you. Did you discover the fountain of youth'?\n\n" +
+            "Also, I want to thank you for being there for me this past year when I really needed " +
+            "help. But, that's what friends are for, and you're a good one. Please know that I " +
+            "will always be there for you too.\n\n" +
+            "Here's to wishing you a long, healthy, and prosperous life my friend!\n\n" +
+            "Again, happy birthday.\n\n" +
+            "Sincerely,\n"
+
+    const val PARENTS_SUBJECT="How are you, dear parents?"
+    const val PARENTS_TEXT="Dear Parents!\n\n" +
+            "I thought I'd take I'd take a couple of minutes too see how you're doing.\n\n" +
+            "Everything is fine with me and life is actively moving forward. Recently, I miss my home " +
+            "very much and about your mentor advices and interesting stories.\n\n" +
+            "How are you? Tell us what's new and how are you doing?\n\n" +
+            "Sincerely,\n"
+
+    const val LOVER_SUBJECT="Love you"
+    const val LOVER_TEXT="My dear,\n\n" +
+            "As you know, I am not much with words. When it comes to times of great importance, " +
+            "I tend to muddle the message and never convey the full impact of my feelings.\n\n" +
+            "That is why I am using the written word to convey this message, because it is one of the " +
+            "most important messages I could want to convey.\n\n" +
+            "That message is this - I love you. I have loved you for a while now, and with each day," +
+            "my love seems to grow and solidify. It has reached the point that I feel my love for you " +
+            "physically, pounding in my heart and almost crystallizing in the air between us.\n\n" +
+            "I hope that you feel this love as well, and that the message of this letter is pleasing " +
+            "to you.\n\nLove,\n"
 }
