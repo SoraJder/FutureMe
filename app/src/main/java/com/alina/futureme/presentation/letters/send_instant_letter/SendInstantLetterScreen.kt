@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ import com.alina.futureme.R
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.TransparentHintTextField
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.option.OptionDialog
@@ -56,6 +58,9 @@ import com.maxkeppeler.sheets.option.models.OptionSelection
 fun SendInstantLetterScreen(
     viewModel: SendInstantLetterViewModel = hiltViewModel()
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     val focusRequester = remember { FocusRequester() }
     val optionState = rememberUseCaseState()
 

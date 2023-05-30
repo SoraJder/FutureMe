@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,12 +33,16 @@ import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.letters.read_letters.LetterScreenError
 import com.alina.futureme.presentation.letters.read_letters.LetterScreenSuccess
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeeYourLettersScreen(
     viewModel: SeeYourLettersViewModel = hiltViewModel()
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     val lettersReceivedFlow = viewModel.letterReceivedFlow.collectAsState()
     lettersReceivedFlow.value.let { resource ->
         when (resource) {

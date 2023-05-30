@@ -27,9 +27,9 @@ class NotificationWorker @AssistedInject constructor(
         val letterList = letterRepository.getNotReceivedLetters()
         letterList.forEach { letter ->
             letter?.let {
-                val date = it.dateToArrive
-                val today = LocalDate.now().toString()
-                if (date == today) {
+                val date = LocalDate.parse(it.dateToArrive)
+                val today = LocalDate.now()
+                if (date == today || today.isAfter(date)) {
                     letterRepository.updateLettersWasReceived(it.id)
                     userRepository.addReceivedLetterInFirestore(it.id)
                     sendNotification()

@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,9 +23,13 @@ import androidx.compose.ui.unit.dp
 import com.alina.futureme.R
 import com.alina.futureme.presentation.theme.FutureMeTheme
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun NoInternetConnection() {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     FutureMeTheme {
         Column(
             modifier = Modifier

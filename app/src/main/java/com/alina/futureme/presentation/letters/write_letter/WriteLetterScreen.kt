@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -33,6 +34,7 @@ import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.TransparentHintTextField
 import com.alina.futureme.presentation.letters.write_letter.bottom_sheet_tips.BottomSheetIdeasScreen
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
@@ -52,6 +54,9 @@ import java.time.LocalDate
 fun WriteLetterScreen(
     viewModel: WriteLetterViewModel = hiltViewModel(),
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     val coroutineScope = rememberCoroutineScope()
     val modalSheetState = rememberModalBottomSheetState()
     val focusRequester = remember { FocusRequester() }

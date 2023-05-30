@@ -43,6 +43,7 @@ import com.alina.futureme.components.PrimaryButtonWithContent
 import com.alina.futureme.components.TextWithLinesOnSides
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -52,6 +53,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 fun SignInScreen(
     viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     val context = LocalContext.current
     var emailText by rememberSaveable { mutableStateOf("") }
     var passwordText by rememberSaveable { mutableStateOf("") }

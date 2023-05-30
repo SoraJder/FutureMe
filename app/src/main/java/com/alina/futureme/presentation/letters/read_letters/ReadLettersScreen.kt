@@ -26,6 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,6 +35,7 @@ import com.alina.futureme.R
 import com.alina.futureme.presentation.letters.read_letters.liked.LikedLetters
 import com.alina.futureme.presentation.letters.read_letters.popular.PopularLetters
 import com.alina.futureme.presentation.letters.read_letters.recent.RecentLetter
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -41,6 +43,9 @@ import kotlinx.coroutines.launch
 fun ReadLetterScreen(
     viewModel: ReadLetterViewModel = hiltViewModel()
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.Black)
+
     val tabs = listOf(
         TabRowItem(
             title = Constants.POPULAR_TAB,
