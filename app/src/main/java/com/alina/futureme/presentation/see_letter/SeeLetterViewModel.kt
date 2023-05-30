@@ -9,7 +9,6 @@ import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.domain.model.Letter
 import com.alina.futureme.navigation.AppNavigator
 import com.alina.futureme.navigation.Destination
-import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
