@@ -6,6 +6,8 @@ import com.alina.common.Constants.LOADING_SCREEN
 import com.alina.common.Constants.ONBOARD_SCREEN
 import com.alina.common.Constants.PROFILE_SCREEN
 import com.alina.common.Constants.READ_LETTER_SCREEN
+import com.alina.common.Constants.SEE_LETTER_SCREEN
+import com.alina.common.Constants.SEE_LETTER_SCREEN_ID
 import com.alina.common.Constants.SEE_YOUR_LETTERS_SCREEN
 import com.alina.common.Constants.SEND_INSTANT_LETTER_SCREEN
 import com.alina.common.Constants.SIGN_IN_SCREEN
@@ -39,6 +41,13 @@ sealed class Destination(protected val route: String, vararg params: String) {
     object SendInstantLetterScreen : NoArgumentsDestination(SEND_INSTANT_LETTER_SCREEN)
     object SeeYourLettersScreen :NoArgumentsDestination(SEE_YOUR_LETTERS_SCREEN)
     object LoadingScreen :NoArgumentsDestination(LOADING_SCREEN)
+    object  SeeLetterScreen:Destination(SEE_LETTER_SCREEN, SEE_LETTER_SCREEN_ID){
+       const val ID= SEE_LETTER_SCREEN_ID
+
+        operator fun invoke(id:String): String = route.appendParams(
+            ID to id
+        )
+    }
 }
 
 internal fun String.appendParams(vararg params: Pair<String, Any?>): String {

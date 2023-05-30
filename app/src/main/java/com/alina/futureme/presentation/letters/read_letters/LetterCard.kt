@@ -58,12 +58,12 @@ fun LetterCard(
     val color: Color =
         if (isFavorite.value) Color.Red else MaterialTheme.colorScheme.onPrimaryContainer
 
-    val sendDate = Utils.formmatedDate(letter.dateWasSend.take(10))
-    val arrivedDate = Utils.formmatedDate(letter.dateToArrive)
+    val sendDate = Utils.formattedDate(letter.dateWasSend.take(10))
+    val arrivedDate = Utils.formattedDate(letter.dateToArrive)
 
     Card(
         modifier = modifier,
-        onClick = {},
+        onClick = { viewModel.onNavigateToLetter(letterId = letter.id) },
         shape = RoundedCornerShape(10.dp),
         elevation = 2.dp,
         backgroundColor = MaterialTheme.colorScheme.primaryContainer
@@ -125,7 +125,8 @@ fun LetterCard(
 
                 Spacer(modifier = Modifier.width(2.dp))
                 IconToggleButton(
-                    checked = isFavorite.value, onCheckedChange = {
+                    checked = isFavorite.value,
+                    onCheckedChange = {
                         if (isFavorite.value) {
                             viewModel.removeLetter(letterId = letter.id)
                             viewModel.updateNumberOfLikes(letterId = letter.id, value = -1)

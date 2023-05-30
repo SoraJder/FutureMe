@@ -29,6 +29,7 @@ import com.alina.futureme.presentation.letters.write_letter.WriteLetterScreen
 import com.alina.futureme.presentation.onboarding.OnboardScreen
 import com.alina.futureme.presentation.profile.ProfileScreen
 import com.alina.futureme.presentation.profile.see_letters.SeeYourLettersScreen
+import com.alina.futureme.presentation.see_letter.SeeLetterScreen
 import com.alina.futureme.presentation.theme.FutureMeTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -89,6 +90,9 @@ fun MainScreen(
                 }
                 composable(destination = Destination.LoadingScreen) {
                     ProgressBar()
+                }
+                composable(destination=Destination.SeeLetterScreen){
+                    SeeLetterScreen()
                 }
             }
         }

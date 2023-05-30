@@ -16,6 +16,7 @@ import com.alina.futureme.NotificationWorker
 import com.alina.futureme.network.ConnectivityObserver
 import com.alina.futureme.network.NetworkConnectivityObserver
 import com.alina.futureme.presentation.main.MainScreen
+import com.alina.futureme.presentation.no_internet_connection.NoInternetConnection
 import com.alina.futureme.presentation.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit

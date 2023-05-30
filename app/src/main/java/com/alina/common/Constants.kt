@@ -15,6 +15,8 @@ object Constants {
     const val SEND_INSTANT_LETTER_SCREEN = "Send Instant Letter"
     const val SEE_YOUR_LETTERS_SCREEN="See Your Letters"
     const val LOADING_SCREEN = "Loading"
+    const val SEE_LETTER_SCREEN="See Letter"
+    const val SEE_LETTER_SCREEN_ID="id"
 
     //google web client id
     const val WEB_CLIENT_ID =

@@ -35,4 +35,7 @@
     <string name="frequently_asked_question">Frequently asked question</string>
     <string name="profile_screen">Profile Screen</string>
     <string name="enjoy_your_lovely_letters">Enjoy your lovely letters</string>
+    <string name="attention_delete_account">Are you sure you want to delete your account?\nAll your future letters will also be deleted!</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="display_name">Display Name</string>
 </resources>

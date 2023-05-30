@@ -1,4 +1,4 @@
-package com.alina.futureme.presentation
+package com.alina.futureme.presentation.no_internet_connection
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

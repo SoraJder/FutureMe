@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.navigation.AppNavigator
+import com.alina.futureme.navigation.Destination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +37,7 @@ class ReadLetterViewModel @Inject constructor(
         _numberOfLikes.value += value
         letterRepository.updateNumberOfLikes(letterId, value)
     }
+
     fun removeLetter(letterId: String) {
         _likedLetters.value?.minus(letterId)
         userRepository.removeUserLikedLettersInFirestore(letterId)
@@ -44,6 +46,14 @@ class ReadLetterViewModel @Inject constructor(
     fun addLetter(letterId: String) {
         _likedLetters.value?.plus(letterId)
         userRepository.addUserLikedLettersInFirestore(letterId)
+    }
+
+    fun onNavigateToLetter(letterId: String) {
+        appNavigator.tryNavigateTo(
+            Destination.SeeLetterScreen(
+                id = letterId
+            )
+        )
     }
 
     fun onNavigateBack() {

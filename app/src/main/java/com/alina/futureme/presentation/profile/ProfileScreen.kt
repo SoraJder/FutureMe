@@ -52,9 +52,9 @@ fun ProfileScreen(
         }, onNegativeClick = {
             infoDialogState.finish()
         }), body = InfoBody.Default(
-            bodyText = "Are you sure you want to delete your account?\nAll your future letters will also be deleted!"
+            bodyText = stringResource(R.string.attention_delete_account)
         ), header = Header.Default(
-            title = "Delete Account"
+            title = stringResource(R.string.delete_account)
         )
     )
 
@@ -79,7 +79,7 @@ fun ProfileScreen(
         Divider(modifier = Modifier.padding(vertical = 4.dp, horizontal = 32.dp))
 
         Text(
-            text = "Display Name",
+            text = stringResource(R.string.display_name),
             style = Typography.bodyLarge,
             color = MaterialTheme.colorScheme.secondary,
             textAlign = TextAlign.Start,
