@@ -1,7 +1,6 @@
 package com.alina.futureme.presentation.splash
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,14 +10,12 @@ import com.alina.futureme.navigation.Destination
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//TODO o pagina de loading
 class SplashViewModel @Inject constructor(
     private val dataStoreRepositoryImpl: DataStoreRepository,
     private val authenticationRepositoryImpl: AuthenticationRepositoryImpl
 ) : ViewModel() {
 
-    private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
-    val isLoading: State<Boolean> = _isLoading
+    val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
     private val _startDestination: MutableState<Destination> =
         mutableStateOf(Destination.LoadingScreen)
@@ -37,7 +34,6 @@ class SplashViewModel @Inject constructor(
                     _startDestination.value = Destination.SignInScreen
                 }
             }
-            _isLoading.value = false
         }
     }
 }

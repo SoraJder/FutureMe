@@ -39,6 +39,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
     startDestinationScreen: Destination,
+    onDataLoaded: () -> Unit
 ) {
     val navController = rememberNavController()
 
@@ -46,6 +47,11 @@ fun MainScreen(
         navigationChannel = mainViewModel.navigationChannel,
         navHostController = navController
     )
+
+    LaunchedEffect(key1 = Unit) {
+        onDataLoaded()
+    }
+
     FutureMeTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -91,7 +97,7 @@ fun MainScreen(
                 composable(destination = Destination.LoadingScreen) {
                     ProgressBar()
                 }
-                composable(destination=Destination.SeeLetterScreen){
+                composable(destination = Destination.SeeLetterScreen) {
                     SeeLetterScreen()
                 }
             }

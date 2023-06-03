@@ -2,7 +2,9 @@ package com.alina.futureme.di
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.app.NotificationManagerCompat
@@ -14,6 +16,7 @@ import com.alina.futureme.data.repository.DataStoreRepository
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.repository.AuthenticationRepository
+import com.alina.futureme.presentation.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -41,7 +44,7 @@ class AppModule {
         userRemoteDataSourceImpl: UserRemoteDataSource,
         firebaseAuth: FirebaseAuth,
     ): UserRepository =
-        UserRepository(userRemoteDataSourceImpl,firebaseAuth)
+        UserRepository(userRemoteDataSourceImpl, firebaseAuth)
 
     @Provides
     fun providesLetterRepository(
@@ -52,13 +55,21 @@ class AppModule {
     @Provides
     fun providesNotificationBuilder(
         @ApplicationContext context: Context
-    ): NotificationCompat.Builder{
-        return NotificationCompat.Builder(context,"Letters Channel ID")
+    ): NotificationCompat.Builder {
+        val flag = PendingIntent.FLAG_IMMUTABLE
+
+        val clickIntent = Intent(context,MainActivity::class.java)
+        val clickPendingIntent = PendingIntent.getActivity(
+            context,1,clickIntent,flag
+        )
+
+        return NotificationCompat.Builder(context, "Letters Channel ID")
             .setContentTitle("Your letter arrived")
             .setContentText("Open your letter and see your message from the past")
             .setSmallIcon(R.drawable.ic_futureme)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setVisibility(VISIBILITY_PUBLIC)
+            .setContentIntent(clickPendingIntent)
     }
 
     @Singleton

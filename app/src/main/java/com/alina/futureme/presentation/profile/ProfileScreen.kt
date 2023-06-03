@@ -30,6 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.alina.futureme.R
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 import com.alina.futureme.presentation.theme.Typography
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.info.InfoDialog
@@ -42,6 +43,9 @@ fun ProfileScreen(
     authenticationViewModel: AuthenticationViewModel = hiltViewModel(),
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(MaterialTheme.colorScheme.tertiaryContainer)
+
     val infoDialogState = rememberUseCaseState()
 
     InfoDialog(
@@ -69,7 +73,7 @@ fun ProfileScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Your details",
+            text = stringResource(R.string.your_details),
             style = Typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary,
             textAlign = TextAlign.Start,
@@ -115,7 +119,7 @@ fun ProfileScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Your letters",
+            text = stringResource(R.string.your_letters),
             style = Typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary,
             textAlign = TextAlign.Start,

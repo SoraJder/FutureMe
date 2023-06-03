@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,9 +28,13 @@ import com.alina.futureme.presentation.theme.Typography
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun NoInternetConnection() {
+fun NoInternetConnection(onDataLoaded: () -> Unit) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.Black)
+
+    LaunchedEffect(key1 = Unit) {
+        onDataLoaded()
+    }
 
     FutureMeTheme {
         Column(
@@ -50,7 +56,7 @@ fun NoInternetConnection() {
                 modifier = Modifier
                     .fillMaxWidth(),
                 style = Typography.headlineSmall,
-                text = "No Internet Connection",
+                text = stringResource(R.string.no_internet_connection),
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.primary
@@ -60,7 +66,7 @@ fun NoInternetConnection() {
                     .fillMaxWidth()
                     .padding(horizontal = 40.dp)
                     .padding(top = 20.dp),
-                text = "You are not connected to the internet. Make sure Wi-Fi or Mobile Data is on and Airplane Mode is off.",
+                text = stringResource(R.string.no_internet_connection_description),
                 style = Typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center,

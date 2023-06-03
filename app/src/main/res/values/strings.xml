@@ -38,4 +38,8 @@
     <string name="attention_delete_account">Are you sure you want to delete your account?\nAll your future letters will also be deleted!</string>
     <string name="delete_account">Delete Account</string>
     <string name="display_name">Display Name</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_internet_connection_description">You are not connected to the internet. Make sure Wi-Fi or Mobile Data is on and Airplane Mode is off.</string>
+    <string name="your_details">Your details</string>
+    <string name="your_letters">Your letters</string>
 </resources>

@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         installSplashScreen().setKeepOnScreenCondition {
-            !splashViewModel.isLoading.value
+            splashViewModel.isLoading.value
         }
 
         connectivityObserver = NetworkConnectivityObserver(applicationContext)
@@ -59,11 +59,14 @@ class MainActivity : ComponentActivity() {
             )
             when (status) {
                 ConnectivityObserver.Status.Available -> {
-                    MainScreen(startDestinationScreen = startDestinationScreen)
+                    MainScreen(
+                        startDestinationScreen = startDestinationScreen,
+                        onDataLoaded = { splashViewModel.isLoading.value = false }
+                    )
                 }
 
                 else -> {
-                    NoInternetConnection()
+                    NoInternetConnection { splashViewModel.isLoading.value = false }
                 }
             }
 
