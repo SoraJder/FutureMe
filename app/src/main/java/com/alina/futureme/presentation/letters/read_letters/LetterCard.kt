@@ -36,9 +36,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.futureme.common.Utils
 import com.alina.futureme.R
+import com.alina.futureme.common.Utils
 import com.alina.futureme.domain.model.ShowLetter
+import com.alina.futureme.presentation.letters.read_letters.liked.LikedLettersViewModel
 import com.alina.futureme.presentation.theme.Typography
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -46,7 +47,8 @@ import com.alina.futureme.presentation.theme.Typography
 fun LetterCard(
     letter: ShowLetter,
     modifier: Modifier = Modifier,
-    viewModel: ReadLetterViewModel = hiltViewModel()
+    viewModel: ReadLetterViewModel = hiltViewModel(),
+    likedLettersViewModel: LikedLettersViewModel = hiltViewModel()
 ) {
     val likedLetters = viewModel.likedLetters.collectAsState().value
 
@@ -137,6 +139,8 @@ fun LetterCard(
                             viewModel.updateNumberOfLikes(letterId = letter.id, value = 1)
                         }
                         isFavorite.value = !isFavorite.value
+                        likedLettersViewModel.initialization()
+
                     }, modifier = Modifier
                         .size(18.dp)
                         .align(Alignment.CenterVertically)

@@ -15,10 +15,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/*TODO Ce mai e de facut:
-    1. Cand un like este scos, scrisoarea sa dispara de pe ecran
-    2. Cand este dat un like pe alta pagina sa se updateze ecranul
-*/
 @HiltViewModel
 class LikedLettersViewModel @Inject constructor(
     private val letterRepository: LetterRepository,
@@ -31,6 +27,23 @@ class LikedLettersViewModel @Inject constructor(
         _likedLettersFlow.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            _likedLettersFlow.value = Resource.Loading
+
+            val likedLetters = userRepository.getLikedLetters()
+            val showLetters: MutableList<ShowLetter> = mutableListOf()
+
+            likedLetters?.forEach { id ->
+                val showLetter = letterRepository.getLetterById(id)
+                showLetter?.let { letter ->
+                    showLetters.add(letter.toShowLetter())
+                }
+            }
+            _likedLettersFlow.value = Recommendation.getRecommendations(showLetters)
+        }
+    }
+
+    fun initialization() = viewModelScope.launch {
         viewModelScope.launch {
             _likedLettersFlow.value = Resource.Loading
 
