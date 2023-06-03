@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.alina.futureme.common.Utils
 import com.alina.futureme.R
+import com.alina.futureme.common.Utils
 import com.alina.futureme.components.PrimaryButton
 import com.alina.futureme.components.TransparentHintTextField
 import com.alina.futureme.presentation.letters.write_letter.bottom_sheet_tips.BottomSheetIdeasScreen
@@ -100,7 +100,7 @@ fun WriteLetterScreen(
     CalendarDialog(
         state = selectSpecificDate,
         config = CalendarConfig(
-            yearSelection = false,
+            yearSelection = true,
             monthSelection = true,
             style = CalendarStyle.MONTH,
             boundary = LocalDate.now().plusDays(1)..LocalDate.now().plusYears(20L)
