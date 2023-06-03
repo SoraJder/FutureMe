@@ -1,4 +1,4 @@
-package com.alina.common
+package com.alina.futureme.common
 
 object Constants {
 

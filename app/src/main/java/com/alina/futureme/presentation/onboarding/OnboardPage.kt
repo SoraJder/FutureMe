@@ -1,8 +1,8 @@
 package com.alina.futureme.presentation.onboarding
 
 import androidx.annotation.DrawableRes
+import com.alina.futureme.common.Constants
 import com.alina.futureme.R
-import com.alina.common.Constants
 
 sealed class OnboardPage(
     @DrawableRes

@@ -2,7 +2,7 @@ package com.alina.futureme.presentation.letters.read_letters.recent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alina.common.Resource
+import com.alina.futureme.common.Resource
 import com.alina.futureme.data.recommendation.Recommendation
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.domain.model.ShowLetter

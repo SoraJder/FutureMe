@@ -2,7 +2,7 @@ package com.alina.futureme.presentation.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alina.common.Resource
+import com.alina.futureme.common.Resource
 import com.alina.futureme.data.repository.LetterRepository
 import com.alina.futureme.data.repository.UserRepository
 import com.alina.futureme.domain.model.User

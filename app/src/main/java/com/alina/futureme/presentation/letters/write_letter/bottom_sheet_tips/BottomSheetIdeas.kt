@@ -2,7 +2,7 @@ package com.alina.futureme.presentation.letters.write_letter.bottom_sheet_tips
 
 import androidx.annotation.DrawableRes
 import com.alina.futureme.R
-import com.alina.common.Constants
+import com.alina.futureme.common.Constants
 
 sealed class BottomSheetIdeasPage(
     @DrawableRes

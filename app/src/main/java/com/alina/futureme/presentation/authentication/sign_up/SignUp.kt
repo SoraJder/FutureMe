@@ -2,8 +2,10 @@ package com.alina.futureme.presentation.authentication.sign_up
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.common.Resource
+import com.alina.futureme.common.Resource
+import com.alina.futureme.R
 import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.authentication.AuthenticationViewModel
 
@@ -26,7 +28,7 @@ fun SignUp(
                 viewModel.createUser(name)
                 viewModel.sendEmailVerification()
                 viewModel.onNavigateToVerifyEmail()
-                showMessage("Email verification was sent")
+                showMessage(stringResource(R.string.email_verification_was_sent))
             }
 
             null -> Unit

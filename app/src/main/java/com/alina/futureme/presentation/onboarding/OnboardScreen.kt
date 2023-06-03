@@ -25,10 +25,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.alina.futureme.R
 import com.alina.futureme.presentation.theme.Typography
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -111,7 +113,7 @@ fun PagerScreen(onboardPage: OnboardPage) {
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.6f),
             painter = painterResource(id = onboardPage.image),
-            contentDescription = "Pager Image"
+            contentDescription = null
         )
         Text(
             modifier = Modifier
@@ -160,7 +162,7 @@ fun FinishButton(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Finish")
+                Text(text = stringResource(R.string.finish))
             }
         }
     }

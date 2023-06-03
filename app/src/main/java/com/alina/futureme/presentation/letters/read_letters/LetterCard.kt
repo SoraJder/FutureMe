@@ -33,9 +33,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.common.Utils
+import com.alina.futureme.common.Utils
+import com.alina.futureme.R
 import com.alina.futureme.domain.model.ShowLetter
 import com.alina.futureme.presentation.theme.Typography
 
@@ -160,7 +162,7 @@ fun LetterScreenError() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Error. Something went wrong :(")
+        Text(text = stringResource(R.string.error_something_went_wrong))
     }
 }
 
@@ -173,22 +175,41 @@ fun LetterScreenSuccess(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            list.forEachIndexed { _, letter ->
+        if (list.isEmpty()) {
 
-                item {
-                    LetterCard(
-                        letter = letter,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 16.dp)
-                            .wrapContentHeight()
-                    )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = stringResource(R.string.there_is_no_letter_to_show_for_now),
+                    style = Typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
+            }
+
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                list.forEachIndexed { _, letter ->
+
+                    item {
+                        LetterCard(
+                            letter = letter,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp, horizontal = 16.dp)
+                                .wrapContentHeight()
+                        )
+                    }
                 }
             }
         }

@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.common.Resource
+import com.alina.futureme.common.Resource
 import com.alina.futureme.R
 import com.alina.futureme.components.ProgressBar
 import com.alina.futureme.presentation.letters.read_letters.LetterScreenError

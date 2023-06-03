@@ -42,4 +42,10 @@
     <string name="no_internet_connection_description">You are not connected to the internet. Make sure Wi-Fi or Mobile Data is on and Airplane Mode is off.</string>
     <string name="your_details">Your details</string>
     <string name="your_letters">Your letters</string>
+    <string name="error_something_went_wrong">Error. Something went wrong :(</string>
+    <string name="there_is_no_letter_to_show_for_now">There is no letter to show for now</string>
+    <string name="email_verification_was_sent">Email verification was sent</string>
+    <string name="what_is_your_message_for_future">What is your message for future?</string>
+    <string name="finish">Finish</string>
+    <string name="see_letters">See letters</string>
 </resources>

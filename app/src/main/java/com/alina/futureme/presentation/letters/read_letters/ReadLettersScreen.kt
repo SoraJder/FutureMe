@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alina.common.Constants
+import com.alina.futureme.common.Constants
 import com.alina.futureme.R
 import com.alina.futureme.presentation.letters.read_letters.liked.LikedLetters
 import com.alina.futureme.presentation.letters.read_letters.popular.PopularLetters

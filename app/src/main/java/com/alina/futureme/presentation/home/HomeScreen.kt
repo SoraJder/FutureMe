@@ -191,7 +191,7 @@ fun HomeCard(
                 color = MaterialTheme.colorScheme.secondary
             )
             Text(
-                text = "What is your message for future?",
+                text = stringResource(R.string.what_is_your_message_for_future),
                 style = Typography.bodyLarge,
                 modifier = Modifier.padding(start = 16.dp),
                 textAlign = TextAlign.Center,

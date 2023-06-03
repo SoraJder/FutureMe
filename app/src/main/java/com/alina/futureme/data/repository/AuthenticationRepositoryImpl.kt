@@ -1,7 +1,7 @@
 package com.alina.futureme.data.repository
 
-import com.alina.common.Resource
-import com.alina.common.firebase_utils.await
+import com.alina.futureme.common.Resource
+import com.alina.futureme.common.firebase_utils.await
 import com.alina.futureme.domain.repository.AuthenticationRepository
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult

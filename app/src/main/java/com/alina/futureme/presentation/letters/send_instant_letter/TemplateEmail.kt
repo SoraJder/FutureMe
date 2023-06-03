@@ -1,11 +1,11 @@
 package com.alina.futureme.presentation.letters.send_instant_letter
 
-import com.alina.common.Constants.BIRTHDAY_SUBJECT
-import com.alina.common.Constants.BIRTHDAY_TEXT
-import com.alina.common.Constants.LOVER_SUBJECT
-import com.alina.common.Constants.LOVER_TEXT
-import com.alina.common.Constants.PARENTS_SUBJECT
-import com.alina.common.Constants.PARENTS_TEXT
+import com.alina.futureme.common.Constants.BIRTHDAY_SUBJECT
+import com.alina.futureme.common.Constants.BIRTHDAY_TEXT
+import com.alina.futureme.common.Constants.LOVER_SUBJECT
+import com.alina.futureme.common.Constants.LOVER_TEXT
+import com.alina.futureme.common.Constants.PARENTS_SUBJECT
+import com.alina.futureme.common.Constants.PARENTS_TEXT
 
 sealed class TemplateEmail(
     val subject: String,

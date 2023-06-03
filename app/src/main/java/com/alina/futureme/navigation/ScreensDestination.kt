@@ -1,19 +1,19 @@
 package com.alina.futureme.navigation
 
-import com.alina.common.Constants.FORGOT_PASSWORD_SCREEN
-import com.alina.common.Constants.HOME_SCREEN
-import com.alina.common.Constants.LOADING_SCREEN
-import com.alina.common.Constants.ONBOARD_SCREEN
-import com.alina.common.Constants.PROFILE_SCREEN
-import com.alina.common.Constants.READ_LETTER_SCREEN
-import com.alina.common.Constants.SEE_LETTER_SCREEN
-import com.alina.common.Constants.SEE_LETTER_SCREEN_ID
-import com.alina.common.Constants.SEE_YOUR_LETTERS_SCREEN
-import com.alina.common.Constants.SEND_INSTANT_LETTER_SCREEN
-import com.alina.common.Constants.SIGN_IN_SCREEN
-import com.alina.common.Constants.SIGN_UP_SCREEN
-import com.alina.common.Constants.VERIFY_EMAIL_SCREEN
-import com.alina.common.Constants.WRITE_LETTER_SCREEN
+import com.alina.futureme.common.Constants.FORGOT_PASSWORD_SCREEN
+import com.alina.futureme.common.Constants.HOME_SCREEN
+import com.alina.futureme.common.Constants.LOADING_SCREEN
+import com.alina.futureme.common.Constants.ONBOARD_SCREEN
+import com.alina.futureme.common.Constants.PROFILE_SCREEN
+import com.alina.futureme.common.Constants.READ_LETTER_SCREEN
+import com.alina.futureme.common.Constants.SEE_LETTER_SCREEN
+import com.alina.futureme.common.Constants.SEE_LETTER_SCREEN_ID
+import com.alina.futureme.common.Constants.SEE_YOUR_LETTERS_SCREEN
+import com.alina.futureme.common.Constants.SEND_INSTANT_LETTER_SCREEN
+import com.alina.futureme.common.Constants.SIGN_IN_SCREEN
+import com.alina.futureme.common.Constants.SIGN_UP_SCREEN
+import com.alina.futureme.common.Constants.VERIFY_EMAIL_SCREEN
+import com.alina.futureme.common.Constants.WRITE_LETTER_SCREEN
 
 sealed class Destination(protected val route: String, vararg params: String) {
 

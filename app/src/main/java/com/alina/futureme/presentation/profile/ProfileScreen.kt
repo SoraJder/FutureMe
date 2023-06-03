@@ -140,7 +140,8 @@ fun ProfileScreen(
             )
         ) {
             Text(
-                text = "See letters", color = MaterialTheme.colorScheme.onSurface
+                text = stringResource(R.string.see_letters),
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
