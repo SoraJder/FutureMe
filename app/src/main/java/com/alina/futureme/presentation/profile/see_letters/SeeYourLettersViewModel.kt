@@ -45,6 +45,6 @@ class SeeYourLettersViewModel @Inject constructor(
     }
 
     fun onNavigateBack() {
-        appNavigator.tryNavigateTo(Destination.ProfileScreen())
+        appNavigator.tryNavigateBack(Destination.ProfileScreen())
     }
 }
