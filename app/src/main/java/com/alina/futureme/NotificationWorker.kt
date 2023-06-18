@@ -29,7 +29,7 @@ class NotificationWorker @AssistedInject constructor(
             letter?.let {
                 val date = LocalDate.parse(it.dateToArrive)
                 val today = LocalDate.now()
-                if (date == today || today.isAfter(date)) {
+                if (date == today || today.isAfter(date) || userRepository.currentUser == it.receiver) {
                     letterRepository.updateLettersWasReceived(it.id)
                     userRepository.addReceivedLetterInFirestore(it.id)
                     sendNotification()

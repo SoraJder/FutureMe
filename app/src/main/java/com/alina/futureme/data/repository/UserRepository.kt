@@ -10,7 +10,7 @@ class UserRepository @Inject constructor(
     auth: FirebaseAuth,
 ) {
 
-    private val currentUser: String? = auth.currentUser?.email
+    val currentUser: String? = auth.currentUser?.email
 
     suspend fun addUserInFirestore(user: User) =
         userRemoteDataSource.addUserInFirestore(user = user)
